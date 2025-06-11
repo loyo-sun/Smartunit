@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI 组件展示</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--background-color);
+            padding: var(--spacing-lg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: var(--spacing-xl);
+            animation: fadeIn var(--transition-normal);
+        }
+
+        .section-title {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--border-primary);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .component-demo {
+            background: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+        }
+
+        .component-demo:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .component-title {
+            font-size: var(--font-size-md);
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .demo-row {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .demo-item {
+            flex: 1;
+            min-width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="fade-in">UI 组件展示</h1>
+
+        <!-- 按钮展示 -->
+        <section class="section">
+            <h2 class="section-title">按钮</h2>
+            <div class="component-grid">
+                <div class="component-demo">
+                    <h3 class="component-title">基础按钮</h3>
+                    <div class="demo-row">
+                        <button class="btn btn-primary">主要按钮</button>
+                        <button class="btn btn-secondary">次要按钮</button>
+                        <button class="btn btn-success">成功按钮</button>
+                        <button class="btn btn-warning">警告按钮</button>
+                        <button class="btn btn-danger">危险按钮</button>
+                    </div>
+                </div>
+                <div class="component-demo">
+                    <h3 class="component-title">渐变按钮</h3>
+                    <div class="demo-row">
+                        <button class="btn gradient-primary">渐变主色</button>
+                        <button class="btn gradient-success">渐变成功</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 表格展示 -->
+        <section class="section">
+            <h2 class="section-title">表格</h2>
+            <div class="component-grid">
+                <div class="component-demo">
+                    <h3 class="component-title">基础表格</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>年龄</th>
+                                <th>城市</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>张三</td>
+                                <td>25</td>
+                                <td>北京</td>
+                            </tr>
+                            <tr>
+                                <td>李四</td>
+                                <td>30</td>
+                                <td>上海</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 表单展示 -->
+        <section class="section">
+            <h2 class="section-title">表单</h2>
+            <div class="component-grid">
+                <div class="component-demo">
+                    <h3 class="component-title">基础表单</h3>
+                    <div class="form-group">
+                        <label class="form-label">用户名</label>
+                        <input type="text" class="form-input" placeholder="请输入用户名">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">密码</label>
+                        <input type="password" class="form-input" placeholder="请输入密码">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 卡片展示 -->
+        <section class="section">
+            <h2 class="section-title">卡片</h2>
+            <div class="component-grid">
+                <div class="component-demo">
+                    <h3 class="component-title">基础卡片</h3>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">卡片标题</h3>
+                        </div>
+                        <div class="card-body">
+                            这是卡片的内容区域，可以放置任何内容。
+                        </div>
+                    </div>
+                </div>
+                <div class="component-demo">
+                    <h3 class="component-title">玻璃拟态卡片</h3>
+                    <div class="card glass">
+                        <div class="card-header">
+                            <h3 class="card-title">玻璃效果卡片</h3>
+                        </div>
+                        <div class="card-body">
+                            这是一个带有玻璃拟态效果的卡片。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 标签展示 -->
+        <section class="section">
+            <h2 class="section-title">标签</h2>
+            <div class="component-grid">
+                <div class="component-demo">
+                    <h3 class="component-title">基础标签</h3>
+                    <div class="demo-row">
+                        <span class="tag tag-primary">主要标签</span>
+                        <span class="tag tag-success">成功标签</span>
+                        <span class="tag tag-warning">警告标签</span>
+                        <span class="tag tag-danger">危险标签</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 提示框展示 -->
+        <section class="section">
+            <h2 class="section-title">提示框</h2>
+            <div class="component-grid">
+                <div class="component-demo">
+                    <h3 class="component-title">基础提示框</h3>
+                    <div class="alert alert-success">操作成功！</div>
+                    <div class="alert alert-warning">请注意！</div>
+                    <div class="alert alert-danger">操作失败！</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 导航展示 -->
+        <section class="section">
+            <h2 class="section-title">导航</h2>
+            <div class="component-grid">
+                <div class="component-demo">
+                    <h3 class="component-title">基础导航</h3>
+                    <nav class="nav">
+                        <a href="#" class="nav-item active">首页</a>
+                        <a href="#" class="nav-item">产品</a>
+                        <a href="#" class="nav-item">服务</a>
+                        <a href="#" class="nav-item">关于</a>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <!-- 加载动画展示 -->
+        <section class="section">
+            <h2 class="section-title">加载动画</h2>
+            <div class="component-grid">
+                <div class="component-demo">
+                    <h3 class="component-title">基础加载动画</h3>
+                    <div class="loading"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工具类展示 -->
+        <section class="section">
+            <h2 class="section-title">工具类</h2>
+            <div class="component-grid">
+                <div class="component-demo">
+                    <h3 class="component-title">文字颜色</h3>
+                    <p class="text-primary">主要文字颜色</p>
+                    <p class="text-regular">常规文字颜色</p>
+                    <p class="text-secondary">次要文字颜色</p>
+                    <p class="text-placeholder">占位符文字颜色</p>
+                </div>
+                <div class="component-demo">
+                    <h3 class="component-title">背景颜色</h3>
+                    <div class="demo-row">
+                        <div class="bg-primary" style="padding: var(--spacing-sm); color: white; border-radius: var(--border-radius-sm);">主要背景色</div>
+                        <div class="bg-success" style="padding: var(--spacing-sm); color: white; border-radius: var(--border-radius-sm);">成功背景色</div>
+                        <div class="bg-warning" style="padding: var(--spacing-sm); color: white; border-radius: var(--border-radius-sm);">警告背景色</div>
+                        <div class="bg-danger" style="padding: var(--spacing-sm); color: white; border-radius: var(--border-radius-sm);">危险背景色</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html> 
