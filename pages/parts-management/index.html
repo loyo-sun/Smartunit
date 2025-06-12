@@ -66,6 +66,7 @@
             border-radius: 4px;
             font-size: 14px;
             width: 200px;
+            box-sizing: border-box;
         }
 
         .select-input {
@@ -74,6 +75,7 @@
             border-radius: 4px;
             font-size: 14px;
             min-width: 150px;
+            box-sizing: border-box;
         }
 
         /* 按钮样式 */
@@ -326,18 +328,40 @@
         }
 
         .form-group input,
-        .form-group select {
+        .form-group select,
+        .form-group textarea {
             width: 100%;
             padding: 8px 12px;
             border: 1px solid var(--color-border-1);
             border-radius: 4px;
             font-size: 14px;
+            box-sizing: border-box;
         }
 
         .form-group input:focus,
-        .form-group select:focus {
+        .form-group select:focus,
+        .form-group textarea:focus {
             border-color: var(--color-primary);
             outline: none;
+        }
+
+        /* 表单分组样式 */
+        .form-section {
+            margin-bottom: 24px;
+            padding: 16px;
+            background: #fafafa;
+            border-radius: 4px;
+        }
+
+        .form-section h4 {
+            margin: 0 0 16px 0;
+            color: var(--color-text-primary);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -562,42 +586,55 @@
             </div>
             <div class="drawer-body">
                 <form id="partsForm">
-                    <div class="form-group">
-                        <label>配件编码</label>
-                        <input type="text" class="search-input">
+                    <div class="form-section">
+                        <h4>基础信息</h4>
+                        <div class="form-group">
+                            <label>配件编码</label>
+                            <input type="text" class="search-input">
+                        </div>
+                        <div class="form-group">
+                            <label>配件名称</label>
+                            <input type="text" class="search-input">
+                        </div>
+                        <div class="form-group">
+                            <label>型号</label>
+                            <input type="text" class="search-input">
+                        </div>
+                        <div class="form-group">
+                            <label>单位</label>
+                            <input type="text" class="search-input">
+                        </div>
+                        <div class="form-group">
+                            <label>单价</label>
+                            <input type="number" class="search-input">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>配件名称</label>
-                        <input type="text" class="search-input">
+
+                    <div class="form-section">
+                        <h4>配件预测</h4>
+                        <div class="form-group">
+                            <label>配件类型</label>
+                            <select class="select-input">
+                                <option value="damage">易损件</option>
+                                <option value="key">关键件</option>
+                                <option value="normal">常备件</option>
+                                <option value="other">其他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>预测方式</label>
+                            <select class="select-input" id="predictionMethod">
+                                <option value="none" selected>不预测</option>
+                                <option value="mean">均值预测</option>
+                                <option value="model">模型预测</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="codeMappingGroup" style="display: none;">
+                            <label>编码映射</label>
+                            <textarea class="search-input" rows="4" placeholder="请输入模型预测的编码映射关系，每行一个映射"></textarea>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>型号</label>
-                        <input type="text" class="search-input">
-                    </div>
-                    <div class="form-group">
-                        <label>单位</label>
-                        <input type="text" class="search-input">
-                    </div>
-                    <div class="form-group">
-                        <label>单价</label>
-                        <input type="number" class="search-input">
-                    </div>
-                    <div class="form-group">
-                        <label>配件类型</label>
-                        <select class="select-input">
-                            <option value="damage">易损件</option>
-                            <option value="key">关键件</option>
-                            <option value="normal">常备件</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>预测方式</label>
-                        <select class="select-input">
-                            <option value="none" selected>不预测</option>
-                            <option value="mean">均值预测</option>
-                            <option value="model">模型预测</option>
-                        </select>
-                    </div>
+
                     <div style="text-align: right;">
                         <button type="button" class="btn btn-secondary">取消</button>
                         <button type="submit" class="btn btn-primary">保存</button>

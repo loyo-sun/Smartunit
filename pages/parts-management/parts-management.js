@@ -260,4 +260,14 @@ pageButtons.forEach(button => {
             console.log('跳转到第', button.textContent, '页');
         }
     });
+});
+
+// 监听预测方式选择变化
+document.getElementById('predictionMethod').addEventListener('change', function(e) {
+    const codeMappingGroup = document.getElementById('codeMappingGroup');
+    if (e.target.value === 'model') {
+        codeMappingGroup.style.display = 'block';
+    } else {
+        codeMappingGroup.style.display = 'none';
+    }
 }); 
