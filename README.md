@@ -9,22 +9,22 @@
 ├── script.js               # 全局脚本
 │
 ├── pages/                  # 功能模块目录
-│   ├── order-management/   # 订单管理模块
+│   ├── orders/             # 订单管理模块
 │   │   ├── index.html     # 订单管理页面
 │   │   ├── style.css      # 订单管理样式
 │   │   └── script.js      # 订单管理脚本
 │   │
-│   ├── asset-management/  # 资产管理模块
+│   ├── assets/            # 资产管理模块
 │   │   ├── index.html     # 资产管理页面
 │   │   ├── style.css      # 资产管理样式
 │   │   └── script.js      # 资产管理脚本
 │   │
-│   ├── parts-management/  # 配件管理模块
+│   ├── parts/             # 配件管理模块
 │   │   ├── index.html     # 配件管理页面
 │   │   ├── style.css      # 配件管理样式
 │   │   └── script.js      # 配件管理脚本
 │   │
-│   └── spare-parts-forecast/  # 配件预测模块
+│   └── forecast/          # 配件预测模块
 │       ├── index.html     # 配件预测页面
 │       ├── style.css      # 配件预测样式
 │       └── script.js      # 配件预测脚本
