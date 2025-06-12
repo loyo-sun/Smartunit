@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>订单管理 - 设备排班管理系统</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="order-container">
+        <h1 class="page-title">订单管理</h1>
+
+        <!-- 快捷筛选标签 -->
+        <div class="quick-filters">
+            <span class="quick-filter-tag active">全部订单</span>
+            <span class="quick-filter-tag">今日作业</span>
+            <span class="quick-filter-tag">待排班</span>
+            <span class="quick-filter-tag">本周已完工</span>
+        </div>
+
+        <!-- 筛选区域 -->
+        <div class="filter-section">
+            <div class="filter-group">
+                <div class="filter-left">
+                    <select>
+                        <option value="">客户名称</option>
+                    </select>
+                    <input type="text" placeholder="项目编号">
+                    <input type="date" placeholder="开始日期">
+                    <input type="date" placeholder="结束日期">
+                    <select>
+                        <option value="">订单状态</option>
+                        <option value="new">新建</option>
+                        <option value="scheduled">已排班</option>
+                        <option value="in-progress">执行中</option>
+                        <option value="completed">已完工</option>
+                        <option value="settled">已结算</option>
+                        <option value="cancelled">已取消</option>
+                    </select>
+                </div>
+                <div class="filter-right">
+                    <button class="btn btn-default">重置</button>
+                    <button class="btn btn-primary">新增订单</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 订单列表 -->
+        <div class="table-section">
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>订单编号</th>
+                        <th>客户名称</th>
+                        <th>施工位置</th>
+                        <th>方量</th>
+                        <th>状态</th>
+                        <th>作业时间</th>
+                        <th>车辆</th>
+                        <th>司机</th>
+                        <th>其他人员</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ORD20240315001</td>
+                        <td>示例客户A</td>
+                        <td>北京市朝阳区</td>
+                        <td>100m³</td>
+                        <td><span class="status-tag status-new">新建</span></td>
+                        <td>2024-03-15</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>
+                            <button class="btn btn-default">查看详情</button>
+                            <button class="btn btn-primary">调度设备</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 分页 -->
+        <div class="pagination">
+            <button class="btn btn-default">上一页</button>
+            <span>1/1</span>
+            <button class="btn btn-default">下一页</button>
+        </div>
+    </div>
+
+    <!-- 订单详情抽屉 -->
+    <div class="drawer-mask"></div>
+    <div class="drawer detail-drawer">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h3>订单详情</h3>
+                <button class="btn-close">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <div class="info-section">
+                    <h4 class="info-title">基本信息</h4>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="label">订单编号</span>
+                            <span class="value">ORD20240315001</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">客户名称</span>
+                            <span class="value">示例客户A</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">施工项目</span>
+                            <span class="value">某小区地下车库</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">施工位置</span>
+                            <span class="value">北京市朝阳区</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">施工部位</span>
+                            <span class="value">B区负一层</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">预计方量</span>
+                            <span class="value">100m³</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">计划时间</span>
+                            <span class="value">2024-03-15 09:00</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">订单状态</span>
+                            <span class="value"><span class="status-tag status-new">新建</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h4 class="info-title">派工信息</h4>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="label">车辆</span>
+                            <span class="value">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">司机</span>
+                            <span class="value">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">泵工</span>
+                            <span class="value">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">接管工</span>
+                            <span class="value">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h4 class="info-title">备注信息</h4>
+                    <div class="info-content">
+                        暂无备注信息
+                    </div>
+                </div>
+            </div>
+            <div class="drawer-footer">
+                <button class="btn btn-default">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增订单抽屉 -->
+    <div class="drawer-mask"></div>
+    <div class="drawer new-order-drawer">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h3>新增订单</h3>
+                <button class="btn-close">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <form id="newOrderForm">
+                    <div class="info-section">
+                        <h4 class="info-title">基本信息</h4>
+                        <div class="form-group">
+                            <label class="form-label">客户信息</label>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <select name="customer" required>
+                                        <option value="">选择客户</option>
+                                        <option value="示例客户A">示例客户A</option>
+                                        <option value="示例客户B">示例客户B</option>
+                                        <option value="示例客户C">示例客户C</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="project" placeholder="施工项目名称" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">作业信息</label>
+                            <div class="form-group">
+                                <input type="text" name="location" placeholder="作业地址" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="position" placeholder="施工部位" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" name="volume" placeholder="预计方量" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="datetime-local" name="planTime" placeholder="计划作业时间" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h4 class="info-title">调度信息</h4>
+                        <div class="form-group">
+                            <label class="form-label">分配车辆</label>
+                            <select name="vehicle" required>
+                                <option value="">选择空闲车辆</option>
+                                <option value="京A12345" data-status="busy" data-time="2024-03-15 14:00">京A12345 (已排班: 2024-03-15 14:00)</option>
+                                <option value="京B67890" data-status="busy" data-time="2024-03-14 10:00">京B67890 (已排班: 2024-03-14 10:00)</option>
+                                <option value="京C12345" data-status="free">京C12345 (空闲)</option>
+                                <option value="京D67890" data-status="free">京D67890 (空闲)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">指定司机</label>
+                            <select name="driver" required>
+                                <option value="">选择司机</option>
+                                <option value="张师傅" data-status="busy" data-time="2024-03-15 14:00">张师傅 (已排班: 2024-03-15 14:00)</option>
+                                <option value="王师傅" data-status="busy" data-time="2024-03-14 10:00">王师傅 (已排班: 2024-03-14 10:00)</option>
+                                <option value="李师傅" data-status="free">李师傅 (空闲)</option>
+                                <option value="赵师傅" data-status="free">赵师傅 (空闲)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">其他角色（可多选）</label>
+                            <select name="otherRoles" multiple>
+                                <option value="李师傅" data-status="free">李师傅 (空闲)</option>
+                                <option value="赵师傅" data-status="free">赵师傅 (空闲)</option>
+                                <option value="钱师傅" data-status="free">钱师傅 (空闲)</option>
+                                <option value="孙师傅" data-status="free">孙师傅 (空闲)</option>
+                                <option value="周师傅" data-status="free">周师傅 (空闲)</option>
+                                <option value="吴师傅" data-status="free">吴师傅 (空闲)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">备注信息</label>
+                            <textarea name="remark" placeholder="请输入备注说明"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="drawer-footer">
+                <button class="btn btn-default">取消</button>
+                <button class="btn btn-primary">提交订单</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 调度设备抽屉 -->
+    <div class="drawer-mask"></div>
+    <div class="drawer dispatch-drawer">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h3>调度设备</h3>
+                <button class="btn-close">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <form id="dispatchForm">
+                    <input type="hidden" name="orderId">
+                    <div class="form-group">
+                        <label class="form-label">分配车辆</label>
+                        <select name="vehicle" required>
+                            <option value="">选择空闲车辆</option>
+                            <option value="京A12345" data-status="busy" data-time="2024-03-15 14:00">京A12345 (已排班: 2024-03-15 14:00)</option>
+                            <option value="京B67890" data-status="busy" data-time="2024-03-14 10:00">京B67890 (已排班: 2024-03-14 10:00)</option>
+                            <option value="京C12345" data-status="free">京C12345 (空闲)</option>
+                            <option value="京D67890" data-status="free">京D67890 (空闲)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">指定司机</label>
+                        <select name="driver" required>
+                            <option value="">选择司机</option>
+                            <option value="张师傅" data-status="busy" data-time="2024-03-15 14:00">张师傅 (已排班: 2024-03-15 14:00)</option>
+                            <option value="王师傅" data-status="busy" data-time="2024-03-14 10:00">王师傅 (已排班: 2024-03-14 10:00)</option>
+                            <option value="李师傅" data-status="free">李师傅 (空闲)</option>
+                            <option value="赵师傅" data-status="free">赵师傅 (空闲)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">其他角色（可多选）</label>
+                        <select name="otherRoles" multiple>
+                            <option value="李师傅" data-status="free">李师傅 (空闲)</option>
+                            <option value="赵师傅" data-status="free">赵师傅 (空闲)</option>
+                            <option value="钱师傅" data-status="free">钱师傅 (空闲)</option>
+                            <option value="孙师傅" data-status="free">孙师傅 (空闲)</option>
+                            <option value="周师傅" data-status="free">周师傅 (空闲)</option>
+                            <option value="吴师傅" data-status="free">吴师傅 (空闲)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">调度备注</label>
+                        <textarea name="remark" placeholder="请输入调度备注说明"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="drawer-footer">
+                <button class="btn btn-default" type="button">取消</button>
+                <button class="btn btn-primary" type="submit">确认调度</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
