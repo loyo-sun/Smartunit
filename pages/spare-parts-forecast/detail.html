@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配件预测详情</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="detail-container">
+        <!-- 基础信息区域 -->
+        <div class="info-section">
+            <h2 class="part-name">轴承 6201-2Z</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="label">配件编码</span>
+                    <span class="value">SP001</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">型号</span>
+                    <span class="value">6201-2Z</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">单位</span>
+                    <span class="value">个</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">配件类型</span>
+                    <span class="value"><span class="tag consumable">易损件</span></span>
+                </div>
+                <div class="info-item">
+                    <span class="label">当前库存</span>
+                    <span class="value">50</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 使用与预测趋势 -->
+        <div class="trend-section">
+            <h3>使用与预测趋势</h3>
+            <div class="chart-container">
+                <!-- 这里将通过JavaScript加载图表 -->
+                <div id="trendChart"></div>
+            </div>
+        </div>
+
+        <!-- 设备分布表 -->
+        <div class="equipment-section">
+            <h3>设备分布</h3>
+            <table class="equipment-table">
+                <thead>
+                    <tr>
+                        <th>设备编码</th>
+                        <th>设备名称</th>
+                        <th>所属项目</th>
+                        <th>使用频次</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>EQ001</td>
+                        <td>注塑机A</td>
+                        <td>项目A</td>
+                        <td>高频</td>
+                    </tr>
+                    <tr>
+                        <td>EQ002</td>
+                        <td>注塑机B</td>
+                        <td>项目B</td>
+                        <td>中频</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="detail.js"></script>
+</body>
+</html> 

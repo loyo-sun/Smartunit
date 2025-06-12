@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配件管理</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        :root {
+            --color-background: #f5f7fa;
+            --color-primary: #1890ff;
+            --color-error: #f5222d;
+            --color-text-primary: #262626;
+            --color-text-regular: #595959;
+            --color-text-secondary: #8c8c8c;
+            --color-border-1: #d9d9d9;
+            --color-border-2: #f0f0f0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--color-background);
+        }
+
+        .parts-container {
+            padding: 24px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .page-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            text-align: left;
+        }
+
+        .page-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* 筛选区样式 */
+        .filter-section {
+            background-color: #fff;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            padding: 8px 12px;
+            border: 1px solid var(--color-border-1);
+            border-radius: 4px;
+            font-size: 14px;
+            width: 200px;
+        }
+
+        .select-input {
+            padding: 8px 12px;
+            border: 1px solid var(--color-border-1);
+            border-radius: 4px;
+            font-size: 14px;
+            min-width: 150px;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #40a9ff;
+        }
+
+        .btn-secondary {
+            background: white;
+            border: 1px solid var(--color-border-1);
+            color: var(--color-text-primary);
+        }
+
+        .btn-secondary:hover {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        /* 表格区域样式 */
+        .table-section {
+            background: #fff;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        /* 表格样式 */
+        .parts-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .parts-table th,
+        .parts-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-1);
+            color: var(--color-text-regular);
+            font-size: 14px;
+        }
+
+        .parts-table th {
+            background: #fff;
+            color: var(--color-text-primary);
+            font-weight: 500;
+        }
+
+        .parts-table tr:hover {
+            background: var(--color-background);
+        }
+
+        /* 标签样式 */
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            border: 1px solid;
+        }
+
+        .tag-damage {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+            background: rgba(24, 144, 255, 0.1);
+        }
+
+        .tag-key {
+            color: var(--color-error);
+            border-color: var(--color-error);
+            background: rgba(245, 34, 45, 0.1);
+        }
+
+        .tag-normal {
+            color: var(--color-text-secondary);
+            border-color: var(--color-text-secondary);
+            background: rgba(140, 140, 140, 0.1);
+        }
+
+        .tag-mean {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+            background: rgba(24, 144, 255, 0.1);
+        }
+
+        .tag-model {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+            background: rgba(24, 144, 255, 0.1);
+        }
+
+        .tag-none {
+            color: var(--color-text-secondary);
+            border-color: var(--color-text-secondary);
+            background: rgba(140, 140, 140, 0.1);
+        }
+
+        /* 抽屉样式 */
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: -40%;
+            width: 40%;
+            height: 100vh;
+            background: #fff;
+            box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+            transition: right 0.3s ease;
+            z-index: 1001;
+        }
+
+        .drawer.active {
+            right: 0;
+        }
+
+        .drawer-content {
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .drawer-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--color-border-1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 1;
+        }
+
+        .drawer-header h3 {
+            margin: 0;
+            color: var(--color-text-primary);
+        }
+
+        .btn-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            padding: 4px 8px;
+            transition: color 0.3s;
+        }
+
+        .btn-close:hover {
+            color: var(--color-text-primary);
+        }
+
+        .drawer-body {
+            padding: 24px;
+        }
+
+        /* 遮罩层样式 */
+        .drawer-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 1000;
+            display: none;
+        }
+
+        .drawer-mask.active {
+            display: block;
+        }
+
+        /* 响应式布局 */
+        @media (max-width: 768px) {
+            .drawer {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
+        /* 分页样式 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 16px;
+            gap: 8px;
+        }
+
+        .pagination button {
+            padding: 8px 16px;
+            border: 1px solid var(--color-border-1);
+            background: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pagination button:hover {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        .pagination button.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        /* 操作按钮样式 */
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text-regular);
+            transition: color 0.3s;
+        }
+
+        .action-btn:hover {
+            color: var(--color-primary);
+        }
+
+        /* 表单样式 */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--color-text-primary);
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--color-border-1);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--color-primary);
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="parts-container">
+        <div class="page-header">
+            <h1 class="page-title">配件管理</h1>
+            <div class="page-actions">
+                <button class="btn btn-primary">新建配件</button>
+                <button class="btn btn-secondary">导入</button>
+                <button class="btn btn-secondary">导出</button>
+            </div>
+        </div>
+        
+        <!-- 筛选区 -->
+        <div class="filter-section">
+            <input type="text" class="search-input" placeholder="搜索配件名称或编码">
+            <select class="select-input">
+                <option value="">全部配件类型</option>
+                <option value="damage">易损件</option>
+                <option value="key">关键件</option>
+                <option value="normal">常备件</option>
+            </select>
+            <select class="select-input">
+                <option value="">全部预测方式</option>
+                <option value="mean">均值预测</option>
+                <option value="model">模型预测</option>
+                <option value="none">不预测</option>
+            </select>
+            <button class="btn btn-secondary">重置</button>
+        </div>
+
+        <!-- 表格区域 -->
+        <div class="table-section">
+            <table class="parts-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox"></th>
+                        <th>配件编码</th>
+                        <th>配件名称</th>
+                        <th>型号</th>
+                        <th>单位</th>
+                        <th style="text-align: right">单价</th>
+                        <th>配件类型</th>
+                        <th>预测方式</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>P001</td>
+                        <td>轴承</td>
+                        <td>SKF-6205</td>
+                        <td>个</td>
+                        <td style="text-align: right">128.00</td>
+                        <td><span class="tag tag-damage">易损件</span></td>
+                        <td><span class="tag tag-mean">均值预测</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn" data-id="P001" data-action="edit">✏️</button>
+                                <button class="action-btn" data-id="P001" data-action="delete">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>P002</td>
+                        <td>电机</td>
+                        <td>Y2-132M-4</td>
+                        <td>台</td>
+                        <td style="text-align: right">1,280.00</td>
+                        <td><span class="tag tag-key">关键件</span></td>
+                        <td><span class="tag tag-model">模型预测</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn" data-id="P002" data-action="edit">✏️</button>
+                                <button class="action-btn" data-id="P002" data-action="delete">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>P003</td>
+                        <td>皮带</td>
+                        <td>B-2000</td>
+                        <td>条</td>
+                        <td style="text-align: right">45.00</td>
+                        <td><span class="tag tag-normal">常备件</span></td>
+                        <td><span class="tag tag-none">不预测</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn" data-id="P003" data-action="edit">✏️</button>
+                                <button class="action-btn" data-id="P003" data-action="delete">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>P004</td>
+                        <td>齿轮</td>
+                        <td>G-45</td>
+                        <td>个</td>
+                        <td style="text-align: right">320.00</td>
+                        <td><span class="tag tag-key">关键件</span></td>
+                        <td><span class="tag tag-model">模型预测</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn" data-id="P004" data-action="edit">✏️</button>
+                                <button class="action-btn" data-id="P004" data-action="delete">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>P005</td>
+                        <td>密封圈</td>
+                        <td>O-100</td>
+                        <td>个</td>
+                        <td style="text-align: right">15.00</td>
+                        <td><span class="tag tag-damage">易损件</span></td>
+                        <td><span class="tag tag-mean">均值预测</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn" data-id="P005" data-action="edit">✏️</button>
+                                <button class="action-btn" data-id="P005" data-action="delete">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>P006</td>
+                        <td>轴承座</td>
+                        <td>UCP-205</td>
+                        <td>个</td>
+                        <td style="text-align: right">85.00</td>
+                        <td><span class="tag tag-normal">常备件</span></td>
+                        <td><span class="tag tag-model">模型预测</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn" data-id="P006" data-action="edit">✏️</button>
+                                <button class="action-btn" data-id="P006" data-action="delete">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>P007</td>
+                        <td>联轴器</td>
+                        <td>L-120</td>
+                        <td>个</td>
+                        <td style="text-align: right">280.00</td>
+                        <td><span class="tag tag-key">关键件</span></td>
+                        <td><span class="tag tag-mean">均值预测</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn" data-id="P007" data-action="edit">✏️</button>
+                                <button class="action-btn" data-id="P007" data-action="delete">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>P008</td>
+                        <td>油封</td>
+                        <td>TC-80</td>
+                        <td>个</td>
+                        <td style="text-align: right">25.00</td>
+                        <td><span class="tag tag-damage">易损件</span></td>
+                        <td><span class="tag tag-none">不预测</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn" data-id="P008" data-action="edit">✏️</button>
+                                <button class="action-btn" data-id="P008" data-action="delete">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>P009</td>
+                        <td>螺栓</td>
+                        <td>M12-50</td>
+                        <td>个</td>
+                        <td style="text-align: right">8.00</td>
+                        <td><span class="tag tag-normal">常备件</span></td>
+                        <td><span class="tag tag-mean">均值预测</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn" data-id="P009" data-action="edit">✏️</button>
+                                <button class="action-btn" data-id="P009" data-action="delete">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>P010</td>
+                        <td>轴承</td>
+                        <td>SKF-6308</td>
+                        <td>个</td>
+                        <td style="text-align: right">168.00</td>
+                        <td><span class="tag tag-damage">易损件</span></td>
+                        <td><span class="tag tag-model">模型预测</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn" data-id="P010" data-action="edit">✏️</button>
+                                <button class="action-btn" data-id="P010" data-action="delete">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 分页 -->
+        <div class="pagination">
+            <button>上一页</button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>下一页</button>
+        </div>
+    </div>
+
+    <!-- 遮罩层 -->
+    <div class="drawer-mask"></div>
+
+    <!-- 抽屉表单 -->
+    <div class="drawer">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h3>新建配件</h3>
+                <button class="btn-close">✖️</button>
+            </div>
+            <div class="drawer-body">
+                <form id="partsForm">
+                    <div class="form-group">
+                        <label>配件编码</label>
+                        <input type="text" class="search-input">
+                    </div>
+                    <div class="form-group">
+                        <label>配件名称</label>
+                        <input type="text" class="search-input">
+                    </div>
+                    <div class="form-group">
+                        <label>型号</label>
+                        <input type="text" class="search-input">
+                    </div>
+                    <div class="form-group">
+                        <label>单位</label>
+                        <input type="text" class="search-input">
+                    </div>
+                    <div class="form-group">
+                        <label>单价</label>
+                        <input type="number" class="search-input">
+                    </div>
+                    <div class="form-group">
+                        <label>配件类型</label>
+                        <select class="select-input">
+                            <option value="damage">易损件</option>
+                            <option value="key">关键件</option>
+                            <option value="normal">常备件</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>预测方式</label>
+                        <select class="select-input">
+                            <option value="none" selected>不预测</option>
+                            <option value="mean">均值预测</option>
+                            <option value="model">模型预测</option>
+                        </select>
+                    </div>
+                    <div style="text-align: right;">
+                        <button type="button" class="btn btn-secondary">取消</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="parts-management.js"></script>
+</body>
+</html> 

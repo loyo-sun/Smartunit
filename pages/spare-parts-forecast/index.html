@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配件预测列表</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="spare-parts-container">
+        <!-- 页面标题 -->
+        <h1 class="page-title">配件预测</h1>
+
+        <!-- 顶部筛选区 -->
+        <div class="filter-section">
+            <div class="filter-group">
+                <div class="filter-left">
+                    <select class="month-selector">
+                        <option value="" disabled selected>选择月份</option>
+                        <option value="2024-01">2024年1月</option>
+                        <option value="2024-02">2024年2月</option>
+                        <!-- 更多月份选项 -->
+                    </select>
+                    
+                    <input type="text" class="search-input" placeholder="搜索配件编码/名称">
+                    
+                    <select class="type-selector">
+                        <option value="all" selected>全部配件类型</option>
+                        <option value="consumable">易损件</option>
+                        <option value="critical">关键件</option>
+                        <option value="regular">常备件</option>
+                    </select>
+                    
+                    <select class="forecast-type-selector">
+                        <option value="all" selected>全部预测方式</option>
+                        <option value="mean">均值预测</option>
+                        <option value="model">模型预测</option>
+                    </select>
+                    
+                    <button class="btn-reset">重置</button>
+                </div>
+                <div class="filter-right">
+                    <button class="btn-export">
+                        <i class="fas fa-download"></i>
+                        导出
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 列表展示区 -->
+        <div class="table-section">
+            <table class="spare-parts-table">
+                <thead>
+                    <tr>
+                        <th>配件编码</th>
+                        <th>配件名称</th>
+                        <th>型号</th>
+                        <th>单位</th>
+                        <th>价格</th>
+                        <th>配件类型</th>
+                        <th>预测方式</th>
+                        <th>预测数量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code">SP001</td>
+                        <td>轴承</td>
+                        <td>6201-2Z</td>
+                        <td>个</td>
+                        <td class="price">120</td>
+                        <td><span class="tag consumable">易损件</span></td>
+                        <td>均值预测</td>
+                        <td class="forecast">15</td>
+                        <td><button class="btn-detail">详情</button></td>
+                    </tr>
+                    <tr>
+                        <td class="code">SP002</td>
+                        <td>电机</td>
+                        <td>Y2-90L-4</td>
+                        <td>台</td>
+                        <td class="price">2800</td>
+                        <td><span class="tag critical">关键件</span></td>
+                        <td>模型预测</td>
+                        <td class="forecast">3</td>
+                        <td><button class="btn-detail">详情</button></td>
+                    </tr>
+                    <tr>
+                        <td class="code">SP003</td>
+                        <td>皮带</td>
+                        <td>B-85</td>
+                        <td>条</td>
+                        <td class="price">45</td>
+                        <td><span class="tag consumable">易损件</span></td>
+                        <td>均值预测</td>
+                        <td class="forecast">25</td>
+                        <td><button class="btn-detail">详情</button></td>
+                    </tr>
+                    <tr>
+                        <td class="code">SP004</td>
+                        <td>润滑油</td>
+                        <td>L-HM46</td>
+                        <td>L</td>
+                        <td class="price">85</td>
+                        <td><span class="tag regular">常备件</span></td>
+                        <td>均值预测</td>
+                        <td class="forecast">50</td>
+                        <td><button class="btn-detail">详情</button></td>
+                    </tr>
+                    <tr>
+                        <td class="code">SP005</td>
+                        <td>控制器</td>
+                        <td>PLC-XC3</td>
+                        <td>台</td>
+                        <td class="price">3500</td>
+                        <td><span class="tag critical">关键件</span></td>
+                        <td>模型预测</td>
+                        <td class="forecast">2</td>
+                        <td><button class="btn-detail">详情</button></td>
+                    </tr>
+                    <tr>
+                        <td class="code">SP006</td>
+                        <td>过滤器</td>
+                        <td>F-100</td>
+                        <td>个</td>
+                        <td class="price">180</td>
+                        <td><span class="tag consumable">易损件</span></td>
+                        <td>均值预测</td>
+                        <td class="forecast">12</td>
+                        <td><button class="btn-detail">详情</button></td>
+                    </tr>
+                    <tr>
+                        <td class="code">SP007</td>
+                        <td>密封圈</td>
+                        <td>O-25</td>
+                        <td>个</td>
+                        <td class="price">35</td>
+                        <td><span class="tag regular">常备件</span></td>
+                        <td>模型预测</td>
+                        <td class="forecast">30</td>
+                        <td><button class="btn-detail">详情</button></td>
+                    </tr>
+                    <tr>
+                        <td class="code">SP008</td>
+                        <td>传感器</td>
+                        <td>PT100</td>
+                        <td>个</td>
+                        <td class="price">420</td>
+                        <td><span class="tag critical">关键件</span></td>
+                        <td>模型预测</td>
+                        <td class="forecast">5</td>
+                        <td><button class="btn-detail">详情</button></td>
+                    </tr>
+                    <tr>
+                        <td class="code">SP009</td>
+                        <td>齿轮</td>
+                        <td>M2-20</td>
+                        <td>个</td>
+                        <td class="price">280</td>
+                        <td><span class="tag regular">常备件</span></td>
+                        <td>均值预测</td>
+                        <td class="forecast">8</td>
+                        <td><button class="btn-detail">详情</button></td>
+                    </tr>
+                    <tr>
+                        <td class="code">SP010</td>
+                        <td>气缸</td>
+                        <td>SC-63</td>
+                        <td>个</td>
+                        <td class="price">650</td>
+                        <td><span class="tag critical">关键件</span></td>
+                        <td>模型预测</td>
+                        <td class="forecast">4</td>
+                        <td><button class="btn-detail">详情</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 分页区域 -->
+        <div class="pagination">
+            <button class="btn-page">上一页</button>
+            <span class="page-number">1</span>
+            <button class="btn-page">下一页</button>
+        </div>
+    </div>
+
+    <!-- 详情抽屉 -->
+    <div class="detail-drawer" id="detailDrawer">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h3>配件预测详情</h3>
+                <button class="btn-close">×</button>
+            </div>
+            <div class="drawer-body">
+                <!-- 详情内容将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加遮罩层 -->
+    <div class="drawer-mask" id="drawerMask"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

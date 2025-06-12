@@ -1,0 +1,106 @@
+:root {
+  /* 主色/次要色/辅助色 */
+  --color-primary: #409EFF;
+  --color-secondary-1: #66B1FF;
+  --color-secondary-2: #A0CFFF;
+  --color-secondary-3: #2B85E4;
+  --color-auxiliary-1: #464c5b;
+  --color-auxiliary-2: #1891FF;
+  --color-auxiliary-3: #2E4050;
+  --color-auxiliary-4: #FF5C00;
+
+  /* 状态色 */
+  --color-success: #19BE6B;
+  --color-warning: #FF9900;
+  --color-error: #F56C6C;
+  --color-info: #808695;
+
+  /* 数据配色 */
+  --color-data-1: #FB6260;
+  --color-data-2: #0099FF;
+  --color-data-3: #8167F5;
+  --color-data-4: #51D351;
+  --color-data-5: #FF7A8C;
+  --color-data-6: #FFA94C;
+  --color-data-7: #73A0FA;
+  --color-data-8: #7585A2;
+  --color-data-9: #24D2D3;
+  --color-data-10: #FEC03D;
+  --color-data-11: #52C1F5;
+  --color-data-12: #82D588;
+
+  /* 文字色 */
+  --color-text-primary: #333333;
+  --color-text-regular: #666666;
+  --color-text-secondary: #999999;
+  --color-text-description: #CCCCCC;
+
+  /* 边框/背景色 */
+  --color-border-1: #E4E4E4;
+  --color-border-2: #E9E9E9;
+  --color-border-3: #F2F2F2;
+  --color-background: #F5F5F5;
+}
+
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+  background: #F5F5F5;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+h1 {
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: 30px;
+}
+.color-group {
+  margin-bottom: 40px;
+}
+.group-title {
+  font-size: 18px;
+  color: var(--color-text-primary);
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+.color-block {
+  border: 1px solid var(--color-border-1);
+  border-radius: 4px;
+  padding: 15px;
+  background: white;
+}
+.color-sample {
+  height: 100px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.color-name {
+  color: var(--color-text-regular);
+  margin-bottom: 5px;
+}
+.color-value {
+  color: var(--color-text-secondary);
+  font-family: monospace;
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 8px;
+  }
+  h1 {
+    font-size: 1.3rem;
+  }
+  .color-sample {
+    width: 40px;
+    height: 40px;
+  }
+} 

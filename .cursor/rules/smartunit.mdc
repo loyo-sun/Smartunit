@@ -1,0 +1,32 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+在选择风格的时候，能够使用[style.css](mdc:style.css)的风格首先使用这里的风格，不能使用的在后面追加。
+所有内容围绕html+css+js的技术栈进行代码输出。
+目录结构
+project/
+├── index.html          # 首页
+├── pages/             # 其他页面
+│   ├── device-list.html    # 设备列表页
+│   ├── device-detail.html  # 设备详情页
+│   └── user-management.html # 用户管理页
+│
+├── assets/            # 静态资源
+│   ├── css/          # 样式文件
+│   │   ├── main.css      # 主样式文件
+│   │   ├── reset.css     # 重置样式
+│   │   └── components/   # 组件样式
+│   │       ├── header.css
+│   │       ├── sidebar.css
+│   │       └── table.css
+│   │
+│   ├── images/       # 图片资源
+│   │   ├── icons/    # 图标
+│   │   └── logos/    # 标志
+│   │
+│   └── js/           # JavaScript文件
+│       └── main.js
+│
+└── README.md         # 项目说明文档

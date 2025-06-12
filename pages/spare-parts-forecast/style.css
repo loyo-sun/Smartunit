@@ -1,0 +1,348 @@
+:root {
+    --color-background: #f5f7fa;
+    --color-primary: #1890ff;
+    --color-error: #f5222d;
+    --color-text-primary: #262626;
+    --color-text-regular: #595959;
+    --color-text-secondary: #8c8c8c;
+    --color-border-1: #d9d9d9;
+    --color-border-2: #f0f0f0;
+    --color-auxiliary-2: #1890ff;
+    --color-data-2: #1890ff;
+    --color-data-4: #52c41a;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--color-background);
+}
+
+.spare-parts-container {
+    padding: 24px;
+}
+
+/* 页面标题样式 */
+.page-title {
+    margin: 0 0 24px 0;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+}
+
+/* 筛选区域样式 */
+.filter-section {
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.filter-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.filter-left {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.filter-right {
+    display: flex;
+    align-items: center;
+}
+
+select, input {
+    padding: 8px 12px;
+    border: 1px solid var(--color-border-1);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.btn-reset {
+    padding: 8px 16px;
+    border: 1px solid var(--color-border-1);
+    background: #fff;
+    color: var(--color-text-primary);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-export {
+    padding: 8px 16px;
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-export:hover {
+    background-color: #40a9ff;
+}
+
+.btn-export i {
+    font-size: 14px;
+}
+
+/* 表格通用样式 */
+.spare-parts-table,
+.equipment-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+.spare-parts-table th,
+.spare-parts-table td,
+.equipment-table th,
+.equipment-table td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border-1);
+    color: var(--color-text-regular);
+    font-size: 14px;
+}
+
+.spare-parts-table th,
+.equipment-table th {
+    background: #fff;
+    color: var(--color-text-primary);
+    font-weight: 500;
+}
+
+/* 表格区域样式 */
+.table-section {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+/* 表格单元格特殊样式 */
+.code,
+.price {
+    font-family: monospace;
+}
+
+.forecast {
+    color: var(--color-auxiliary-2);
+    font-weight: bold;
+}
+
+/* 标签样式 */
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    border: 1px solid;
+}
+
+.tag.consumable {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background: rgba(24, 144, 255, 0.1);
+}
+
+.tag.critical {
+    color: var(--color-error);
+    border-color: var(--color-error);
+    background: rgba(245, 34, 45, 0.1);
+}
+
+.tag.regular {
+    color: var(--color-text-secondary);
+    border-color: var(--color-text-secondary);
+    background: rgba(140, 140, 140, 0.1);
+}
+
+/* 按钮样式 */
+.btn-detail {
+    padding: 4px 12px;
+    border: 1px solid var(--color-border-1);
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--color-text-regular);
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-detail:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+/* 分页样式 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    gap: 8px;
+}
+
+.btn-page {
+    padding: 8px 16px;
+    border: 1px solid var(--color-border-1);
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.page-number {
+    color: var(--color-text-regular);
+}
+
+/* 抽屉样式 */
+.detail-drawer {
+    position: fixed;
+    top: 0;
+    right: -40%;
+    width: 40%;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+    transition: right 0.3s ease;
+    z-index: 1001;
+}
+
+.detail-drawer.active {
+    right: 0;
+}
+
+.drawer-content {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.drawer-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--color-border-1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 1;
+}
+
+.drawer-header h3 {
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+.drawer-body {
+    padding: 24px;
+}
+
+/* 遮罩层样式 */
+.drawer-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1000;
+    display: none;
+}
+
+.drawer-mask.active {
+    display: block;
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+    .filter-group {
+        flex-direction: column;
+    }
+    
+    .filter-left {
+        width: 100%;
+    }
+    
+    .filter-right {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    
+    .detail-drawer {
+        width: 100%;
+        right: -100%;
+    }
+}
+
+/* 详情页样式 */
+.info-section {
+    margin-bottom: 24px;
+}
+
+.part-name {
+    margin: 0 0 16px 0;
+    color: var(--color-text-primary);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-item .label {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+}
+
+.info-item .value {
+    font-size: 14px;
+    color: var(--color-text-regular);
+}
+
+.trend-section {
+    margin-bottom: 24px;
+}
+
+.trend-section h3 {
+    margin: 0 0 16px 0;
+    color: var(--color-text-primary);
+}
+
+.chart-container {
+    background: #fff;
+    border-radius: 4px;
+    padding: 16px;
+}
+
+.equipment-section h3 {
+    margin: 0 0 16px 0;
+    color: var(--color-text-primary);
+} 
