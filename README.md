@@ -1,6 +1,6 @@
 # Smartunit演示页面
 
-一个工程机械智能化管理平台的演示页面。
+Smartunit是我在树根科技的一个工程机械机群管理产品，这是产品的演示原型。
 
 ## 功能模块
 
@@ -42,9 +42,10 @@
 
 ```
 ├── index.html              # 首页
-├── demo.html              # 演示页面，对配合风格的说明
-├── style.css              # 全局样式参考配色
-├── pages/                 # 功能模块页面
+├── demo.html               # 演示页面，对配合风格的说明
+├── style.css               # 全局样式参考配色
+├── mobile/                 # 移动端演示页面
+├── pages/                  # 功能模块页面
 │   ├── spare-parts-forecast/  # 配件预测模块
 │   │   ├── index.html
 │   │   ├── style.css
@@ -52,7 +53,7 @@
 │   └── parts-management/      # 配件管理模块
 │       ├── index.html
 │       └── parts-management.js
-└── README.md             # 项目说明文档
+└── README.md             # 项目说明文档、
 ```
 
 ## 使用说明
