@@ -40,6 +40,36 @@
             font-size: 16px;
         }
 
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            background: #fff;
+            border: 1px solid #1890ff;
+            color: #1890ff;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: #1890ff;
+            color: #fff;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -120,52 +150,110 @@
             <p>智能维修费控，降低因缺件造成的停机损失</p>
         </div>
 
-        <div class="menu-grid">
-            <a href="pages/forecast/index.html" class="menu-item" target="_blank">
-                <h2>配件预测</h2>
-                <p>智能预测配件需求，优化库存管理</p>
-                <ul class="features">
-                    <li>支持均值预测和模型预测</li>
-                    <li>可视化趋势分析</li>
-                    <li>设备使用分布展示</li>
-                    <li>灵活的筛选和导出功能</li>
-                </ul>
-            </a>
-            <a href="pages/parts/index.html" class="menu-item" target="_blank">
-                <h2>配件管理</h2>
-                <p>全面管理配件信息，提升管理效率</p>
-                <ul class="features">
-                    <li>配件基础信息管理</li>
-                    <li>支持批量导入导出</li>
-                    <li>灵活的筛选和搜索</li>
-                    <li>预测方式灵活配置</li>
-                </ul>
-            </a>
-            <a href="pages/assets/index.html" class="menu-item" target="_blank">
-                <h2>资产列表</h2>
-                <p>全面管理设备资产，提升资产管理效率</p>
-                <ul class="features">
-                    <li>资产基础信息管理</li>
-                    <li>多维度筛选和搜索</li>
-                    <li>批量编辑功能</li>
-                    <li>资产状态实时监控</li>
-                </ul>
-            </a>
-            <a href="pages/orders/index.html" class="menu-item" target="_blank">
-                <h2>订单管理</h2>
-                <p>高效管理维修订单，提升服务响应速度</p>
-                <ul class="features">
-                    <li>订单全生命周期管理</li>
-                    <li>实时订单状态追踪</li>
-                    <li>智能派单和分配</li>
-                    <li>订单数据统计分析</li>
-                </ul>
-            </a>
+        <div class="tab-container">
+            <div class="tab active" onclick="switchTab('desktop')">电脑端</div>
+            <div class="tab" onclick="switchTab('mobile')">移动端</div>
+        </div>
+
+        <div id="desktop" class="content-section active">
+            <div class="menu-grid">
+                <a href="pages/forecast/index.html" class="menu-item" target="_blank">
+                    <h2>配件预测</h2>
+                    <p>智能预测配件需求，优化库存管理</p>
+                    <ul class="features">
+                        <li>支持均值预测和模型预测</li>
+                        <li>可视化趋势分析</li>
+                        <li>设备使用分布展示</li>
+                        <li>灵活的筛选和导出功能</li>
+                    </ul>
+                </a>
+                <a href="pages/parts/index.html" class="menu-item" target="_blank">
+                    <h2>配件管理</h2>
+                    <p>全面管理配件信息，提升管理效率</p>
+                    <ul class="features">
+                        <li>配件基础信息管理</li>
+                        <li>支持批量导入导出</li>
+                        <li>灵活的筛选和搜索</li>
+                        <li>预测方式灵活配置</li>
+                    </ul>
+                </a>
+                <a href="pages/assets/index.html" class="menu-item" target="_blank">
+                    <h2>资产列表</h2>
+                    <p>全面管理设备资产，提升资产管理效率</p>
+                    <ul class="features">
+                        <li>资产基础信息管理</li>
+                        <li>多维度筛选和搜索</li>
+                        <li>批量编辑功能</li>
+                        <li>资产状态实时监控</li>
+                    </ul>
+                </a>
+                <a href="pages/orders/index.html" class="menu-item" target="_blank">
+                    <h2>订单管理</h2>
+                    <p>高效管理维修订单，提升服务响应速度</p>
+                    <ul class="features">
+                        <li>订单全生命周期管理</li>
+                        <li>实时订单状态追踪</li>
+                        <li>智能派单和分配</li>
+                        <li>订单数据统计分析</li>
+                    </ul>
+                </a>
+            </div>
+        </div>
+
+        <div id="mobile" class="content-section">
+            <div class="menu-grid">
+                <a href="mobile/orders/index.html" class="menu-item" target="_blank">
+                    <h2>订单管理</h2>
+                    <p>移动端订单管理，随时随地处理订单</p>
+                    <ul class="features">
+                        <li>订单列表快速查看</li>
+                        <li>订单状态实时更新</li>
+                        <li>便捷的订单处理</li>
+                        <li>移动端优化体验</li>
+                    </ul>
+                </a>
+                <a href="mobile/maintenance/index.html" class="menu-item" target="_blank">
+                    <h2>保养管理</h2>
+                    <p>移动端保养管理，提升设备维护效率</p>
+                    <ul class="features">
+                        <li>保养计划智能提醒</li>
+                        <li>保养记录实时更新</li>
+                        <li>保养任务快速处理</li>
+                        <li>设备健康状态监控</li>
+                    </ul>
+                </a>
+                <a href="mobile/assets/index.html" class="menu-item" target="_blank">
+                    <h2>资产管理</h2>
+                    <p>移动端资产管理，随时随地管理资产</p>
+                    <ul class="features">
+                        <li>资产信息快速查看</li>
+                        <li>资产状态实时更新</li>
+                        <li>便捷的资产编辑</li>
+                        <li>移动端优化体验</li>
+                    </ul>
+                </a>
+            </div>
         </div>
 
         <div class="footer">
             <p>© 2025 Smartunit原型演示</p>
         </div>
     </div>
+
+    <script>
+        function switchTab(tabId) {
+            // 移除所有标签的active类
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // 移除所有内容区域的active类
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            // 为选中的标签和对应的内容区域添加active类
+            document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
 </body>
 </html> 

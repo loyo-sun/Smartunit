@@ -1,0 +1,518 @@
+:root {
+    /* 使用style.css中定义的颜色变量 */
+    --color-primary: #409EFF;
+    --color-secondary-1: #66B1FF;
+    --color-success: #19BE6B;
+    --color-warning: #FF9900;
+    --color-error: #F56C6C;
+    --color-text-primary: #333333;
+    --color-text-regular: #666666;
+    --color-text-secondary: #999999;
+    --color-border-1: #E4E4E4;
+    --color-background: #F5F5F5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+    background: var(--color-background);
+    color: var(--color-text-primary);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 12px;
+}
+
+/* 筛选栏样式 */
+.filter-bar {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.date-picker {
+    margin-bottom: 12px;
+}
+
+.date-picker input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--color-border-1);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.status-filter {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.status-btn {
+    padding: 6px 12px;
+    border: 1px solid var(--color-border-1);
+    border-radius: 16px;
+    background: white;
+    color: var(--color-text-regular);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.status-btn.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+/* 任务卡片样式 */
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.task-card {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.task-header {
+    margin-bottom: 12px;
+}
+
+.device-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.device-code {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+}
+
+.task-info {
+    margin-bottom: 12px;
+}
+
+.project-name {
+    font-size: 14px;
+    color: var(--color-text-regular);
+    margin-bottom: 8px;
+}
+
+.hours-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--color-text-regular);
+}
+
+.task-status {
+    margin-bottom: 12px;
+}
+
+.status-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: white;
+}
+
+.status-tag.normal {
+    background: var(--color-success);
+}
+
+.status-tag.warning {
+    background: var(--color-warning);
+}
+
+.status-tag.error {
+    background: var(--color-error);
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-primary:active {
+    background: var(--color-secondary-1);
+}
+
+/* 适配小屏幕 */
+@media (max-width: 320px) {
+    .container {
+        padding: 8px;
+    }
+    
+    .task-card {
+        padding: 12px;
+    }
+    
+    .hours-info {
+        flex-direction: column;
+        gap: 4px;
+    }
+}
+
+/* 保养详情页样式 */
+.detail-header {
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.detail-header h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.maintenance-info {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.info-section {
+    margin-bottom: 20px;
+}
+
+.info-section h3 {
+    font-size: 16px;
+    color: var(--color-text-primary);
+    margin-bottom: 8px;
+}
+
+.maintenance-items {
+    list-style: none;
+    padding-left: 0;
+}
+
+.maintenance-items li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-border-1);
+    color: var(--color-text-regular);
+}
+
+.maintenance-items li:last-child {
+    border-bottom: none;
+}
+
+.maintenance-form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-text-primary);
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--color-border-1);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.photo-upload {
+    margin-top: 8px;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.photo-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--color-background);
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-item.add-photo {
+    border: 1px dashed var(--color-border-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: white;
+}
+
+.photo-item.add-photo:hover {
+    border-color: var(--color-primary);
+}
+
+.photo-item.add-photo label {
+    font-size: 24px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+}
+
+.delete-photo {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.delete-photo:hover {
+    background: rgba(0,0,0,0.7);
+}
+
+.upload-tip {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.btn-secondary {
+    flex: 1;
+    padding: 10px;
+    background: white;
+    color: var(--color-text-regular);
+    border: 1px solid var(--color-border-1);
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-secondary:active {
+    background: var(--color-background);
+}
+
+/* 历史记录页样式 */
+.search-bar {
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.search-input {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.search-input input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--color-border-1);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.search-btn {
+    padding: 8px 16px;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.date-range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.date-range input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid var(--color-border-1);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.date-range span {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.history-card {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.history-header h3 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.history-date {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+.history-info {
+    margin-bottom: 12px;
+}
+
+.device-code,
+.maintenance-type {
+    font-size: 14px;
+    color: var(--color-text-regular);
+    margin-bottom: 8px;
+}
+
+.maintenance-data {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.data-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.data-item .label {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+}
+
+.data-item .value {
+    font-size: 16px;
+    color: var(--color-text-primary);
+    font-weight: bold;
+}
+
+.history-status {
+    margin-bottom: 12px;
+}
+
+.status-tag.completed {
+    background: var(--color-success);
+}
+
+.history-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 返回按钮样式 */
+.header-top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.btn-back {
+    background: none;
+    border: none;
+    padding: 8px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.back-icon {
+    font-size: 20px;
+    color: var(--color-text-primary);
+}
+
+.device-info {
+    margin-top: 8px;
+}
+
+.device-info h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+/* 表单验证样式 */
+.form-group input:invalid,
+.form-group textarea:invalid {
+    border-color: var(--color-error);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+} 

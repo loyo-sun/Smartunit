@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>保养详情</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="detail-header">
+            <div class="header-top">
+                <button class="btn-back" onclick="history.back()">
+                    <span class="back-icon">←</span>
+                </button>
+                <h2>保养详情</h2>
+            </div>
+            <div class="device-info">
+                <h3>挖掘机 - EX200-7</h3>
+                <p class="device-code">编码：EX2007-001</p>
+            </div>
+        </div>
+
+        <div class="maintenance-info">
+            <div class="info-section">
+                <h3>保养方案</h3>
+                <p>5000小时定期保养</p>
+            </div>
+
+            <div class="info-section">
+                <h3>预计保养项</h3>
+                <ul class="maintenance-items">
+                    <li>更换机油及机油滤芯</li>
+                    <li>更换燃油滤芯</li>
+                    <li>更换空气滤芯</li>
+                    <li>检查液压系统</li>
+                </ul>
+            </div>
+
+            <form class="maintenance-form" id="maintenanceForm">
+                <div class="form-group">
+                    <label for="actualHours">实际保养小时</label>
+                    <input type="number" id="actualHours" name="actualHours" placeholder="请输入实际保养小时" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="actualMileage">实际保养里程</label>
+                    <input type="number" id="actualMileage" name="actualMileage" placeholder="请输入实际保养里程" required>
+                </div>
+
+                <div class="form-group">
+                    <label>保养照片</label>
+                    <div class="photo-upload">
+                        <div class="photo-grid" id="photoGrid">
+                            <div class="photo-item add-photo">
+                                <input type="file" id="photoUpload" multiple accept="image/*" style="display: none;">
+                                <label for="photoUpload">+</label>
+                            </div>
+                        </div>
+                        <p class="upload-tip">支持多图上传，每张不超过10MB，最多9张</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="remarks">备注信息</label>
+                    <textarea id="remarks" name="remarks" rows="4" placeholder="请输入备注信息"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="saveDraft" style="flex: 1;">保存草稿</button>
+                    <button type="submit" class="btn-primary" style="flex: 1;">提交完成</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 图片上传预览和删除
+        const photoGrid = document.getElementById('photoGrid');
+        const photoUpload = document.getElementById('photoUpload');
+        const maxPhotos = 9;
+
+        photoUpload.addEventListener('change', function(e) {
+            const files = e.target.files;
+            const currentPhotos = photoGrid.querySelectorAll('.photo-item:not(.add-photo)').length;
+            
+            if (currentPhotos + files.length > maxPhotos) {
+                alert(`最多只能上传${maxPhotos}张照片`);
+                return;
+            }
+            
+            for(let file of files) {
+                if(file.size > 10 * 1024 * 1024) {
+                    alert('图片大小不能超过10MB');
+                    continue;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'photo-item';
+                    photoItem.innerHTML = `
+                        <img src="${e.target.result}" alt="保养照片">
+                        <button type="button" class="delete-photo" onclick="deletePhoto(this)">×</button>
+                    `;
+                    photoGrid.insertBefore(photoItem, document.querySelector('.add-photo'));
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function deletePhoto(btn) {
+            btn.parentElement.remove();
+        }
+
+        // 表单提交处理
+        document.getElementById('maintenanceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // TODO: 处理表单提交
+            alert('保养信息提交成功！');
+        });
+
+        // 保存草稿
+        document.getElementById('saveDraft').addEventListener('click', function() {
+            // TODO: 处理草稿保存
+            alert('草稿保存成功！');
+        });
+    </script>
+</body>
+</html> 

@@ -6,7 +6,7 @@
 ├── README.md                # 项目说明文档
 ├── index.html              # 系统首页
 ├── style.css               # 全局样式
-├── script.js               # 全局脚本
+├── demo.html              # 演示页面
 │
 ├── pages/                  # 功能模块目录
 │   ├── orders/             # 订单管理模块
@@ -29,10 +29,23 @@
 │       ├── style.css      # 配件预测样式
 │       └── script.js      # 配件预测脚本
 │
-├── assets/                 # 静态资源目录
-│   ├── images/            # 图片资源
-│   ├── icons/             # 图标资源
-│   └── fonts/             # 字体资源
+├── mobile/                 # 移动端适配目录
+│   ├── orders/            # 移动端订单管理
+│   │   ├── index.html    # 订单列表页面
+│   │   └── styles.css    # 订单样式
+│   │
+│   ├── maintenance/       # 移动端维护管理
+│   │   ├── index.html    # 维护列表页面
+│   │   ├── detail.html   # 维护详情页面
+│   │   ├── history.html  # 维护历史页面
+│   │   └── styles.css    # 维护样式
+│   │
+│   └── assets/           # 移动端资产管理
+│       ├── index.html    # 资产列表页面
+│       ├── detail.html   # 资产详情页面
+│       ├── add.html      # 新增资产页面
+│       ├── edit.html     # 编辑资产页面
+│       └── styles.css    # 资产样式
 │
 └── docs/                  # 文档目录
     ├── api/              # API文档

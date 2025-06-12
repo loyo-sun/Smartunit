@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>编辑设备</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="top-bar">
+    <button class="back-btn" onclick="history.back()">&lt;</button>
+    <span class="title">编辑设备</span>
+  </div>
+  <form class="device-form">
+    <label>设备编号 <input type="text" name="deviceId" required value="TF00009111AE"></label>
+    <label>设备名称 <input type="text" name="deviceName" required value="自卸车/SYZ320C-8"></label>
+    <label>设备类型 <input type="text" name="deviceType" required value="自卸车"></label>
+    <label>设备状态
+      <select name="deviceStatus" required>
+        <option value="working" selected>工作</option>
+        <option value="idle">停机</option>
+        <option value="off">关机</option>
+      </select>
+    </label>
+    <label>物联设备状态 <input type="text" name="iotStatus" value="工作"></label>
+    <label>自定义字段 <input type="text" name="customField" value="字段xxxxxxxxxxxx"></label>
+    <button class="save-btn" type="submit">保存</button>
+    <button class="delete-btn" type="button" onclick="confirm('确定要删除该设备吗？')">删除</button>
+  </form>
+</body>
+</html> 

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的订单</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部区域 -->
+        <header class="header">
+            <h1 class="page-title">我的订单</h1>
+            <div class="date-picker">
+                <input type="date" id="orderDate" value="">
+            </div>
+        </header>
+
+        <!-- 订单列表 -->
+        <main class="order-list">
+            <!-- 订单卡片示例 -->
+            <div class="order-card">
+                <div class="order-header">
+                    <h3 class="customer-name">客户名称：某某建筑公司</h3>
+                    <span class="status-tag status-pending">待执行</span>
+                </div>
+                <div class="order-info">
+                    <p class="location">施工地点：北京市朝阳区某某路123号</p>
+                    <p class="volume">计划方量：50m³</p>
+                    <p class="time">作业时间：09:00-12:00</p>
+                    <p class="vehicle">派工车辆：京A12345</p>
+                    <p class="dispatcher">调度人：张三</p>
+                    <p class="pump-operator">泵工：李四</p>
+                </div>
+                <div class="order-actions">
+                    <button class="action-btn check-in">到场打卡</button>
+                    <button class="action-btn start-work" disabled>开始作业</button>
+                    <button class="action-btn complete" disabled>完工打卡</button>
+                    <button class="action-btn input-volume" disabled>填写方量</button>
+                    <button class="action-btn cancel">申请取消</button>
+                </div>
+            </div>
+
+            <!-- 第二个订单卡片示例 -->
+            <div class="order-card">
+                <div class="order-header">
+                    <h3 class="customer-name">客户名称：某某工程公司</h3>
+                    <span class="status-tag status-in-progress">进行中</span>
+                </div>
+                <div class="order-info">
+                    <p class="location">施工地点：北京市海淀区某某路456号</p>
+                    <p class="volume">计划方量：30m³</p>
+                    <p class="time">作业时间：14:00-17:00</p>
+                    <p class="vehicle">派工车辆：京B67890</p>
+                    <p class="dispatcher">调度人：王五</p>
+                    <p class="pump-operator">泵工：赵六</p>
+                </div>
+                <div class="order-actions">
+                    <button class="action-btn check-in" disabled>到场打卡</button>
+                    <button class="action-btn start-work" disabled>开始作业</button>
+                    <button class="action-btn complete">完工打卡</button>
+                    <button class="action-btn input-volume">填写方量</button>
+                    <button class="action-btn cancel">申请取消</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 

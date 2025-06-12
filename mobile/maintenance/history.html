@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>保养历史记录</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 搜索栏 -->
+        <div class="search-bar">
+            <div class="search-input">
+                <input type="text" placeholder="搜索设备名称或编码">
+                <button class="search-btn">搜索</button>
+            </div>
+            <div class="date-range">
+                <input type="date" id="startDate">
+                <span>至</span>
+                <input type="date" id="endDate">
+            </div>
+        </div>
+
+        <!-- 历史记录列表 -->
+        <div class="history-list">
+            <!-- 历史记录卡片示例 -->
+            <div class="history-card">
+                <div class="history-header">
+                    <h3>挖掘机 - EX200-7</h3>
+                    <span class="history-date">2024-03-15</span>
+                </div>
+                <div class="history-info">
+                    <p class="device-code">编码：EX2007-001</p>
+                    <p class="maintenance-type">保养类型：5000小时定期保养</p>
+                    <div class="maintenance-data">
+                        <div class="data-item">
+                            <span class="label">保养小时</span>
+                            <span class="value">4800</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="label">保养里程</span>
+                            <span class="value">12500</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="history-status">
+                    <span class="status-tag completed">已完成</span>
+                </div>
+                <div class="history-actions">
+                    <button class="btn-secondary" onclick="location.href='detail.html'">查看详情</button>
+                </div>
+            </div>
+
+            <!-- 更多历史记录卡片 -->
+            <div class="history-card">
+                <div class="history-header">
+                    <h3>装载机 - ZL50</h3>
+                    <span class="history-date">2024-03-10</span>
+                </div>
+                <div class="history-info">
+                    <p class="device-code">编码：ZL50-002</p>
+                    <p class="maintenance-type">保养类型：2500小时定期保养</p>
+                    <div class="maintenance-data">
+                        <div class="data-item">
+                            <span class="label">保养小时</span>
+                            <span class="value">2450</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="label">保养里程</span>
+                            <span class="value">8200</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="history-status">
+                    <span class="status-tag completed">已完成</span>
+                </div>
+                <div class="history-actions">
+                    <button class="btn-secondary" onclick="location.href='detail.html'">查看详情</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 设置日期选择器默认值
+        const today = new Date();
+        const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+        
+        document.getElementById('startDate').valueAsDate = lastMonth;
+        document.getElementById('endDate').valueAsDate = today;
+ 
