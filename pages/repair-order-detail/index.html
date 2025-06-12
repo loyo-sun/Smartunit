@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>维修工单详情</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <!-- 左侧内容区 -->
+            <div class="left-content">
+                <!-- 工单信息卡片 -->
+                <div class="card">
+                    <h2 class="card-title">工单信息</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>设备编码</label>
+                            <div class="info-value">EQ-2024-001</div>
+                        </div>
+                        <div class="info-item">
+                            <label>创建人</label>
+                            <div class="info-value">张工</div>
+                        </div>
+                        <div class="info-item">
+                            <label>维修日期</label>
+                            <div class="info-value">2024-03-20</div>
+                        </div>
+                        <div class="info-item">
+                            <label>完工时间</label>
+                            <div class="info-value">2024-03-20 15:30</div>
+                        </div>
+                        <div class="info-item">
+                            <label>故障描述</label>
+                            <div class="info-value">液压系统压力异常</div>
+                        </div>
+                        <div class="info-item">
+                            <label>故障根因</label>
+                            <div class="info-value">液压泵密封圈损坏</div>
+                        </div>
+                        <div class="info-item">
+                            <label>工时成本</label>
+                            <div class="info-value">¥1,200</div>
+                        </div>
+                        <div class="info-item">
+                            <label>配件成本</label>
+                            <div class="info-value">¥3,500</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 维修工况信息卡片 -->
+                <div class="card">
+                    <h2 class="card-title">设备工况信息</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>发动机小时</label>
+                            <div class="info-value">2,580 h</div>
+                        </div>
+                        <div class="info-item">
+                            <label>行驶里程</label>
+                            <div class="info-value">15,680 km</div>
+                        </div>
+                        <div class="info-item">
+                            <label>总油耗</label>
+                            <div class="info-value">8,960 L</div>
+                        </div>
+                        <div class="info-item">
+                            <label>方量</label>
+                            <div class="info-value">12,500 m³</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 配件明细表格 -->
+                <div class="card">
+                    <h2 class="card-title">配件明细</h2>
+                    <table class="parts-table">
+                        <thead>
+                            <tr>
+                                <th>配件编码</th>
+                                <th>名称</th>
+                                <th>单位</th>
+                                <th>数量</th>
+                                <th>小计</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>P001</td>
+                                <td>液压泵</td>
+                                <td>个</td>
+                                <td>1</td>
+                                <td>¥2,500</td>
+                            </tr>
+                            <tr>
+                                <td>P002</td>
+                                <td>密封圈</td>
+                                <td>个</td>
+                                <td>2</td>
+                                <td>¥1,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 右侧AI审查助手区域 -->
+            <div class="right-content">
+                <div class="card">
+                    <h2 class="card-title">AI识别助手</h2>
+                    
+                    <!-- AI分析结果提示 -->
+                    <div class="ai-alert">
+                        <div class="ai-status">
+                            <div class="ai-icon">🤖</div>
+                            <div class="ai-text">
+                                <p>AI分析完成！发现3个问题，快来看看吧~</p>
+                                <div class="risk-level">
+                                    <span class="risk-tag high">严重</span>
+                                    <span class="risk-score">风险评分: 75分</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 风险项列表 -->
+                    <div class="risk-items">
+                        <div class="risk-item high">
+                            <div class="risk-header">
+                                <input type="checkbox" id="risk1">
+                                <label for="risk1">异常换件提醒</label>
+                                <span class="risk-tag high">严重</span>
+                            </div>
+                            <p class="risk-description">液压泵更换寿命仅 52 天，远低于行业均值 180 天</p>
+                            <div class="risk-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">建议操作：</span>
+                                    <span class="detail-value">检查设备使用情况，评估是否需要更换其他部件</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="risk-item medium">
+                            <div class="risk-header">
+                                <input type="checkbox" id="risk2">
+                                <label for="risk2">重复维修识别</label>
+                                <span class="risk-tag medium">中等</span>
+                            </div>
+                            <p class="risk-description">同部件两次更换间隔仅 12 天，维修人相同</p>
+                            <div class="risk-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">维修历史：</span>
+                                    <span class="detail-value">近30天内维修3次，建议进行设备全面检查</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="risk-item low">
+                            <div class="risk-header">
+                                <input type="checkbox" id="risk3">
+                                <label for="risk3">维修合理性评分</label>
+                                <span class="risk-tag low">一般</span>
+                            </div>
+                            <p class="risk-description">故障现象与原因匹配度仅 45%，建议复审</p>
+                            <div class="risk-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">匹配分析：</span>
+                                    <span class="detail-value">故障描述与维修方案存在偏差，建议补充故障现象描述</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 底部操作按钮 -->
+                    <div class="action-area">
+                        <button class="export-btn">
+                            <span class="btn-icon">📥</span>
+                            <span>一键导出报告</span>
+                        </button>
+                        <p class="note">由AI模型初审，请结合人工作业复核</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
