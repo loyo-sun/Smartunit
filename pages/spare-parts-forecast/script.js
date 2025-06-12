@@ -5,6 +5,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const detailButtons = document.querySelectorAll('.btn-detail');
     const closeButton = document.querySelector('.btn-close');
 
+    // 筛选功能
+    const monthSelector = document.querySelector('.month-selector');
+    const searchInput = document.querySelector('.search-input');
+    const typeSelector = document.querySelector('.type-selector');
+    const forecastTypeSelector = document.querySelector('.forecast-type-selector');
+    const resetButton = document.querySelector('.btn-reset');
+
+    // 监听筛选条件变化
+    searchInput.addEventListener('input', updateTable);
+    typeSelector.addEventListener('change', updateTable);
+    forecastTypeSelector.addEventListener('change', updateTable);
+    monthSelector.addEventListener('change', updateTable);
+
+    // 重置按钮
+    resetButton.addEventListener('click', () => {
+        searchInput.value = '';
+        typeSelector.value = 'all';
+        forecastTypeSelector.value = 'all';
+        // 保持月份选择器为默认值（下个月）
+        const defaultMonth = monthSelector.querySelector('option[selected]');
+        if (defaultMonth) {
+            monthSelector.value = defaultMonth.value;
+        }
+        updateTable();
+    });
+
     // 打开抽屉
     detailButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -22,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             loadDetailData(partData);
             drawer.classList.add('active');
             drawerMask.classList.add('active');
-            document.body.style.overflow = 'hidden'; // 防止背景滚动
+            document.body.style.overflow = 'hidden';
         });
     });
 
@@ -30,44 +56,52 @@ document.addEventListener('DOMContentLoaded', function() {
     function closeDrawer() {
         drawer.classList.remove('active');
         drawerMask.classList.remove('active');
-        document.body.style.overflow = ''; // 恢复背景滚动
+        document.body.style.overflow = '';
     }
 
     closeButton.addEventListener('click', closeDrawer);
-
-    // 点击遮罩层关闭抽屉
     drawerMask.addEventListener('click', closeDrawer);
-
-    // 筛选功能
-    const monthSelector = document.querySelector('.month-selector');
-    const searchInput = document.querySelector('.search-input');
-    const typeSelector = document.querySelector('.type-selector');
-    const forecastTypeSelector = document.querySelector('.forecast-type-selector');
-    const resetButton = document.querySelector('.btn-reset');
-
-    // 监听筛选条件变化
-    [monthSelector, searchInput, typeSelector, forecastTypeSelector].forEach(element => {
-        element.addEventListener('change', updateTable);
-    });
-
-    // 重置按钮
-    resetButton.addEventListener('click', () => {
-        monthSelector.value = '';
-        searchInput.value = '';
-        typeSelector.value = 'all';
-        forecastTypeSelector.value = 'all';
-        updateTable();
-    });
 
     // 导出按钮
     const exportButton = document.querySelector('.btn-export');
     exportButton.addEventListener('click', exportData);
+
+    // 初始化月份选择器
+    initMonthSelector();
 });
 
 // 更新表格数据
 function updateTable() {
-    // 这里添加实际的API调用逻辑
-    console.log('更新表格数据');
+    const monthValue = document.querySelector('.month-selector').value;
+    const searchValue = document.querySelector('.search-input').value.trim().toLowerCase();
+    const typeValue = document.querySelector('.type-selector').value;
+    const forecastTypeValue = document.querySelector('.forecast-type-selector').value;
+    
+    // 获取所有表格行
+    const rows = document.querySelectorAll('.spare-parts-table tbody tr');
+    
+    rows.forEach(row => {
+        const code = row.querySelector('.code').textContent.toLowerCase();
+        const name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+        const type = row.querySelector('.tag').classList[1];
+        const forecastType = row.querySelector('td:nth-child(7)').textContent;
+        
+        // 检查是否匹配搜索条件
+        const matchesSearch = !searchValue || 
+            code.includes(searchValue) || 
+            name.includes(searchValue);
+        
+        // 检查是否匹配类型条件
+        const matchesType = typeValue === 'all' || type === typeValue;
+        
+        // 检查是否匹配预测方式条件
+        const matchesForecastType = forecastTypeValue === 'all' || 
+            (forecastTypeValue === 'mean' && forecastType === '均值预测') ||
+            (forecastTypeValue === 'model' && forecastType === '模型预测');
+        
+        // 显示或隐藏行
+        row.style.display = matchesSearch && matchesType && matchesForecastType ? '' : 'none';
+    });
 }
 
 // 加载详情数据
@@ -282,4 +316,35 @@ function initChart() {
 function exportData() {
     // 这里添加实际的导出逻辑
     console.log('导出数据');
+}
+
+// 初始化月份选择器
+function initMonthSelector() {
+    const monthSelector = document.querySelector('.month-selector');
+    const today = new Date();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+    
+    // 清空现有选项
+    monthSelector.innerHTML = '';
+    
+    // 生成未来3个月的选项
+    for (let i = 1; i <= 3; i++) {
+        const date = new Date(currentYear, currentMonth + i, 1);
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const value = `${year}-${month.toString().padStart(2, '0')}`;
+        const text = `${year}年${month}月`;
+        
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = text;
+        
+        // 默认选中下个月
+        if (i === 1) {
+            option.selected = true;
+        }
+        
+        monthSelector.appendChild(option);
+    }
 } 

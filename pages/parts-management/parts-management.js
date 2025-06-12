@@ -38,15 +38,32 @@ const searchInput = document.querySelector('.search-input');
 const typeSelect = document.querySelectorAll('.select-input')[0];
 const statusSelect = document.querySelectorAll('.select-input')[1];
 const resetBtn = document.querySelector('.filter-section .btn-secondary');
+const tableBody = document.querySelector('.parts-table tbody');
 
 // 搜索处理
 function handleSearch() {
-    const searchValue = searchInput.value.trim();
+    const searchValue = searchInput.value.trim().toLowerCase();
     const typeValue = typeSelect.value;
     const statusValue = statusSelect.value;
     
-    // TODO: 实现搜索逻辑
-    console.log('搜索条件：', { searchValue, typeValue, statusValue });
+    // 遍历表格行进行筛选
+    const rows = tableBody.querySelectorAll('tr');
+    rows.forEach(row => {
+        const code = row.cells[0].textContent.toLowerCase();
+        const name = row.cells[1].textContent.toLowerCase();
+        const type = row.cells[5].querySelector('.tag').classList[1].replace('tag-', '');
+        const status = row.cells[6].querySelector('.tag').classList[1].replace('tag-', '');
+        
+        // 检查是否匹配搜索条件
+        const matchesSearch = !searchValue || code.includes(searchValue) || name.includes(searchValue);
+        // 检查是否匹配类型条件
+        const matchesType = !typeValue || type === typeValue;
+        // 检查是否匹配预测方式条件
+        const matchesStatus = !statusValue || status === statusValue;
+        
+        // 显示或隐藏行
+        row.style.display = matchesSearch && matchesType && matchesStatus ? '' : 'none';
+    });
 }
 
 // 重置处理
@@ -54,17 +71,15 @@ function handleReset() {
     searchInput.value = '';
     typeSelect.value = '';
     statusSelect.value = '';
-    handleSearch();
+    // 显示所有行
+    const rows = tableBody.querySelectorAll('tr');
+    rows.forEach(row => {
+        row.style.display = '';
+    });
 }
 
 // 绑定事件
-searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        handleSearch();
-    }
-});
-
-searchInput.addEventListener('blur', handleSearch);
+searchInput.addEventListener('input', handleSearch);
 typeSelect.addEventListener('change', handleSearch);
 statusSelect.addEventListener('change', handleSearch);
 resetBtn.addEventListener('click', handleReset);
