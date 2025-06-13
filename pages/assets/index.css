@@ -126,6 +126,11 @@ body {
     font-size: 14px;
 }
 
+.device-id {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
 .asset-table th {
     background: #fff;
     color: var(--color-text-primary);

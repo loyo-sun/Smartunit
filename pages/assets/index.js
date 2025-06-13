@@ -136,7 +136,7 @@ function renderTable(data) {
   tbody.innerHTML = data.map(item => `
     <tr>
       <td><input type="checkbox"></td>
-      <td>${item.code}</td>
+      <td class="device-id">${item.code}</td>
       <td>${item.status}</td>
       <td>${item.model}</td>
       <td>${item.name}</td>

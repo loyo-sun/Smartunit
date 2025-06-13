@@ -1,139 +1,69 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>资产管理</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资产列表</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <!-- 顶部搜索栏和筛选按钮 -->
-    <div class="header">
-      <input type="text" class="search-bar" placeholder="搜索设备编号/名称...">
-      <button class="filter-btn">筛选</button>
-    </div>
+    <div class="container">
+        <!-- 顶部导航 -->
+        <header class="header">
+            <h1 class="title">资产列表</h1>
+            <div class="search-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+            </div>
+        </header>
 
-    <!-- 设备列表区域 -->
-    <div class="device-list">
-      <div class="device-card" onclick="location.href='detail.html'">
-        <div class="device-info">
-          <span class="device-id">TF00009111AE</span>
-          <span class="device-name">自卸车/SYZ320C-8</span>
+        <!-- 筛选栏 -->
+        <div class="filter-bar">
+            <div class="filter-item">
+                <select id="assetType">
+                    <option value="all">资产类型</option>
+                    <option value="pump">泵车</option>
+                    <option value="mixer">搅拌车</option>
+                    <option value="excavator">挖掘机</option>
+                    <option value="dump">自卸车</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <select id="operationStatus">
+                    <option value="all">经营状态</option>
+                    <option value="operating">经营</option>
+                    <option value="idle">闲置</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <select id="stopStatus">
+                    <option value="all">停机状态</option>
+                    <option value="normal">正常</option>
+                    <option value="stopped">停机</option>
+                </select>
+            </div>
         </div>
-        <div class="device-meta">
-          <span class="device-type">自卸车</span>
-          <span class="device-status status-working">● 工作</span>
-        </div>
-        <span class="arrow">&gt;</span>
-      </div>
-      <div class="device-card" onclick="location.href='detail.html'">
-        <div class="device-info">
-          <span class="device-id">TF00009112BE</span>
-          <span class="device-name">挖掘机/EX200-7</span>
-        </div>
-        <div class="device-meta">
-          <span class="device-type">挖掘机</span>
-          <span class="device-status status-idle">● 停机</span>
-        </div>
-        <span class="arrow">&gt;</span>
-      </div>
-      <div class="device-card" onclick="location.href='detail.html'">
-        <div class="device-info">
-          <span class="device-id">TF00009113CE</span>
-          <span class="device-name">推土机/SD16</span>
-        </div>
-        <div class="device-meta">
-          <span class="device-type">推土机</span>
-          <span class="device-status status-off">● 关机</span>
-        </div>
-        <span class="arrow">&gt;</span>
-      </div>
-      <div class="device-card" onclick="location.href='detail.html'">
-        <div class="device-info">
-          <span class="device-id">TF00009114DE</span>
-          <span class="device-name">装载机/ZL50</span>
-        </div>
-        <div class="device-meta">
-          <span class="device-type">装载机</span>
-          <span class="device-status status-working">● 工作</span>
-        </div>
-        <span class="arrow">&gt;</span>
-      </div>
-      <div class="device-card" onclick="location.href='detail.html'">
-        <div class="device-info">
-          <span class="device-id">TF00009115EE</span>
-          <span class="device-name">压路机/XS223J</span>
-        </div>
-        <div class="device-meta">
-          <span class="device-type">压路机</span>
-          <span class="device-status status-idle">● 停机</span>
-        </div>
-        <span class="arrow">&gt;</span>
-      </div>
-      <div class="device-card" onclick="location.href='detail.html'">
-        <div class="device-info">
-          <span class="device-id">TF00009116FE</span>
-          <span class="device-name">平地机/GR180</span>
-        </div>
-        <div class="device-meta">
-          <span class="device-type">平地机</span>
-          <span class="device-status status-working">● 工作</span>
-        </div>
-        <span class="arrow">&gt;</span>
-      </div>
-      <div class="device-card" onclick="location.href='detail.html'">
-        <div class="device-info">
-          <span class="device-id">TF00009117GE</span>
-          <span class="device-name">泵车/37米</span>
-        </div>
-        <div class="device-meta">
-          <span class="device-type">泵车</span>
-          <span class="device-status status-off">● 关机</span>
-        </div>
-        <span class="arrow">&gt;</span>
-      </div>
-      <div class="device-card" onclick="location.href='detail.html'">
-        <div class="device-info">
-          <span class="device-id">TF00009118HE</span>
-          <span class="device-name">搅拌车/HOWO</span>
-        </div>
-        <div class="device-meta">
-          <span class="device-type">搅拌车</span>
-          <span class="device-status status-working">● 工作</span>
-        </div>
-        <span class="arrow">&gt;</span>
-      </div>
-      <div class="device-card" onclick="location.href='detail.html'">
-        <div class="device-info">
-          <span class="device-id">TF00009119IE</span>
-          <span class="device-name">起重机/QY25K5</span>
-        </div>
-        <div class="device-meta">
-          <span class="device-type">起重机</span>
-          <span class="device-status status-idle">● 停机</span>
-        </div>
-        <span class="arrow">&gt;</span>
-      </div>
-      <div class="device-card" onclick="location.href='detail.html'">
-        <div class="device-info">
-          <span class="device-id">TF00009120JE</span>
-          <span class="device-name">叉车/FD30</span>
-        </div>
-        <div class="device-meta">
-          <span class="device-type">叉车</span>
-          <span class="device-status status-off">● 关机</span>
-        </div>
-        <span class="arrow">&gt;</span>
-      </div>
-    </div>
 
-    <!-- 分页加载 -->
-    <div class="pagination">
-      <button class="load-more">加载更多</button>
+        <!-- 资产列表 -->
+        <div class="asset-list" id="assetList">
+            <!-- 资产卡片示例 -->
+            <div class="asset-card" data-id="CMI-DT-026">
+                <div class="status-tags">
+                    <span class="tag operating">经营</span>
+                    <span class="tag stopped">停机</span>
+                </div>
+                <div class="asset-info">
+                    <div class="main-info">
+                        <span class="asset-id">CMI-DT-026</span>
+                        <span class="arrow">></span>
+                    </div>
+                    <div class="sub-info">自卸车 / SYZ320C-8</div>
+                    <div class="extra-info">项目名称 | 更新时间：06-12 10:32</div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- 新增设备悬浮按钮 -->
-  <button class="fab" onclick="location.href='add.html'">+</button>
+    <script src="script.js"></script>
 </body>
 </html> 
