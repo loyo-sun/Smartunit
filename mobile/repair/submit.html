@@ -7,6 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>提交维修工单</title>
     <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
         .maintenance-form {
             width: 100%;
@@ -130,52 +131,54 @@
     </style>
 </head>
 <body>
-    <div class="page">
-        <div class="header">
-            <div class="header-content">
-                <div class="back-btn">
-                    <i class="icon-back"></i>
-                </div>
-                <div class="title">提交维修工单</div>
-            </div>
-        </div>
-        
-        <div class="page-content">
-            <div class="maintenance-form">
-                <div class="form-item">
-                    <label>设备名称</label>
-                    <select id="deviceName">
-                        <option value="">请选择设备</option>
-                    </select>
-                </div>
-                
-                <div class="form-item">
-                    <label>设备编号</label>
-                    <input type="text" id="deviceNo" readonly>
-                </div>
-                
-                <div class="form-item">
-                    <label>当前项目</label>
-                    <input type="text" id="project" readonly>
-                </div>
-                
-                <div class="form-item">
-                    <label>故障描述</label>
-                    <textarea id="faultDesc" placeholder="请简要描述设备当前问题"></textarea>
-                </div>
-                
-                <div class="form-item">
-                    <label>拍照上传</label>
-                    <div class="photo-upload">
-                        <div class="upload-btn" id="uploadBtn">
-                            <i class="icon-camera"></i>
-                            <span>点击上传照片</span>
-                        </div>
-                        <div class="photo-list" id="photoList"></div>
+    <div class="mobile-container">
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="back-btn">
+                        <i class="icon-back"></i>
                     </div>
+                    <div class="title">提交维修工单</div>
                 </div>
-                
-                <button class="submit-btn" id="submitBtn" disabled>提交</button>
+            </div>
+            
+            <div class="page-content">
+                <div class="maintenance-form">
+                    <div class="form-item">
+                        <label>设备名称</label>
+                        <select id="deviceName">
+                            <option value="">请选择设备</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-item">
+                        <label>设备编号</label>
+                        <input type="text" id="deviceNo" readonly>
+                    </div>
+                    
+                    <div class="form-item">
+                        <label>当前项目</label>
+                        <input type="text" id="project" readonly>
+                    </div>
+                    
+                    <div class="form-item">
+                        <label>故障描述</label>
+                        <textarea id="faultDesc" placeholder="请简要描述设备当前问题"></textarea>
+                    </div>
+                    
+                    <div class="form-item">
+                        <label>拍照上传</label>
+                        <div class="photo-upload">
+                            <div class="upload-btn" id="uploadBtn">
+                                <i class="icon-camera"></i>
+                                <span>点击上传照片</span>
+                            </div>
+                            <div class="photo-list" id="photoList"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="submit-btn" id="submitBtn" disabled>提交</button>
+                </div>
             </div>
         </div>
     </div>

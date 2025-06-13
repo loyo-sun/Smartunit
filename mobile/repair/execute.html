@@ -7,6 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>执行维修工单</title>
     <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
         .info-header {
             background: #fff;
@@ -213,77 +214,79 @@
     </style>
 </head>
 <body>
-    <div class="page">
-        <div class="header">
-            <div class="header-content">
-                <div class="back-btn">
-                    <i class="icon-back"></i>
-                </div>
-                <div class="title">执行维修工单</div>
-            </div>
-        </div>
-        
-        <div class="page-content">
-            <div class="info-header">
-                <div class="info-item">
-                    <div class="info-label">工单编号</div>
-                    <div class="info-value">WO202403150001</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">设备信息</div>
-                    <div class="info-value">
-                        <div>设备名称：CNC加工中心</div>
-                        <div>设备编号：CNC001</div>
-                        <div>所在项目：A项目</div>
+    <div class="mobile-container">
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="back-btn">
+                        <i class="icon-back"></i>
                     </div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">派工时间</div>
-                    <div class="info-value">2024-03-15 11:00</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">派工人</div>
-                    <div class="info-value">张三</div>
+                    <div class="title">执行维修工单</div>
                 </div>
             </div>
             
-            <div class="repair-form">
-                <div class="form-item">
-                    <label>实际维修时间</label>
-                    <input type="datetime-local" id="actualTime">
-                </div>
-                
-                <div class="form-item">
-                    <label>维修项目</label>
-                    <textarea id="repairDesc" placeholder="请详细描述维修内容"></textarea>
-                </div>
-                
-                <div class="form-item">
-                    <label>更换配件</label>
-                    <div class="parts-list" id="partsList">
-                        <div class="parts-item">
-                            <input type="text" placeholder="配件名称">
-                            <input type="number" placeholder="数量">
-                            <button class="delete-btn" onclick="removeParts(this)">×</button>
+            <div class="page-content">
+                <div class="info-header">
+                    <div class="info-item">
+                        <div class="info-label">工单编号</div>
+                        <div class="info-value">WO202403150001</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">设备信息</div>
+                        <div class="info-value">
+                            <div>设备名称：CNC加工中心</div>
+                            <div>设备编号：CNC001</div>
+                            <div>所在项目：A项目</div>
                         </div>
                     </div>
-                    <button class="add-parts-btn" onclick="addParts()">添加配件</button>
-                </div>
-                
-                <div class="form-item">
-                    <label>维修照片</label>
-                    <div class="photo-upload">
-                        <div class="upload-btn" id="uploadBtn">
-                            <i class="icon-camera"></i>
-                            <span>点击上传照片</span>
-                        </div>
-                        <div class="photo-list" id="photoList"></div>
+                    <div class="info-item">
+                        <div class="info-label">派工时间</div>
+                        <div class="info-value">2024-03-15 11:00</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">派工人</div>
+                        <div class="info-value">张三</div>
                     </div>
                 </div>
                 
-                <div class="action-buttons">
-                    <button class="action-btn complete-btn" id="completeBtn">完成维修</button>
-                    <button class="action-btn save-btn" id="saveBtn">保存草稿</button>
+                <div class="repair-form">
+                    <div class="form-item">
+                        <label>实际维修时间</label>
+                        <input type="datetime-local" id="actualTime">
+                    </div>
+                    
+                    <div class="form-item">
+                        <label>维修项目</label>
+                        <textarea id="repairDesc" placeholder="请详细描述维修内容"></textarea>
+                    </div>
+                    
+                    <div class="form-item">
+                        <label>更换配件</label>
+                        <div class="parts-list" id="partsList">
+                            <div class="parts-item">
+                                <input type="text" placeholder="配件名称">
+                                <input type="number" placeholder="数量">
+                                <button class="delete-btn" onclick="removeParts(this)">×</button>
+                            </div>
+                        </div>
+                        <button class="add-parts-btn" onclick="addParts()">添加配件</button>
+                    </div>
+                    
+                    <div class="form-item">
+                        <label>维修照片</label>
+                        <div class="photo-upload">
+                            <div class="upload-btn" id="uploadBtn">
+                                <i class="icon-camera"></i>
+                                <span>点击上传照片</span>
+                            </div>
+                            <div class="photo-list" id="photoList"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="action-btn complete-btn" id="completeBtn">完成维修</button>
+                        <button class="action-btn save-btn" id="saveBtn">保存草稿</button>
+                    </div>
                 </div>
             </div>
         </div>

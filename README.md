@@ -39,6 +39,10 @@
 │   │   ├── index.html    # 订单列表页面
 │   │   └── styles.css    # 订单样式
 │   │
+│   ├── repair/           # 移动端维修管理
+│   │   ├── index.html    # 维修列表页面
+│   │   └── styles.css    # 维修样式
+│   │
 │   ├── maintenance/       # 移动端维护管理
 │   │   ├── index.html    # 维护列表页面
 │   │   ├── detail.html   # 维护详情页面

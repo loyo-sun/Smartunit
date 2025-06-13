@@ -7,6 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>派发维修工单</title>
     <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
         .info-card {
             background: #fff;
@@ -129,68 +130,70 @@
     </style>
 </head>
 <body>
-    <div class="page">
-        <div class="header">
-            <div class="header-content">
-                <div class="back-btn">
-                    <i class="icon-back"></i>
-                </div>
-                <div class="title">派发维修工单</div>
-            </div>
-        </div>
-        
-        <div class="page-content">
-            <div class="info-card">
-                <div class="info-item">
-                    <div class="info-label">工单编号</div>
-                    <div class="info-value">WO202403150001</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">故障描述</div>
-                    <div class="info-value">设备无法启动，显示屏无反应</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">提交时间</div>
-                    <div class="info-value">2024-03-15 10:30</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">提交人</div>
-                    <div class="info-value">张三</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">设备信息</div>
-                    <div class="info-value">
-                        <div>设备名称：CNC加工中心</div>
-                        <div>设备编号：CNC001</div>
-                        <div>所在项目：A项目</div>
+    <div class="mobile-container">
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="back-btn">
+                        <i class="icon-back"></i>
                     </div>
+                    <div class="title">派发维修工单</div>
                 </div>
             </div>
             
-            <div class="assign-form">
-                <div class="form-item">
-                    <label>维修人员</label>
-                    <select id="repairer">
-                        <option value="">请选择维修人员</option>
-                        <option value="1">李四 <span class="repairer-status status-available">空闲</span></option>
-                        <option value="2">王五 <span class="repairer-status status-busy">忙碌</span></option>
-                        <option value="3">赵六 <span class="repairer-status status-offline">离线</span></option>
-                    </select>
+            <div class="page-content">
+                <div class="info-card">
+                    <div class="info-item">
+                        <div class="info-label">工单编号</div>
+                        <div class="info-value">WO202403150001</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">故障描述</div>
+                        <div class="info-value">设备无法启动，显示屏无反应</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">提交时间</div>
+                        <div class="info-value">2024-03-15 10:30</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">提交人</div>
+                        <div class="info-value">张三</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">设备信息</div>
+                        <div class="info-value">
+                            <div>设备名称：CNC加工中心</div>
+                            <div>设备编号：CNC001</div>
+                            <div>所在项目：A项目</div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="form-item">
-                    <label>计划维修时间</label>
-                    <input type="datetime-local" id="repairTime">
-                </div>
-                
-                <div class="form-item">
-                    <label>备注说明</label>
-                    <textarea id="remarks" placeholder="请输入派工备注信息"></textarea>
-                </div>
-                
-                <div class="action-buttons">
-                    <button class="action-btn confirm-btn" id="confirmBtn">确认派工</button>
-                    <button class="action-btn reject-btn" id="rejectBtn">拒绝工单</button>
+                <div class="assign-form">
+                    <div class="form-item">
+                        <label>维修人员</label>
+                        <select id="repairer">
+                            <option value="">请选择维修人员</option>
+                            <option value="1">李四 <span class="repairer-status status-available">空闲</span></option>
+                            <option value="2">王五 <span class="repairer-status status-busy">忙碌</span></option>
+                            <option value="3">赵六 <span class="repairer-status status-offline">离线</span></option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-item">
+                        <label>计划维修时间</label>
+                        <input type="datetime-local" id="repairTime">
+                    </div>
+                    
+                    <div class="form-item">
+                        <label>备注说明</label>
+                        <textarea id="remarks" placeholder="请输入派工备注信息"></textarea>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="action-btn confirm-btn" id="confirmBtn">确认派工</button>
+                        <button class="action-btn reject-btn" id="rejectBtn">拒绝工单</button>
+                    </div>
                 </div>
             </div>
         </div>

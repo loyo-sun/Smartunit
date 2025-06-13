@@ -7,6 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>维修审批</title>
     <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
         .info-section {
             background: #fff;
@@ -165,90 +166,92 @@
     </style>
 </head>
 <body>
-    <div class="page">
-        <div class="header">
-            <div class="header-content">
-                <div class="back-btn">
-                    <i class="icon-back"></i>
-                </div>
-                <div class="title">维修审批</div>
-            </div>
-        </div>
-        
-        <div class="page-content">
-            <div class="info-section">
-                <div class="section-title">工单信息</div>
-                <div class="info-item">
-                    <div class="info-label">工单编号</div>
-                    <div class="info-value">WO202403150001</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">设备信息</div>
-                    <div class="info-value">
-                        <div>设备名称：CNC加工中心</div>
-                        <div>设备编号：CNC001</div>
-                        <div>所在项目：A项目</div>
+    <div class="mobile-container">
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="back-btn">
+                        <i class="icon-back"></i>
                     </div>
+                    <div class="title">维修审批</div>
                 </div>
             </div>
             
-            <div class="info-section">
-                <div class="section-title">维修信息</div>
-                <div class="info-item">
-                    <div class="info-label">维修人员</div>
-                    <div class="info-value">李四</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">维修时间</div>
-                    <div class="info-value">2024-03-15 14:30</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">故障描述</div>
-                    <div class="info-value">设备无法启动，显示屏无反应</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">维修记录</div>
-                    <div class="info-value">更换了主板和显示屏，重新安装了系统</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">更换配件</div>
-                    <div class="info-value">
-                        <div>主板 × 1</div>
-                        <div>显示屏 × 1</div>
+            <div class="page-content">
+                <div class="info-section">
+                    <div class="section-title">工单信息</div>
+                    <div class="info-item">
+                        <div class="info-label">工单编号</div>
+                        <div class="info-value">WO202403150001</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">设备信息</div>
+                        <div class="info-value">
+                            <div>设备名称：CNC加工中心</div>
+                            <div>设备编号：CNC001</div>
+                            <div>所在项目：A项目</div>
+                        </div>
                     </div>
                 </div>
-                <div class="info-item">
-                    <div class="info-label">维修照片</div>
-                    <div class="info-value">
-                        <div class="repair-images">
-                            <div class="repair-image">
-                                <img src="repair1.jpg" alt="维修照片1">
-                            </div>
-                            <div class="repair-image">
-                                <img src="repair2.jpg" alt="维修照片2">
+                
+                <div class="info-section">
+                    <div class="section-title">维修信息</div>
+                    <div class="info-item">
+                        <div class="info-label">维修人员</div>
+                        <div class="info-value">李四</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">维修时间</div>
+                        <div class="info-value">2024-03-15 14:30</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">故障描述</div>
+                        <div class="info-value">设备无法启动，显示屏无反应</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">维修记录</div>
+                        <div class="info-value">更换了主板和显示屏，重新安装了系统</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">更换配件</div>
+                        <div class="info-value">
+                            <div>主板 × 1</div>
+                            <div>显示屏 × 1</div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">维修照片</div>
+                        <div class="info-value">
+                            <div class="repair-images">
+                                <div class="repair-image">
+                                    <img src="repair1.jpg" alt="维修照片1">
+                                </div>
+                                <div class="repair-image">
+                                    <img src="repair2.jpg" alt="维修照片2">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="approve-section">
-                <div class="approve-form">
-                    <textarea id="approveComment" placeholder="请输入审批意见"></textarea>
-                    <div class="action-buttons">
-                        <button class="action-btn approve-btn" id="approveBtn">同意</button>
-                        <button class="action-btn reject-btn" id="rejectBtn">拒绝</button>
-                    </div>
-                </div>
                 
-                <div class="approval-status">
-                    <div class="status-item">
-                        <div class="status-label">项目经理审批</div>
-                        <div class="status-value status-approved">已同意</div>
+                <div class="approve-section">
+                    <div class="approve-form">
+                        <textarea id="approveComment" placeholder="请输入审批意见"></textarea>
+                        <div class="action-buttons">
+                            <button class="action-btn approve-btn" id="approveBtn">同意</button>
+                            <button class="action-btn reject-btn" id="rejectBtn">拒绝</button>
+                        </div>
                     </div>
-                    <div class="status-item">
-                        <div class="status-label">设备主管审批</div>
-                        <div class="status-value status-pending">待审批</div>
+                    
+                    <div class="approval-status">
+                        <div class="status-item">
+                            <div class="status-label">项目经理审批</div>
+                            <div class="status-value status-approved">已同意</div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-label">设备主管审批</div>
+                            <div class="status-value status-pending">待审批</div>
+                        </div>
                     </div>
                 </div>
             </div>
