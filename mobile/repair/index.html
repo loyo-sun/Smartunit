@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>维修工单流程</title>
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .process-container {
+            padding: 15px;
+        }
+        .process-title {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--color-text-primary);
+        }
+        .process-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--color-primary);
+        }
+        .process-step {
+            position: relative;
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+        .process-step:last-child {
+            margin-bottom: 0;
+        }
+        .step-dot {
+            position: absolute;
+            left: -30px;
+            width: 20px;
+            height: 20px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 12px;
+        }
+        .step-content {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+        }
+        .step-content.blur {
+            filter: blur(3px);
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .step-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-left: 10px;
+        }
+        .step-desc {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .step-details {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--color-border);
+        }
+        .detail-item {
+            display: flex;
+            margin-bottom: 8px;
+        }
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+        .detail-label {
+            width: 80px;
+            color: var(--color-text-secondary);
+            flex-shrink: 0;
+        }
+        .detail-value {
+            flex: 1;
+            color: var(--color-text-primary);
+        }
+        /* 右侧滑出详情样式 */
+        .side-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100%;
+            background: #fff;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+        }
+        .side-panel.active {
+            right: 0;
+        }
+        .side-panel-content {
+            padding: 20px;
+            height: 100%;
+            overflow-y: auto;
+        }
+        .side-panel-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        /* 适配暗黑模式 */
+        @media (prefers-color-scheme: dark) {
+            .step-content, .side-panel {
+                background: #2c2c2c;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="back-btn">
+                        <i class="icon-back"></i>
+                    </div>
+                    <div class="title">维修工单流程</div>
+                </div>
+            </div>
+            <div class="page-content">
+                <div class="process-container">
+                    <div class="process-title">维修工单处理流程</div>
+                    <div class="process-timeline">
+                        <!-- 提交工单 -->
+                        <div class="process-step" onclick="showDetail(1)">
+                            <div class="step-dot">1</div>
+                            <div class="step-content">
+                                <div class="step-header">
+                                    <div class="step-title">提交工单</div>
+                                </div>
+                                <div class="step-desc">
+                                    通过手机APP提交维修工单
+                                </div>
+                                <div class="step-details">
+                                    <div class="detail-item">
+                                        <div class="detail-label">操作人：</div>
+                                        <div class="detail-value">操作手</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">所需信息：</div>
+                                        <div class="detail-value">设备信息、故障描述、现场照片</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 工单确认 -->
+                        <div class="process-step" onclick="window.open('assign.html', '_blank')">
+                            <div class="step-dot">2</div>
+                            <div class="step-content">
+                                <div class="step-header">
+                                    <div class="step-title">工单确认</div>
+                                </div>
+                                <div class="step-desc">
+                                    维修主管确认工单内容，判断驳回或派单
+                                </div>
+                                <div class="step-details">
+                                    <div class="detail-item">
+                                        <div class="detail-label">操作人：</div>
+                                        <div class="detail-value">维修主管</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">所需信息：</div>
+                                        <div class="detail-value">工单内容确认、维修人员分配</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 执行维修 -->
+                        <div class="process-step">
+                            <div class="step-dot">3</div>
+                            <div class="step-content blur">
+                                <div class="step-header">
+                                    <div class="step-title">执行维修</div>
+                                </div>
+                                <div class="step-desc">
+                                    维修人员执行维修，记录过程、上传维修照片
+                                </div>
+                                <div class="step-details">
+                                    <div class="detail-item">
+                                        <div class="detail-label">操作人：</div>
+                                        <div class="detail-value">维修人员</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">所需信息：</div>
+                                        <div class="detail-value">维修过程、更换配件、维修照片</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 完工确认 -->
+                        <div class="process-step">
+                            <div class="step-dot">4</div>
+                            <div class="step-content blur">
+                                <div class="step-header">
+                                    <div class="step-title">完工确认</div>
+                                </div>
+                                <div class="step-desc">
+                                    维修人员或主管确认维修完成，发起审批流程
+                                </div>
+                                <div class="step-details">
+                                    <div class="detail-item">
+                                        <div class="detail-label">操作人：</div>
+                                        <div class="detail-value">维修人员/主管</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">所需信息：</div>
+                                        <div class="detail-value">维修结果确认、发起审批</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 工单审批 -->
+                        <div class="process-step">
+                            <div class="step-dot">5</div>
+                            <div class="step-content blur">
+                                <div class="step-header">
+                                    <div class="step-title">工单审批</div>
+                                </div>
+                                <div class="step-desc">
+                                    相关负责人审批维修结果，工单归档
+                                </div>
+                                <div class="step-details">
+                                    <div class="detail-item">
+                                        <div class="detail-label">操作人：</div>
+                                        <div class="detail-value">相关负责人</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">所需信息：</div>
+                                        <div class="detail-value">审批结果、工单归档</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 右侧滑出详情 -->
+    <div class="side-panel" id="sidePanel">
+        <div class="side-panel-content" id="sidePanelContent"></div>
+        <div class="side-panel-close" onclick="closePanel()">×</div>
+    </div>
+    <script>
+        function showDetail(step) {
+            const panel = document.getElementById('sidePanel');
+            const content = document.getElementById('sidePanelContent');
+            let detailContent = '';
+            switch(step) {
+                case 1:
+                    window.open('submit.html', '_blank');
+                    return;
+                case 2:
+                    window.open('assign.html', '_blank');
+                    return;
+                case 3:
+                    window.open('execute.html', '_blank');
+                    return;
+                case 4:
+                    window.open('complete.html', '_blank');
+                    return;
+                case 5:
+                    window.open('approve.html', '_blank');
+                    return;
+            }
+        }
+        function closePanel() {
+            document.getElementById('sidePanel').classList.remove('active');
+        }
+    </script>
+</body>
+</html> 

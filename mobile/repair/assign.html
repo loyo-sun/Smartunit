@@ -5,126 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>派发维修工单</title>
+    <title>工单确认</title>
     <link rel="stylesheet" href="../assets/css/common.css">
-    <link rel="stylesheet" href="styles.css">
     <style>
-        .info-card {
+        .page {
+            padding: 15px;
+        }
+        .card {
             background: #fff;
             border-radius: 8px;
             padding: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
         }
-        
+        .card-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--color-text-primary);
+        }
         .info-item {
             display: flex;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
-        
-        .info-item:last-child {
-            margin-bottom: 0;
-        }
-        
         .info-label {
             width: 80px;
             color: var(--color-text-secondary);
             flex-shrink: 0;
+            text-align: right;
+            padding-right: 10px;
         }
-        
         .info-value {
             flex: 1;
             color: var(--color-text-primary);
+            min-width: 0;
         }
-        
-        .assign-form {
-            background: #fff;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
-        }
-        
-        .form-item {
-            margin-bottom: 20px;
-        }
-        
-        .form-item label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--color-text-primary);
-            font-weight: 500;
-        }
-        
-        .form-item input,
-        .form-item select,
-        .form-item textarea {
-            width: 100%;
-            padding: 12px;
-        }
-        
-        .form-item textarea {
-            height: 80px;
-            resize: none;
-        }
-        
-        .form-item textarea::placeholder {
-            color: var(--color-text-secondary);
-        }
-        
-        .repairer-status {
+        .info-value a {
             display: inline-block;
-            padding: 2px 8px;
+            width: 100%;
+        }
+        .phone-link {
+            color: var(--color-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .phone-link i {
+            font-size: 16px;
+        }
+        .phone-link:active {
+            opacity: 0.8;
+        }
+        .photo-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .photo-item {
+            width: 100px;
+            height: 100px;
             border-radius: 4px;
-            font-size: 12px;
-            margin-left: 8px;
+            overflow: hidden;
         }
-        
-        .status-available {
-            background: var(--color-success);
-            color: #fff;
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        
-        .status-busy {
-            background: var(--color-warning);
-            color: #fff;
-        }
-        
-        .status-offline {
-            background: var(--color-info);
-            color: #fff;
-        }
-        
         .action-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            display: flex;
+            gap: 10px;
             margin-top: 20px;
         }
-        
-        .action-btn {
-            height: 44px;
-            border: none;
+        .btn {
+            flex: 1;
+            height: 40px;
             border-radius: 4px;
+            border: none;
             font-size: 16px;
             cursor: pointer;
         }
-        
-        .confirm-btn {
+        .btn-primary {
             background: var(--color-primary);
             color: #fff;
         }
-        
-        .reject-btn {
-            background: var(--color-error);
+        .btn-danger {
+            background: #ff4d4f;
             color: #fff;
         }
-        
         /* 适配暗黑模式 */
         @media (prefers-color-scheme: dark) {
-            .info-card,
-            .assign-form {
+            .card {
                 background: #2c2c2c;
-                box-shadow: 0 2px 12px 0 rgba(0,0,0,0.2);
             }
         }
     </style>
@@ -134,100 +108,132 @@
         <div class="page">
             <div class="header">
                 <div class="header-content">
-                    <div class="back-btn">
+                    <div class="back-btn" onclick="history.back()">
                         <i class="icon-back"></i>
                     </div>
-                    <div class="title">派发维修工单</div>
+                    <div class="title">工单确认</div>
                 </div>
             </div>
-            
             <div class="page-content">
-                <div class="info-card">
+                <!-- 工单信息 -->
+                <div class="card">
+                    <div class="card-title">工单信息</div>
                     <div class="info-item">
-                        <div class="info-label">工单编号</div>
-                        <div class="info-value">WO202403150001</div>
+                        <div class="info-label">工单编号：</div>
+                        <div class="info-value">R202403150001</div>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">故障描述</div>
-                        <div class="info-value">设备无法启动，显示屏无反应</div>
+                        <div class="info-label">设备类型：</div>
+                        <div class="info-value">挖掘机</div>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">提交时间</div>
-                        <div class="info-value">2024-03-15 10:30</div>
+                        <div class="info-label">设备型号：</div>
+                        <div class="info-value">SY215C</div>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">提交人</div>
-                        <div class="info-value">张三</div>
+                        <div class="info-label">设备编号：</div>
+                        <div class="info-value">SY215C-2024001</div>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">设备信息</div>
+                        <div class="info-label">故障类型：</div>
+                        <div class="info-value">发动机故障</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">故障描述：</div>
+                        <div class="info-value">发动机无法启动，启动时有异常噪音，机油压力报警</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">现场照片：</div>
                         <div class="info-value">
-                            <div>设备名称：CNC加工中心</div>
-                            <div>设备编号：CNC001</div>
-                            <div>所在项目：A项目</div>
+                            <div class="photo-list">
+                                <div class="photo-item">
+                                    <img src="https://smartunit.sunqing.org/mobile/assets/images/image.svg" alt="现场照片">
+                                </div>
+                                <div class="photo-item">
+                                    <img src="https://smartunit.sunqing.org/mobile/assets/images/image.svg" alt="现场照片">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="assign-form">
-                    <div class="form-item">
-                        <label>维修人员</label>
-                        <select id="repairer">
-                            <option value="">请选择维修人员</option>
-                            <option value="1">李四 <span class="repairer-status status-available">空闲</span></option>
-                            <option value="2">王五 <span class="repairer-status status-busy">忙碌</span></option>
-                            <option value="3">赵六 <span class="repairer-status status-offline">离线</span></option>
-                        </select>
+
+                <!-- 发起人信息 -->
+                <div class="card">
+                    <div class="card-title">发起人信息</div>
+                    <div class="info-item">
+                        <div class="info-label">使用单位：</div>
+                        <div class="info-value">湖南三一工程机械有限公司</div>
                     </div>
-                    
-                    <div class="form-item">
-                        <label>计划维修时间</label>
-                        <input type="datetime-local" id="repairTime">
+                    <div class="info-item">
+                        <div class="info-label">联系人：</div>
+                        <div class="info-value">张三</div>
                     </div>
-                    
-                    <div class="form-item">
-                        <label>备注说明</label>
-                        <textarea id="remarks" placeholder="请输入派工备注信息"></textarea>
+                    <div class="info-item">
+                        <div class="info-label">联系电话：</div>
+                        <div class="info-value">
+                            <a href="tel:13800138000" class="phone-link">
+                                <i class="icon-phone"></i>
+                                13800138000
+                            </a>
+                        </div>
                     </div>
-                    
-                    <div class="action-buttons">
-                        <button class="action-btn confirm-btn" id="confirmBtn">确认派工</button>
-                        <button class="action-btn reject-btn" id="rejectBtn">拒绝工单</button>
+                    <div class="info-item">
+                        <div class="info-label">设备位置：</div>
+                        <div class="info-value">湖南省长沙市三一工业城</div>
                     </div>
+                </div>
+
+                <!-- 派单操作 -->
+                <div class="card">
+                    <div class="card-title">派单操作</div>
+                    <div class="info-item">
+                        <div class="info-label">维修人员：</div>
+                        <div class="info-value">
+                            <select style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--color-border);">
+                                <option value="">请选择维修人员</option>
+                                <option value="1">李四（发动机维修 | 5年经验 | 在线）</option>
+                                <option value="2">王五（液压系统维修 | 8年经验 | 在线）</option>
+                                <option value="3">赵六（电气系统维修 | 6年经验 | 在线）</option>
+                                <option value="4">钱七（底盘维修 | 7年经验 | 在线）</option>
+                                <option value="5">孙八（整机维修 | 10年经验 | 在线）</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">优先级：</div>
+                        <div class="info-value">
+                            <select style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--color-border);">
+                                <option value="1">普通</option>
+                                <option value="2">紧急</option>
+                                <option value="3">特急</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 操作按钮 -->
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="handleAssign()">派单</button>
+                    <button class="btn btn-danger" onclick="handleReject()">拒绝</button>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <script>
-        // 确认派工
-        document.getElementById('confirmBtn').addEventListener('click', () => {
-            const repairer = document.getElementById('repairer').value;
-            const repairTime = document.getElementById('repairTime').value;
-            
-            if (!repairer || !repairTime) {
-                alert('请选择维修人员并设置维修时间');
-                return;
-            }
-            
-            // 这里添加派工确认逻辑
-            alert('派工成功');
-            window.history.back();
-        });
-        
-        // 拒绝工单
-        document.getElementById('rejectBtn').addEventListener('click', () => {
-            if (confirm('确定要拒绝该工单吗？')) {
-                // 这里添加拒绝工单逻辑
+        function handleAssign() {
+            // 派单处理逻辑
+            alert('派单成功');
+            history.back();
+        }
+
+        function handleReject() {
+            // 拒绝处理逻辑
+            if(confirm('确定要拒绝该工单吗？')) {
                 alert('工单已拒绝');
-                window.history.back();
+                history.back();
             }
-        });
-        
-        // 返回按钮
-        document.querySelector('.back-btn').addEventListener('click', () => {
-            window.history.back();
-        });
+        }
     </script>
 </body>
 </html> 
