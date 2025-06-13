@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>派发维修工单</title>
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        .info-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+        }
+        
+        .info-item {
+            display: flex;
+            margin-bottom: 12px;
+        }
+        
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-label {
+            width: 80px;
+            color: var(--color-text-secondary);
+            flex-shrink: 0;
+        }
+        
+        .info-value {
+            flex: 1;
+            color: var(--color-text-primary);
+        }
+        
+        .assign-form {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+        }
+        
+        .form-item {
+            margin-bottom: 20px;
+        }
+        
+        .form-item label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--color-text-primary);
+            font-weight: 500;
+        }
+        
+        .form-item input,
+        .form-item select,
+        .form-item textarea {
+            width: 100%;
+            padding: 12px;
+        }
+        
+        .form-item textarea {
+            height: 80px;
+            resize: none;
+        }
+        
+        .form-item textarea::placeholder {
+            color: var(--color-text-secondary);
+        }
+        
+        .repairer-status {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        
+        .status-available {
+            background: var(--color-success);
+            color: #fff;
+        }
+        
+        .status-busy {
+            background: var(--color-warning);
+            color: #fff;
+        }
+        
+        .status-offline {
+            background: var(--color-info);
+            color: #fff;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .action-btn {
+            height: 44px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .confirm-btn {
+            background: var(--color-primary);
+            color: #fff;
+        }
+        
+        .reject-btn {
+            background: var(--color-error);
+            color: #fff;
+        }
+        
+        /* 适配暗黑模式 */
+        @media (prefers-color-scheme: dark) {
+            .info-card,
+            .assign-form {
+                background: #2c2c2c;
+                box-shadow: 0 2px 12px 0 rgba(0,0,0,0.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <div class="header-content">
+                <div class="back-btn">
+                    <i class="icon-back"></i>
+                </div>
+                <div class="title">派发维修工单</div>
+            </div>
+        </div>
+        
+        <div class="page-content">
+            <div class="info-card">
+                <div class="info-item">
+                    <div class="info-label">工单编号</div>
+                    <div class="info-value">WO202403150001</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">故障描述</div>
+                    <div class="info-value">设备无法启动，显示屏无反应</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">提交时间</div>
+                    <div class="info-value">2024-03-15 10:30</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">提交人</div>
+                    <div class="info-value">张三</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">设备信息</div>
+                    <div class="info-value">
+                        <div>设备名称：CNC加工中心</div>
+                        <div>设备编号：CNC001</div>
+                        <div>所在项目：A项目</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="assign-form">
+                <div class="form-item">
+                    <label>维修人员</label>
+                    <select id="repairer">
+                        <option value="">请选择维修人员</option>
+                        <option value="1">李四 <span class="repairer-status status-available">空闲</span></option>
+                        <option value="2">王五 <span class="repairer-status status-busy">忙碌</span></option>
+                        <option value="3">赵六 <span class="repairer-status status-offline">离线</span></option>
+                    </select>
+                </div>
+                
+                <div class="form-item">
+                    <label>计划维修时间</label>
+                    <input type="datetime-local" id="repairTime">
+                </div>
+                
+                <div class="form-item">
+                    <label>备注说明</label>
+                    <textarea id="remarks" placeholder="请输入派工备注信息"></textarea>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn confirm-btn" id="confirmBtn">确认派工</button>
+                    <button class="action-btn reject-btn" id="rejectBtn">拒绝工单</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 确认派工
+        document.getElementById('confirmBtn').addEventListener('click', () => {
+            const repairer = document.getElementById('repairer').value;
+            const repairTime = document.getElementById('repairTime').value;
+            
+            if (!repairer || !repairTime) {
+                alert('请选择维修人员并设置维修时间');
+                return;
+            }
+            
+            // 这里添加派工确认逻辑
+            alert('派工成功');
+            window.history.back();
+        });
+        
+        // 拒绝工单
+        document.getElementById('rejectBtn').addEventListener('click', () => {
+            if (confirm('确定要拒绝该工单吗？')) {
+                // 这里添加拒绝工单逻辑
+                alert('工单已拒绝');
+                window.history.back();
+            }
+        });
+        
+        // 返回按钮
+        document.querySelector('.back-btn').addEventListener('click', () => {
+            window.history.back();
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>维修审批</title>
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        .info-section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 3px solid var(--color-primary);
+        }
+        
+        .info-item {
+            display: flex;
+            margin-bottom: 12px;
+        }
+        
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-label {
+            width: 80px;
+            color: var(--color-text-secondary);
+            flex-shrink: 0;
+        }
+        
+        .info-value {
+            flex: 1;
+            color: var(--color-text-primary);
+        }
+        
+        .repair-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .repair-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .repair-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .approve-section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+        }
+        
+        .approve-form {
+            margin-bottom: 20px;
+        }
+        
+        .approve-form textarea {
+            width: 100%;
+            height: 100px;
+            padding: 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            resize: none;
+            margin-bottom: 15px;
+        }
+        
+        .approve-form textarea::placeholder {
+            color: var(--color-text-secondary);
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .action-btn {
+            height: 44px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .approve-btn {
+            background: var(--color-success);
+            color: #fff;
+        }
+        
+        .reject-btn {
+            background: var(--color-error);
+            color: #fff;
+        }
+        
+        .approval-status {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .status-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .status-label {
+            color: var(--color-text-secondary);
+        }
+        
+        .status-value {
+            color: var(--color-text-primary);
+        }
+        
+        .status-approved {
+            color: var(--color-success);
+        }
+        
+        .status-rejected {
+            color: var(--color-error);
+        }
+        
+        .status-pending {
+            color: var(--color-warning);
+        }
+        
+        /* 适配暗黑模式 */
+        @media (prefers-color-scheme: dark) {
+            .info-section,
+            .approve-section {
+                background: #2c2c2c;
+                box-shadow: 0 2px 12px 0 rgba(0,0,0,0.2);
+            }
+            
+            .approval-status {
+                border-top-color: #3a3a3a;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <div class="header-content">
+                <div class="back-btn">
+                    <i class="icon-back"></i>
+                </div>
+                <div class="title">维修审批</div>
+            </div>
+        </div>
+        
+        <div class="page-content">
+            <div class="info-section">
+                <div class="section-title">工单信息</div>
+                <div class="info-item">
+                    <div class="info-label">工单编号</div>
+                    <div class="info-value">WO202403150001</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">设备信息</div>
+                    <div class="info-value">
+                        <div>设备名称：CNC加工中心</div>
+                        <div>设备编号：CNC001</div>
+                        <div>所在项目：A项目</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <div class="section-title">维修信息</div>
+                <div class="info-item">
+                    <div class="info-label">维修人员</div>
+                    <div class="info-value">李四</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">维修时间</div>
+                    <div class="info-value">2024-03-15 14:30</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">故障描述</div>
+                    <div class="info-value">设备无法启动，显示屏无反应</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">维修记录</div>
+                    <div class="info-value">更换了主板和显示屏，重新安装了系统</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">更换配件</div>
+                    <div class="info-value">
+                        <div>主板 × 1</div>
+                        <div>显示屏 × 1</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">维修照片</div>
+                    <div class="info-value">
+                        <div class="repair-images">
+                            <div class="repair-image">
+                                <img src="repair1.jpg" alt="维修照片1">
+                            </div>
+                            <div class="repair-image">
+                                <img src="repair2.jpg" alt="维修照片2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="approve-section">
+                <div class="approve-form">
+                    <textarea id="approveComment" placeholder="请输入审批意见"></textarea>
+                    <div class="action-buttons">
+                        <button class="action-btn approve-btn" id="approveBtn">同意</button>
+                        <button class="action-btn reject-btn" id="rejectBtn">拒绝</button>
+                    </div>
+                </div>
+                
+                <div class="approval-status">
+                    <div class="status-item">
+                        <div class="status-label">项目经理审批</div>
+                        <div class="status-value status-approved">已同意</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">设备主管审批</div>
+                        <div class="status-value status-pending">待审批</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 同意审批
+        document.getElementById('approveBtn').addEventListener('click', () => {
+            const comment = document.getElementById('approveComment').value;
+            if (!comment) {
+                alert('请输入审批意见');
+                return;
+            }
+            
+            // 这里添加同意审批逻辑
+            alert('审批已同意');
+            window.history.back();
+        });
+        
+        // 拒绝审批
+        document.getElementById('rejectBtn').addEventListener('click', () => {
+            const comment = document.getElementById('approveComment').value;
+            if (!comment) {
+                alert('请输入审批意见');
+                return;
+            }
+            
+            if (confirm('确定要拒绝该维修工单吗？')) {
+                // 这里添加拒绝审批逻辑
+                alert('工单已拒绝');
+                window.history.back();
+            }
+        });
+        
+        // 返回按钮
+        document.querySelector('.back-btn').addEventListener('click', () => {
+            window.history.back();
+        });
+    </script>
+</body>
+</html> 

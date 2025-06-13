@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>执行维修工单</title>
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        .info-header {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+        }
+        
+        .info-item {
+            display: flex;
+            margin-bottom: 12px;
+        }
+        
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-label {
+            width: 80px;
+            color: var(--color-text-secondary);
+            flex-shrink: 0;
+        }
+        
+        .info-value {
+            flex: 1;
+            color: var(--color-text-primary);
+        }
+        
+        .repair-form {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+        }
+        
+        .form-item {
+            margin-bottom: 20px;
+        }
+        
+        .form-item label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--color-text-primary);
+            font-weight: 500;
+        }
+        
+        .form-item input,
+        .form-item select,
+        .form-item textarea {
+            width: 100%;
+            padding: 12px;
+        }
+        
+        .form-item textarea {
+            height: 100px;
+            resize: none;
+        }
+        
+        .form-item textarea::placeholder {
+            color: var(--color-text-secondary);
+        }
+        
+        .parts-list {
+            margin-top: 10px;
+        }
+        
+        .parts-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .parts-item input {
+            flex: 1;
+        }
+        
+        .parts-item .delete-btn {
+            width: 44px;
+            height: 44px;
+            background: var(--color-error);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .add-parts-btn {
+            width: 100%;
+            height: 44px;
+            background: var(--color-primary);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        
+        .photo-upload {
+            margin-top: 10px;
+        }
+        
+        .upload-btn {
+            width: 80px;
+            height: 80px;
+            border: 1px dashed var(--color-border);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: #fff;
+        }
+        
+        .upload-btn i {
+            font-size: 24px;
+            color: var(--color-text-secondary);
+            margin-bottom: 5px;
+        }
+        
+        .upload-btn span {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+        
+        .photo-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .photo-item {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .photo-item .delete {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .action-btn {
+            height: 44px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .complete-btn {
+            background: var(--color-success);
+            color: #fff;
+        }
+        
+        .save-btn {
+            background: var(--color-primary);
+            color: #fff;
+        }
+        
+        /* 适配暗黑模式 */
+        @media (prefers-color-scheme: dark) {
+            .info-header,
+            .repair-form {
+                background: #2c2c2c;
+                box-shadow: 0 2px 12px 0 rgba(0,0,0,0.2);
+            }
+            
+            .upload-btn {
+                background: #2c2c2c;
+                border-color: #3a3a3a;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <div class="header-content">
+                <div class="back-btn">
+                    <i class="icon-back"></i>
+                </div>
+                <div class="title">执行维修工单</div>
+            </div>
+        </div>
+        
+        <div class="page-content">
+            <div class="info-header">
+                <div class="info-item">
+                    <div class="info-label">工单编号</div>
+                    <div class="info-value">WO202403150001</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">设备信息</div>
+                    <div class="info-value">
+                        <div>设备名称：CNC加工中心</div>
+                        <div>设备编号：CNC001</div>
+                        <div>所在项目：A项目</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">派工时间</div>
+                    <div class="info-value">2024-03-15 11:00</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">派工人</div>
+                    <div class="info-value">张三</div>
+                </div>
+            </div>
+            
+            <div class="repair-form">
+                <div class="form-item">
+                    <label>实际维修时间</label>
+                    <input type="datetime-local" id="actualTime">
+                </div>
+                
+                <div class="form-item">
+                    <label>维修项目</label>
+                    <textarea id="repairDesc" placeholder="请详细描述维修内容"></textarea>
+                </div>
+                
+                <div class="form-item">
+                    <label>更换配件</label>
+                    <div class="parts-list" id="partsList">
+                        <div class="parts-item">
+                            <input type="text" placeholder="配件名称">
+                            <input type="number" placeholder="数量">
+                            <button class="delete-btn" onclick="removeParts(this)">×</button>
+                        </div>
+                    </div>
+                    <button class="add-parts-btn" onclick="addParts()">添加配件</button>
+                </div>
+                
+                <div class="form-item">
+                    <label>维修照片</label>
+                    <div class="photo-upload">
+                        <div class="upload-btn" id="uploadBtn">
+                            <i class="icon-camera"></i>
+                            <span>点击上传照片</span>
+                        </div>
+                        <div class="photo-list" id="photoList"></div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn complete-btn" id="completeBtn">完成维修</button>
+                    <button class="action-btn save-btn" id="saveBtn">保存草稿</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 添加配件记录
+        function addParts() {
+            const partsList = document.getElementById('partsList');
+            const partsItem = document.createElement('div');
+            partsItem.className = 'parts-item';
+            partsItem.innerHTML = `
+                <input type="text" placeholder="配件名称">
+                <input type="number" placeholder="数量">
+                <button class="delete-btn" onclick="removeParts(this)">×</button>
+            `;
+            partsList.appendChild(partsItem);
+        }
+        
+        // 删除配件记录
+        function removeParts(btn) {
+            const partsItem = btn.parentElement;
+            partsItem.remove();
+        }
+        
+        // 完成维修
+        document.getElementById('completeBtn').addEventListener('click', () => {
+            const actualTime = document.getElementById('actualTime').value;
+            const repairDesc = document.getElementById('repairDesc').value;
+            
+            if (!actualTime || !repairDesc) {
+                alert('请填写实际维修时间和维修项目');
+                return;
+            }
+            
+            // 这里添加完成维修逻辑
+            alert('维修完成');
+            window.history.back();
+        });
+        
+        // 保存草稿
+        document.getElementById('saveBtn').addEventListener('click', () => {
+            // 这里添加保存草稿逻辑
+            alert('草稿已保存');
+        });
+        
+        // 图片上传相关
+        const uploadBtn = document.getElementById('uploadBtn');
+        const photoList = document.getElementById('photoList');
+        let photos = [];
+        
+        uploadBtn.addEventListener('click', () => {
+            if (photos.length >= 9) {
+                alert('最多只能上传9张图片');
+                return;
+            }
+            // 这里添加图片上传逻辑
+        });
+        
+        // 返回按钮
+        document.querySelector('.back-btn').addEventListener('click', () => {
+            window.history.back();
+        });
+    </script>
+</body>
+</html> 
