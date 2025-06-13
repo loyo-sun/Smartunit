@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资产详情</title>
+    <link rel="stylesheet" href="detail.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部导航 -->
+        <header class="header">
+            <button class="back-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </button>
+            <h1 class="title">资产详情</h1>
+            <button class="more-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                </svg>
+            </button>
+        </header>
+
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 基本信息卡片 -->
+            <section class="card basic-info">
+                <h2 class="card-title">基本信息</h2>
+                <div class="info-item">
+                    <div class="info-label">设备编号</div>
+                    <div class="info-value">CMI-DT-026</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">设备名称</div>
+                    <div class="info-value">自卸车</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">类型/型号</div>
+                    <div class="info-value">自卸车 / SYZ320C-8</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">品牌/制造商</div>
+                    <div class="info-value">中联重科</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">所属项目</div>
+                    <div class="info-value">台州项目部</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">所属单位</div>
+                    <div class="info-value">设备中心A组</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">资产来源</div>
+                    <div class="info-value">自有</div>
+                </div>
+            </section>
+
+            <!-- 运行状态卡片 -->
+            <section class="card status-info">
+                <h2 class="card-title">运行状态</h2>
+                <div class="status-tags">
+                    <span class="tag operating">经营</span>
+                    <span class="tag stopped">停机</span>
+                </div>
+                <div class="iot-status">
+                    <span class="status-dot online"></span>
+                    <span class="status-text">在线</span>
+                </div>
+                <div class="location-info">
+                    <div class="address">浙江省台州市路桥区金清镇</div>
+                    <button class="map-btn">查看地图</button>
+                </div>
+                <div class="work-hours">
+                    <span class="hours-label">当前累计工时</span>
+                    <span class="hours-value">1248h</span>
+                </div>
+            </section>
+
+            <!-- 维保信息卡片 -->
+            <section class="card maintenance-info">
+                <h2 class="card-title">维保信息</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">最近保养时间</div>
+                        <div class="info-value">2025-06-10</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">下次保养计划</div>
+                        <div class="info-value">2025-07-10</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">累计保养次数</div>
+                        <div class="info-value">6次</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">最近维修时间</div>
+                        <div class="info-value">2025-06-03</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">当前故障记录</div>
+                        <div class="info-value">无</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">累计维修次数</div>
+                        <div class="info-value">4次</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">累计停机时长</div>
+                        <div class="info-value">43小时</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 资产信息 -->
+            <div class="card lifecycle-info">
+                <div class="card-title">资产信息</div>
+                <div class="info-list">
+                    <div class="info-item">
+                        <div class="info-label">购入日期</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">启用日期</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">预计使用年限</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">已使用年限</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">当前价值</div>
+                        <div class="info-value">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 成本信息 -->
+            <div class="card cost-info">
+                <div class="card-title">成本信息</div>
+                <div class="info-list">
+                    <div class="info-item">
+                        <div class="info-label">维修成本</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">保养成本</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">折旧成本</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">保险成本</div>
+                        <div class="info-value">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 附件与图片 -->
+            <div class="card attachments-info">
+                <div class="card-title">附件与图片</div>
+                <div class="doc-list">
+                    <!-- 文档列表 -->
+                </div>
+                <div class="photo-scroll">
+                    <!-- 照片列表 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="detail.js"></script>
+</body>
+</html> 
