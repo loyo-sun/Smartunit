@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>完工确认</title>
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        .mobile-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            min-height: 100vh;
+            position: relative;
+        }
+        .page {
+            background: #f5f5f5;
+            min-height: 100vh;
+            position: relative;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            z-index: 100;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            height: 44px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+        .page-content {
+            padding: 15px;
+            padding-bottom: 70px;
+        }
+        .section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 8px;
+            color: #1890ff;
+        }
+        .info-item {
+            display: flex;
+            margin-bottom: 12px;
+        }
+        .info-label {
+            width: 80px;
+            color: #666;
+            flex-shrink: 0;
+        }
+        .info-value {
+            flex: 1;
+            color: #333;
+        }
+        .repair-item {
+            background: #f5f5f5;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+        .repair-item-code {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .repair-item-title {
+            color: #333;
+            font-weight: 500;
+        }
+        .repair-item-desc {
+            color: #666;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        .part-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 10px;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+        .part-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .part-code {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .part-name {
+            color: #333;
+            font-weight: 500;
+        }
+        .part-quantity {
+            text-align: right;
+            color: #333;
+        }
+        .part-price {
+            text-align: right;
+            color: #333;
+        }
+        .part-total {
+            text-align: right;
+            color: #ff4d4f;
+            font-weight: 500;
+        }
+        .total-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            text-align: right;
+        }
+        .total-label {
+            color: #666;
+            margin-right: 10px;
+        }
+        .total-value {
+            color: #ff4d4f;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .photo-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .photo-item {
+            aspect-ratio: 1;
+            background: #f5f5f5;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .photo-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            font-size: 12px;
+            padding: 4px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+        .form-control {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-control:focus {
+            border-color: #1890ff;
+            outline: none;
+        }
+        .radio-group {
+            display: flex;
+            gap: 20px;
+        }
+        .radio-item {
+            display: flex;
+            align-items: center;
+        }
+        .radio-item input {
+            margin-right: 4px;
+        }
+        .rating {
+            display: flex;
+            gap: 10px;
+        }
+        .rating-item {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .rating-item.active {
+            background: #1890ff;
+            color: #fff;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: #1890ff;
+            color: #fff;
+        }
+        .btn-danger {
+            background: #ff4d4f;
+            color: #fff;
+        }
+        .btn:active {
+            opacity: 0.8;
+        }
+        /* 适配暗黑模式 */
+        @media (prefers-color-scheme: dark) {
+            .section {
+                background: #2c2c2c;
+            }
+            .section-title {
+                color: #fff;
+            }
+            .info-label {
+                color: #999;
+            }
+            .info-value {
+                color: #fff;
+            }
+            .repair-item {
+                background: #3c3c3c;
+            }
+            .repair-item-title {
+                color: #fff;
+            }
+            .repair-item-desc {
+                color: #999;
+            }
+            .part-item {
+                border-bottom-color: #3c3c3c;
+            }
+            .part-name {
+                color: #fff;
+            }
+            .part-quantity, .part-price {
+                color: #fff;
+            }
+            .form-label {
+                color: #fff;
+            }
+            .form-control {
+                background: #3c3c3c;
+                border-color: #4c4c4c;
+                color: #fff;
+            }
+            .rating-item {
+                background: #3c3c3c;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="back-btn" onclick="history.back()">
+                        <i class="icon-back"></i>
+                    </div>
+                    <div class="title">完工确认</div>
+                </div>
+            </div>
+            <div class="page-content">
+                <!-- 工单信息 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="icon-info"></i>
+                        工单信息
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">工单号：</div>
+                        <div class="info-value">REP202403150001</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">设备名称：</div>
+                        <div class="info-value">三一重工 SY5418THB 56米泵车</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">故障描述：</div>
+                        <div class="info-value">泵送系统压力异常，主油缸动作缓慢，分配阀换向不灵敏</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">维修地点：</div>
+                        <div class="info-value">XX工地现场</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">报修时间：</div>
+                        <div class="info-value">2024-03-15 10:30</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">维修人员：</div>
+                        <div class="info-value">张工</div>
+                    </div>
+                </div>
+
+                <!-- 维修执行信息 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="icon-tools"></i>
+                        维修项目
+                    </div>
+                    <div id="repairItems">
+                        <!-- 维修项目列表 -->
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <i class="icon-parts"></i>
+                        更换配件
+                    </div>
+                    <div id="partItems">
+                        <!-- 配件列表 -->
+                    </div>
+                    <div class="total-section">
+                        <span class="total-label">配件总价：</span>
+                        <span class="total-value" id="partTotal">0.00</span>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <i class="icon-camera"></i>
+                        维修照片
+                    </div>
+                    <div class="photo-section">
+                        <div class="photo-item">
+                            <img src="../assets/images/image.svg" alt="维修前">
+                        </div>
+                        <div class="photo-item">
+                            <img src="../assets/images/image.svg" alt="维修中">
+                        </div>
+                        <div class="photo-item">
+                            <img src="../assets/images/image.svg" alt="维修后">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 完工确认表单 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="icon-check"></i>
+                        完工确认
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">维修质量评分</label>
+                        <div class="rating" id="qualityRating">
+                            <div class="rating-item" data-rating="1">1</div>
+                            <div class="rating-item" data-rating="2">2</div>
+                            <div class="rating-item" data-rating="3">3</div>
+                            <div class="rating-item" data-rating="4">4</div>
+                            <div class="rating-item" data-rating="5">5</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">维修建议</label>
+                        <textarea class="form-control" rows="3" placeholder="请输入后续维护建议"></textarea>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-danger" onclick="returnRepair()">退回重修</button>
+                    <button class="btn btn-primary" onclick="confirmComplete()">确认完工</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 模拟维修项目数据
+        const repairItems = [
+            { code: 'R001', title: '检查主油泵', desc: '检查主油泵压力、流量、噪音等参数' },
+            { code: 'R002', title: '检查主油缸', desc: '检查主油缸密封、活塞、缸体等部件' },
+            { code: 'R003', title: '检查分配阀', desc: '检查分配阀换向、密封、磨损等情况' }
+        ];
+
+        // 模拟配件数据
+        const partItems = [
+            { code: 'P001', name: '主油泵', spec: 'A4VG-71', quantity: 1, price: 12800 },
+            { code: 'P002', name: '主油缸', spec: 'φ180×2000', quantity: 2, price: 5600 },
+            { code: 'P003', name: '分配阀', spec: 'S管阀', quantity: 1, price: 8500 }
+        ];
+
+        // 渲染维修项目
+        function renderRepairItems() {
+            const container = document.getElementById('repairItems');
+            container.innerHTML = repairItems.map(item => `
+                <div class="repair-item">
+                    <div class="repair-item-code">${item.code}</div>
+                    <div class="repair-item-title">${item.title}</div>
+                    <div class="repair-item-desc">${item.desc}</div>
+                </div>
+            `).join('');
+        }
+
+        // 渲染配件列表
+        function renderPartItems() {
+            const container = document.getElementById('partItems');
+            container.innerHTML = partItems.map(item => `
+                <div class="part-item">
+                    <div class="part-info">
+                        <div class="part-code">${item.code}</div>
+                        <div class="part-name">${item.name}</div>
+                    </div>
+                    <div class="part-quantity">${item.quantity}</div>
+                    <div class="part-price">${item.price}</div>
+                    <div class="part-total">${(item.quantity * item.price).toFixed(2)}</div>
+                </div>
+            `).join('');
+
+            // 计算配件总价
+            const total = partItems.reduce((sum, item) => sum + (item.quantity * item.price), 0);
+            document.getElementById('partTotal').textContent = total.toFixed(2);
+            document.getElementById('partsCost').textContent = total.toFixed(2);
+            updateTotalCost();
+        }
+
+        // 更新总费用
+        function updateTotalCost() {
+            const partsCost = parseFloat(document.getElementById('partsCost').textContent) || 0;
+            const laborCost = parseFloat(document.getElementById('laborCost').value) || 0;
+            const total = partsCost + laborCost;
+            document.getElementById('totalCost').textContent = total.toFixed(2);
+        }
+
+        // 质量评分
+        function initRating() {
+            const ratingItems = document.querySelectorAll('.rating-item');
+            ratingItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const rating = this.dataset.rating;
+                    ratingItems.forEach(ri => {
+                        ri.classList.toggle('active', ri.dataset.rating <= rating);
+                    });
+                });
+            });
+        }
+
+        // 确认完工
+        function confirmComplete() {
+            const qualityRating = document.querySelectorAll('.rating-item.active').length;
+            const maintenanceAdvice = document.querySelector('textarea[placeholder="请输入后续维护建议"]').value;
+
+            // 这里添加提交逻辑
+            console.log('质量评分:', qualityRating);
+            console.log('维护建议:', maintenanceAdvice);
+
+            // 模拟提交成功
+            alert('完工确认成功');
+            window.location.href = 'index.html';
+        }
+
+        // 退回重修
+        function returnRepair() {
+            const reason = prompt('请输入退回原因：');
+            if (reason) {
+                // 这里添加退回逻辑
+                console.log('退回原因:', reason);
+                alert('已退回重修');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            renderRepairItems();
+            renderPartItems();
+            initRating();
+            document.getElementById('laborCost').addEventListener('input', updateTotalCost);
+        });
+    </script>
+</body>
+</html> 
