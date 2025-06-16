@@ -180,4 +180,56 @@ footer {
   .container {
     padding: 20px;
   }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.language-switch {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.lang-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+  background: #f5f5f5;
+}
+
+.lang-btn.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* 添加语言切换器样式 */
+.language-switcher {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.language-switcher select {
+  padding: 5px 10px;
+  border: 1px solid #1890ff;
+  border-radius: 4px;
+  background: white;
+  color: #1890ff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.language-switcher select:hover {
+  background: #f0f7ff;
 } 

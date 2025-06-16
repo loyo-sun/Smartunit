@@ -2,90 +2,96 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>关于我们 - Smartunit</title>
+  <title data-i18n="title">关于我们 - Smartunit</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body lang="zh">
   <div class="container">
+    <div class="language-switcher">
+      <select id="languageSelect" onchange="changeLanguage(this.value)">
+        <option value="zh-CN">中文</option>
+        <option value="en-US">English</option>
+      </select>
+    </div>
     <div class="logo">Smartunit</div>
-    <div class="slogan">数据驱动智慧运营</div>
+    <div class="slogan" data-i18n="slogan">数据驱动智慧运营</div>
 
-    <h2>关于产品</h2>
-    <p>Smartunit 是一款以"数据驱动优化"为核心的设备智能管理平台，帮助工程设备企业实现从"被动响应"到"主动优化"的转型。</p>
-    <p>Smartunit不仅是一个设备管理系统，更是一套围绕设备全生命周期运行的优化引擎，通过数字化手段、数据模型和智能识别，实现从设备资产、维修流程、配件使用到运营成本的全面优化。</p>
+    <h2 data-i18n="about.title">关于产品</h2>
+    <p data-i18n="about.description1">Smartunit 是一款以"数据驱动优化"为核心的设备智能管理平台，帮助工程设备企业实现从"被动响应"到"主动优化"的转型。</p>
+    <p data-i18n="about.description2">Smartunit不仅是一个设备管理系统，更是一套围绕设备全生命周期运行的优化引擎，通过数字化手段、数据模型和智能识别，实现从设备资产、维修流程、配件使用到运营成本的全面优化。</p>
 
-    <h2>我们在优化什么？</h2>
+    <h2 data-i18n="optimization.title">我们在优化什么？</h2>
     <div class="optimization-section">
       <div class="optimization-card">
         <div class="icon"><i class="fas fa-chart-line"></i></div>
         <div class="content">
-          <div class="title">资产数智优化</div>
-          <div class="desc">构建统一资产列表，打通<span class="highlight">调拨、折旧、出勤、状态</span>等数据，实现资产全生命周期管理，避免资产沉睡与重复购置。</div>
+          <div class="title" data-i18n="optimization.cards.asset.title">资产数智优化</div>
+          <div class="desc" data-i18n="optimization.cards.asset.desc">构建统一资产列表，打通调拨、折旧、出勤、状态等数据，实现资产全生命周期管理，避免资产沉睡与重复购置。</div>
         </div>
       </div>
       <div class="optimization-card">
         <div class="icon"><i class="fas fa-tools"></i></div>
         <div class="content">
-          <div class="title">工单智能优化</div>
-          <div class="desc">移动端闭环工单体系，结合<span class="highlight">AI识别机制</span>，优化维修指派与审批流转，提升响应速度与决策质量。</div>
+          <div class="title" data-i18n="optimization.cards.workorder.title">工单智能优化</div>
+          <div class="desc" data-i18n="optimization.cards.workorder.desc">移动端闭环工单体系，结合AI识别机制，优化维修指派与审批流转，提升响应速度与决策质量。</div>
         </div>
       </div>
       <div class="optimization-card">
         <div class="icon"><i class="fas fa-boxes"></i></div>
         <div class="content">
-          <div class="title">配件合理优化</div>
-          <div class="desc">基于<span class="highlight">换件预测模型</span>，实现配件储备精准匹配，降低备件资金占用，提升使用效率。</div>
+          <div class="title" data-i18n="optimization.cards.parts.title">配件合理优化</div>
+          <div class="desc" data-i18n="optimization.cards.parts.desc">基于换件预测模型，实现配件储备精准匹配，降低备件资金占用，提升使用效率。</div>
         </div>
       </div>
       <div class="optimization-card">
         <div class="icon"><i class="fas fa-truck"></i></div>
         <div class="content">
-          <div class="title">调度协同优化</div>
-          <div class="desc">以订单为驱动，优化<span class="highlight">车辆与人员排班</span>，提升资源利用率，增强调度灵活性。</div>
+          <div class="title" data-i18n="optimization.cards.dispatch.title">调度协同优化</div>
+          <div class="desc" data-i18n="optimization.cards.dispatch.desc">以订单为驱动，优化车辆与人员排班，提升资源利用率，增强调度灵活性。</div>
         </div>
       </div>
       <div class="optimization-card">
         <div class="icon"><i class="fas fa-clipboard-check"></i></div>
         <div class="content">
-          <div class="title">维修质量优化</div>
-          <div class="desc">构建<span class="highlight">重复维修识别、异常换件检测</span>等能力，持续优化维修质量控制机制。</div>
+          <div class="title" data-i18n="optimization.cards.quality.title">维修质量优化</div>
+          <div class="desc" data-i18n="optimization.cards.quality.desc">构建重复维修识别、异常换件检测等能力，持续优化维修质量控制机制。</div>
         </div>
       </div>
       <div class="optimization-card">
         <div class="icon"><i class="fas fa-chart-pie"></i></div>
         <div class="content">
-          <div class="title">成本效益优化</div>
-          <div class="desc">通过<span class="highlight">成本分析、效率评估、ROI追踪</span>等维度，实现设备运营效益最大化。</div>
+          <div class="title" data-i18n="optimization.cards.cost.title">成本效益优化</div>
+          <div class="desc" data-i18n="optimization.cards.cost.desc">通过成本分析、效率评估、ROI追踪等维度，实现设备运营效益最大化。</div>
         </div>
       </div>
     </div>
 
     <div class="brain-section">
-      <h2>Smartunit 的"优化大脑"</h2>
+      <h2 data-i18n="brain.title">Smartunit 的"优化大脑"</h2>
       <div class="brain-container">
         <div class="brain-card">
           <i class="fas fa-network-wired icon"></i>
-          <div class="title">沟通脑</div>
-          <div class="desc">标准化维修语言，提炼结构化故障特征，优化维修知识沉淀。</div>
+          <div class="title" data-i18n="brain.cards.communication.title">沟通脑</div>
+          <div class="desc" data-i18n="brain.cards.communication.desc">标准化维修语言，提炼结构化故障特征，优化维修知识沉淀。</div>
           <ul class="features">
-            <li>统一维修术语库</li>
-            <li>故障特征提取</li>
-            <li>知识图谱构建</li>
-            <li>维修经验沉淀</li>
+            <li data-i18n="brain.cards.communication.features.0">统一维修术语库</li>
+            <li data-i18n="brain.cards.communication.features.1">故障特征提取</li>
+            <li data-i18n="brain.cards.communication.features.2">知识图谱构建</li>
+            <li data-i18n="brain.cards.communication.features.3">维修经验沉淀</li>
           </ul>
           <i class="fas fa-cogs process-icon"></i>
         </div>
         <div class="brain-card">
           <i class="fas fa-microchip icon"></i>
-          <div class="title">逻辑脑</div>
-          <div class="desc">基于数据时序，优化换件与维修决策，识别风险与浪费。</div>
+          <div class="title" data-i18n="brain.cards.logic.title">逻辑脑</div>
+          <div class="desc" data-i18n="brain.cards.logic.desc">基于数据时序，优化换件与维修决策，识别风险与浪费。</div>
           <ul class="features">
-            <li>时序数据分析</li>
-            <li>智能决策支持</li>
-            <li>风险预警机制</li>
-            <li>成本优化建议</li>
+            <li data-i18n="brain.cards.logic.features.0">时序数据分析</li>
+            <li data-i18n="brain.cards.logic.features.1">智能决策支持</li>
+            <li data-i18n="brain.cards.logic.features.2">风险预警机制</li>
+            <li data-i18n="brain.cards.logic.features.3">成本优化建议</li>
           </ul>
           <i class="fas fa-sync process-icon"></i>
         </div>
@@ -93,7 +99,7 @@
     </div>
 
     <footer>
-      <div>© 2025 Smartunit原型演示</div>
+      <div data-i18n="footer.copyright">© 2025 Smartunit原型演示</div>
     </footer>
   </div>
   <script src="script.js"></script>
