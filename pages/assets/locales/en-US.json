@@ -1,0 +1,45 @@
+{
+    "title": "Asset List",
+    "search": {
+        "title": "Search",
+        "assetCode": "Code/Name",
+        "costCenter": "Cost",
+        "purchaseEntity": "Buyer",
+        "assetType": "Type",
+        "selectPlaceholder": "Select",
+        "inputPlaceholder": "Enter",
+        "buttons": {
+            "reset": "Reset",
+            "expand": "More"
+        }
+    },
+    "actions": {
+        "add": "Add",
+        "batchEdit": "Batch"
+    },
+    "table": {
+        "selectAll": "All",
+        "headers": {
+            "deviceCode": "ID",
+            "deviceModel": "Model",
+            "assetName": "Name",
+            "operationStatus": "Running",
+            "downtimeStatus": "Downtime",
+            "purchaseTime": "Bought",
+            "createTime": "Created",
+            "iotStatus": "IoT",
+            "purchaseEntity": "Buyer",
+            "costCenter": "Cost",
+            "customFields": "Custom",
+            "actions": "Actions"
+        },
+        "actions": {
+            "edit": "Edit",
+            "delete": "Delete"
+        }
+    },
+    "pagination": {
+        "total": "Total",
+        "goTo": "Go to"
+    }
+} 

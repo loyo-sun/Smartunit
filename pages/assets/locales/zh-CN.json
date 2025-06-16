@@ -1,0 +1,40 @@
+{
+    "title": "资产列表",
+    "search": {
+        "placeholder": "请输入",
+        "assetCode": "资产编码/名称:",
+        "costCenter": "成本归属:",
+        "purchaseEntity": "采购主体:",
+        "assetType": "资产类型:",
+        "selectPlaceholder": "请选择"
+    },
+    "buttons": {
+        "reset": "重置",
+        "expand": "展开",
+        "addAsset": "新增资产",
+        "batchEdit": "批量编辑",
+        "selectAll": "全选",
+        "edit": "编辑",
+        "delete": "删除"
+    },
+    "table": {
+        "headers": {
+            "deviceCode": "设备编码",
+            "downtimeStatus": "停机状态",
+            "deviceModel": "设备型号",
+            "assetName": "资产名称",
+            "operationStatus": "经营状态",
+            "purchaseTime": "采购时间",
+            "createTime": "创建时间",
+            "iotStatus": "物联状态",
+            "purchaseEntity": "采购主体",
+            "costCenter": "成本归属",
+            "customFields": "自定义字段多选",
+            "actions": "操作"
+        }
+    },
+    "pagination": {
+        "total": "Total",
+        "goTo": "Go to"
+    }
+} 

@@ -1,0 +1,98 @@
+{
+    "title": "Smartunit System Demo",
+    "subtitle": "Smart maintenance cost control, reducing downtime losses due to parts shortage",
+    "desktop": "Desktop",
+    "mobile": "Mobile",
+    "repairOrderPro": {
+        "title": "Work Order Detail Pro",
+        "description": "Intelligent work order data analysis with professional maintenance suggestions",
+        "features": [
+            "Full lifecycle work order management",
+            "Real-time equipment condition monitoring",
+            "Smart parts usage analysis",
+            "AI-assisted decision support"
+        ]
+    },
+    "forecast": {
+        "title": "Parts Forecast",
+        "description": "Smart parts demand prediction for optimized inventory management",
+        "features": [
+            "Mean and model-based prediction support",
+            "Visual trend analysis",
+            "Equipment usage distribution display",
+            "Flexible filtering and export functions"
+        ]
+    },
+    "parts": {
+        "title": "Parts Management",
+        "description": "Comprehensive parts information management for improved efficiency",
+        "features": [
+            "Basic parts information management",
+            "Batch import/export support",
+            "Flexible filtering and search",
+            "Configurable prediction methods"
+        ]
+    },
+    "assets": {
+        "title": "Asset List",
+        "description": "Comprehensive equipment asset management for improved efficiency",
+        "features": [
+            "Basic asset information management",
+            "Multi-dimensional filtering and search",
+            "Batch editing functionality",
+            "Real-time asset status monitoring"
+        ]
+    },
+    "orders": {
+        "title": "Order Management",
+        "description": "Efficient maintenance order management for improved service response",
+        "features": [
+            "Full lifecycle order management",
+            "Real-time order status tracking",
+            "Smart order dispatching and assignment",
+            "Order data statistical analysis"
+        ]
+    },
+    "mobileOrders": {
+        "title": "Order Management",
+        "description": "Mobile order management for anytime, anywhere order processing",
+        "features": [
+            "Quick order list viewing",
+            "Real-time order status updates",
+            "Convenient order processing",
+            "Mobile-optimized experience"
+        ]
+    },
+    "maintenance": {
+        "title": "Maintenance Management",
+        "description": "Mobile maintenance management for regular equipment maintenance",
+        "features": [
+            "Smart maintenance plan reminders",
+            "Real-time maintenance record updates",
+            "Quick maintenance task processing",
+            "Equipment health status monitoring"
+        ]
+    },
+    "repair": {
+        "title": "Repair Management",
+        "description": "Mobile repair management for quick response to equipment failures",
+        "features": [
+            "Quick repair work order processing",
+            "Fault diagnosis support",
+            "Real-time repair progress tracking",
+            "Complete repair record preservation"
+        ]
+    },
+    "mobileAssets": {
+        "title": "Asset Management",
+        "description": "Mobile asset management for anytime, anywhere asset management",
+        "features": [
+            "Quick asset information viewing",
+            "Real-time asset status updates",
+            "Convenient asset editing",
+            "Mobile-optimized experience"
+        ]
+    },
+    "about": "About Smartunit",
+    "copyright": "© 2025 Smartunit Demo"
+} 
