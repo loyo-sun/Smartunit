@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>执行维修</title>
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        .mobile-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            min-height: 100vh;
+            position: relative;
+        }
+        .page {
+            background: #f5f5f5;
+            min-height: 100vh;
+            position: relative;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            z-index: 100;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            height: 44px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+        .btn-submit {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 30px);
+            max-width: 450px;
+            background: #1890ff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            z-index: 100;
+        }
+        .btn-submit:active {
+            opacity: 0.8;
+        }
+        .page-content {
+            padding: 15px;
+            padding-bottom: 70px;
+        }
+        .section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 8px;
+            color: #1890ff;
+        }
+        .info-item {
+            display: flex;
+            margin-bottom: 12px;
+        }
+        .info-label {
+            width: 80px;
+            color: #666;
+            flex-shrink: 0;
+        }
+        .info-value {
+            flex: 1;
+            color: #333;
+        }
+        .repair-item {
+            background: #f5f5f5;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .repair-item .delete-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ff4d4f;
+            cursor: pointer;
+        }
+        .repair-item-code {
+            color: #666;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .repair-item-title {
+            color: #333;
+            font-weight: 500;
+            flex: 1;
+        }
+        .repair-item-desc {
+            color: #666;
+            font-size: 14px;
+        }
+        .part-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 10px;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            align-items: center;
+        }
+        .part-item .delete-btn {
+            position: absolute;
+            right: 10px;
+            color: #ff4d4f;
+            cursor: pointer;
+        }
+        .part-input-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+            padding-right: 80px;
+        }
+        .part-input-group input {
+            padding: 8px 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+            height: 36px;
+        }
+        .part-input-group input[type="number"] {
+            text-align: right;
+        }
+        .part-input-group input[type="number"]::-webkit-inner-spin-button,
+        .part-input-group input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .part-input-group input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        .input-row .total-section {
+            margin: 0;
+            padding: 0 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            background: #fff;
+            text-align: right;
+            height: 36px;
+            line-height: 36px;
+        }
+        .input-row .total-value {
+            color: #ff4d4f;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .input-row .btn-submit {
+            position: static;
+            margin-top: 10px;
+        }
+        .part-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .part-code {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .part-name {
+            color: #333;
+            font-weight: 500;
+        }
+        .part-quantity {
+            text-align: right;
+            color: #333;
+        }
+        .part-total {
+            text-align: right;
+            color: #ff4d4f;
+            font-weight: 500;
+        }
+        .search-result {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 80px;
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            margin-top: 4px;
+        }
+        .search-item {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        .search-item:hover {
+            background: #f5f5f5;
+        }
+        .total-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            text-align: right;
+        }
+        .total-label {
+            color: #666;
+            margin-right: 10px;
+        }
+        .total-value {
+            color: #ff4d4f;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .upload-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .upload-item {
+            aspect-ratio: 1;
+            background: #f5f5f5;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .upload-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .upload-item .add-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 32px;
+            height: 32px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .upload-item.upload-btn {
+            background: #f5f5f5;
+            border: 1px dashed #d9d9d9;
+        }
+        .upload-item.upload-btn .add-icon {
+            opacity: 1;
+            background: none;
+            color: #999;
+            font-size: 24px;
+        }
+        .upload-item.upload-btn:hover {
+            border-color: #1890ff;
+        }
+        .upload-item.upload-btn:hover .add-icon {
+            color: #1890ff;
+        }
+        .upload-item .delete-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .upload-item:hover .delete-btn {
+            opacity: 1;
+        }
+        .add-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            color: #1890ff;
+            cursor: pointer;
+            margin-top: 10px;
+            user-select: none;
+        }
+        .add-btn.active {
+            background: #e6f7ff;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            padding-right: 80px;
+        }
+        .input-group input {
+            padding: 8px 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            height: 36px;
+            box-sizing: border-box;
+        }
+        .input-group input[type="text"] {
+            flex: 1;
+        }
+        .input-group .btn-submit {
+            position: static;
+            margin: 0;
+            height: 36px;
+            padding: 0 15px;
+            white-space: nowrap;
+        }
+        .input-row {
+            background: #f5f5f5;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .input-row .action-btns {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 8px;
+            background: #f5f5f5;
+            padding: 4px;
+            border-radius: 4px;
+        }
+        .input-row .action-btn {
+            color: #666;
+            cursor: pointer;
+            font-size: 18px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        .input-row .confirm-btn {
+            color: #52c41a;
+        }
+        .input-row .confirm-btn:hover {
+            background: rgba(82, 196, 26, 0.1);
+        }
+        .input-row .delete-btn {
+            color: #ff4d4f;
+        }
+        .input-row .delete-btn:hover {
+            background: rgba(255, 77, 79, 0.1);
+        }
+        /* 适配暗黑模式 */
+        @media (prefers-color-scheme: dark) {
+            .section {
+                background: #2c2c2c;
+            }
+            .section-title {
+                color: #fff;
+            }
+            .info-label {
+                color: #999;
+            }
+            .info-value {
+                color: #fff;
+            }
+            .repair-item {
+                background: #3c3c3c;
+            }
+            .repair-item-title {
+                color: #fff;
+            }
+            .repair-item-desc {
+                color: #999;
+            }
+            .part-item {
+                border-bottom-color: #3c3c3c;
+            }
+            .part-name {
+                color: #fff;
+            }
+            .part-spec {
+                color: #999;
+            }
+            .part-quantity {
+                color: #fff;
+            }
+            .upload-item {
+                background: #3c3c3c;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="back-btn" onclick="history.back()">
+                        <i class="icon-back"></i>
+                    </div>
+                    <div class="title">执行维修</div>
+                </div>
+            </div>
+            <div class="page-content">
+                <!-- 工单信息 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="icon-info"></i>
+                        工单信息
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">工单号：</div>
+                        <div class="info-value">REP202403150001</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">设备名称：</div>
+                        <div class="info-value">三一重工 SY5418THB 56米泵车</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">故障描述：</div>
+                        <div class="info-value">泵送系统压力异常，主油缸动作缓慢，分配阀换向不灵敏</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">维修地点：</div>
+                        <div class="info-value">XX工地现场</div>
+                    </div>
+                </div>
+
+                <!-- 维修项目 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="icon-tools"></i>
+                        维修项目
+                    </div>
+                    <div id="repairItems">
+                        <!-- 维修项目列表 -->
+                    </div>
+                    <div id="repairInputs">
+                        <!-- 维修项目输入行 -->
+                    </div>
+                    <div class="add-btn" onclick="addRepairInput()">
+                        <i class="icon-plus"></i>
+                        添加维修项目
+                    </div>
+                </div>
+
+                <!-- 更换配件 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="icon-parts"></i>
+                        更换配件
+                    </div>
+                    <div id="partItems">
+                        <!-- 配件列表 -->
+                    </div>
+                    <div id="partInputs">
+                        <!-- 配件输入行 -->
+                    </div>
+                    <div class="add-btn" onclick="addPartInput()">
+                        <i class="icon-plus"></i>
+                        添加配件
+                    </div>
+                    <div class="total-section">
+                        <span class="total-label">配件总价：</span>
+                        <span class="total-value" id="partTotal">¥0.00</span>
+                    </div>
+                </div>
+
+                <!-- 上传图片 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="icon-camera"></i>
+                        上传图片
+                    </div>
+                    <div class="upload-section" id="uploadSection">
+                        <div class="upload-item upload-btn" onclick="uploadImage()">
+                            <div class="add-icon">+</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-submit" onclick="submitRepair()">提交维修记录</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 图片上传功能
+        function uploadImage() {
+            // 创建文件输入元素
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.capture = 'environment'; // 优先使用后置摄像头
+            
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // 这里可以添加上传逻辑
+                    console.log('选择图片:', file.name);
+                    // 预览图片
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const uploadSection = document.getElementById('uploadSection');
+                        const uploadItem = document.createElement('div');
+                        uploadItem.className = 'upload-item';
+                        uploadItem.innerHTML = `
+                            <img src="${e.target.result}">
+                            <div class="add-icon" onclick="uploadImage()">+</div>
+                            <div class="delete-btn" onclick="this.parentElement.remove()">×</div>
+                        `;
+                        uploadSection.appendChild(uploadItem);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            
+            input.click();
+        }
+
+        // 维修项目相关功能
+        function addRepairInput() {
+            const inputId = 'repairInput_' + Date.now();
+            const inputRow = document.createElement('div');
+            inputRow.className = 'input-row';
+            inputRow.innerHTML = `
+                <div class="input-group">
+                    <input type="text" id="${inputId}_code" placeholder="维修编码" oninput="searchRepairItems(this.value, '${inputId}')">
+                    <input type="text" id="${inputId}_title" placeholder="维修项目名称">
+                    <div id="${inputId}_searchResult" class="search-result"></div>
+                </div>
+                <div class="action-btns">
+                    <div class="action-btn confirm-btn" onclick="addRepairItem('${inputId}')">✓</div>
+                    <div class="action-btn delete-btn" onclick="this.closest('.input-row').remove()">×</div>
+                </div>
+            `;
+            document.getElementById('repairInputs').appendChild(inputRow);
+        }
+
+        // 模拟维修项目数据
+        const repairItemsData = [
+            { code: 'R001', title: '检查主油泵', desc: '检查主油泵压力、流量、噪音等参数' },
+            { code: 'R002', title: '检查主油缸', desc: '检查主油缸密封、活塞、缸体等部件' },
+            { code: 'R003', title: '检查分配阀', desc: '检查分配阀换向、密封、磨损等情况' },
+            { code: 'R004', title: '检查输送管', desc: '检查输送管磨损、变形、连接等情况' },
+            { code: 'R005', title: '检查臂架系统', desc: '检查臂架油缸、管路、限位等部件' },
+            { code: 'R006', title: '检查电气系统', desc: '检查控制器、传感器、线路等部件' },
+            { code: 'R007', title: '检查润滑系统', desc: '检查润滑油泵、分配器、管路等部件' },
+            { code: 'R008', title: '检查冷却系统', desc: '检查散热器、水泵、管路等部件' }
+        ];
+
+        // 维修项目搜索
+        function searchRepairItems(keyword, inputId) {
+            const result = document.getElementById(inputId + '_searchResult');
+            if (!keyword) {
+                result.style.display = 'none';
+                return;
+            }
+
+            const matches = repairItemsData.filter(item => 
+                item.code.toLowerCase().includes(keyword.toLowerCase()) ||
+                item.title.toLowerCase().includes(keyword.toLowerCase())
+            );
+
+            result.innerHTML = matches.map(item => `
+                <div class="search-item" onclick="selectRepairItem('${item.code}', '${inputId}')">
+                    ${item.code} - ${item.title}
+                </div>
+            `).join('');
+            result.style.display = 'block';
+        }
+
+        // 选择维修项目
+        function selectRepairItem(code, inputId) {
+            const item = repairItemsData.find(item => item.code === code);
+            if (item) {
+                document.getElementById(inputId + '_code').value = item.code;
+                document.getElementById(inputId + '_title').value = item.title;
+                document.getElementById(inputId + '_desc').value = item.desc;
+                document.getElementById(inputId + '_searchResult').style.display = 'none';
+            }
+        }
+
+        // 配件相关功能
+        function addPartInput() {
+            const inputId = 'partInput_' + Date.now();
+            const inputRow = document.createElement('div');
+            inputRow.className = 'input-row';
+            inputRow.innerHTML = `
+                <div class="part-input-group">
+                    <div>
+                        <input type="text" id="${inputId}_code" placeholder="编码/名称" oninput="searchParts(this.value, '${inputId}')">
+                        <div id="${inputId}_searchResult" class="search-result"></div>
+                    </div>
+                    <input type="number" id="${inputId}_quantity" placeholder="数量" onchange="calculatePartTotal('${inputId}')">
+                    <input type="number" id="${inputId}_price" placeholder="单价" onchange="calculatePartTotal('${inputId}')">
+                    <div class="total-section">
+                        <span class="total-value" id="${inputId}_subtotal">0.00</span>
+                    </div>
+                </div>
+                <div class="action-btns">
+                    <div class="action-btn confirm-btn" onclick="addPartItem('${inputId}')">✓</div>
+                    <div class="action-btn delete-btn" onclick="this.closest('.input-row').remove()">×</div>
+                </div>
+            `;
+            document.getElementById('partInputs').appendChild(inputRow);
+        }
+
+        // 模拟配件数据
+        const partsData = [
+            { code: 'P001', name: '主油泵', spec: 'A4VG-71', price: 12800 },
+            { code: 'P002', name: '主油缸', spec: 'φ180×2000', price: 5600 },
+            { code: 'P003', name: '分配阀', spec: 'S管阀', price: 8500 },
+            { code: 'P004', name: '输送管', spec: 'φ125×3m', price: 1800 },
+            { code: 'P005', name: '换向阀', spec: '4WE10E', price: 3200 },
+            { code: 'P006', name: '液压油', spec: '46#抗磨', price: 280 },
+            { code: 'P007', name: '滤芯', spec: '回油滤', price: 450 },
+            { code: 'P008', name: '密封圈', spec: 'O型圈', price: 35 },
+            { code: 'P009', name: '轴承', spec: '6318', price: 680 },
+            { code: 'P010', name: '电机', spec: '55KW', price: 9800 }
+        ];
+
+        // 配件搜索
+        function searchParts(keyword, inputId) {
+            const result = document.getElementById(inputId + '_searchResult');
+            if (!keyword) {
+                result.style.display = 'none';
+                return;
+            }
+
+            const matches = partsData.filter(item => 
+                item.code.toLowerCase().includes(keyword.toLowerCase()) ||
+                item.name.toLowerCase().includes(keyword.toLowerCase())
+            );
+
+            result.innerHTML = matches.map(item => `
+                <div class="search-item" onclick="selectPart('${item.code}', '${inputId}')">
+                    ${item.code} - ${item.name} (${item.spec}) - ${item.price}
+                </div>
+            `).join('');
+            result.style.display = 'block';
+        }
+
+        // 选择配件
+        function selectPart(code, inputId) {
+            const item = partsData.find(item => item.code === code);
+            if (item) {
+                document.getElementById(inputId + '_code').value = item.code;
+                document.getElementById(inputId + '_price').value = item.price;
+                document.getElementById(inputId + '_searchResult').style.display = 'none';
+                calculatePartTotal(inputId);
+            }
+        }
+
+        // 计算配件小计
+        function calculatePartTotal(inputId) {
+            const quantity = parseFloat(document.getElementById(inputId + '_quantity').value) || 0;
+            const price = parseFloat(document.getElementById(inputId + '_price').value) || 0;
+            const subtotal = quantity * price;
+            document.getElementById(inputId + '_subtotal').textContent = `${subtotal.toFixed(2)}`;
+        }
+
+        // 计算配件总价
+        function calculateTotal() {
+            const items = Array.from(document.getElementById('partItems').children);
+            const total = items.reduce((sum, item) => {
+                const quantity = parseFloat(item.querySelector('.part-quantity').textContent) || 0;
+                const price = parseFloat(item.querySelector('.part-price').textContent) || 0;
+                return sum + (quantity * price);
+            }, 0);
+            document.getElementById('partTotal').textContent = `${total.toFixed(2)}`;
+        }
+
+        // 添加维修项目
+        function addRepairItem(inputId) {
+            const code = document.getElementById(inputId + '_code').value;
+            const title = document.getElementById(inputId + '_title').value;
+            
+            if (!code || !title) {
+                alert('请填写完整信息');
+                return;
+            }
+
+            const repairItems = document.getElementById('repairItems');
+            const item = document.createElement('div');
+            item.className = 'repair-item';
+            item.innerHTML = `
+                <div class="repair-item-code">${code}</div>
+                <div class="repair-item-title">${title}</div>
+                <div class="delete-btn" onclick="this.parentElement.remove()">×</div>
+            `;
+            
+            repairItems.appendChild(item);
+            
+            // 删除输入行
+            document.getElementById(inputId + '_code').closest('.input-row').remove();
+        }
+
+        // 添加配件
+        function addPartItem(inputId) {
+            const code = document.getElementById(inputId + '_code').value;
+            const quantity = document.getElementById(inputId + '_quantity').value;
+            const price = document.getElementById(inputId + '_price').value;
+            
+            if (!code || !quantity || !price) {
+                alert('请填写完整信息');
+                return;
+            }
+
+            const part = partsData.find(item => item.code === code);
+            if (!part) {
+                alert('配件不存在');
+                return;
+            }
+
+            const partItems = document.getElementById('partItems');
+            const item = document.createElement('div');
+            item.className = 'part-item';
+            item.innerHTML = `
+                <div class="part-info">
+                    <div class="part-code">${part.code}</div>
+                    <div class="part-name">${part.name}</div>
+                </div>
+                <div class="part-quantity">${quantity}</div>
+                <div class="part-price">${price}</div>
+                <div class="part-total">${(quantity * price).toFixed(2)}</div>
+                <div class="delete-btn" onclick="this.parentElement.remove(); calculateTotal();">×</div>
+            `;
+            
+            partItems.appendChild(item);
+            calculateTotal();
+            
+            // 删除输入行
+            document.getElementById(inputId + '_code').closest('.input-row').remove();
+        }
+
+        // 提交维修记录
+        function submitRepair() {
+            // 获取所有维修项目
+            const repairItems = Array.from(document.getElementById('repairItems').children).map(item => ({
+                title: item.querySelector('.repair-item-title').textContent,
+                desc: item.querySelector('.repair-item-desc').textContent
+            }));
+
+            // 获取所有配件
+            const partItems = Array.from(document.getElementById('partItems').children).map(item => ({
+                name: item.querySelector('.part-name').textContent,
+                spec: item.querySelector('.part-spec').textContent,
+                quantity: item.querySelector('.part-quantity').textContent
+            }));
+
+            // 这里添加提交逻辑
+            console.log('维修项目:', repairItems);
+            console.log('更换配件:', partItems);
+            
+            // 可以添加表单验证
+            if (repairItems.length === 0) {
+                alert('请至少添加一个维修项目');
+                return;
+            }
+            
+            // 可以添加提交动画
+            // 可以添加成功/失败提示
+        }
+    </script>
+</body>
+</html> 

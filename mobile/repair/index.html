@@ -59,11 +59,6 @@
             padding: 15px;
             box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
         }
-        .step-content.blur {
-            filter: blur(3px);
-            opacity: 0.6;
-            pointer-events: none;
-        }
         .step-header {
             display: flex;
             align-items: center;
@@ -197,9 +192,9 @@
                             </div>
                         </div>
                         <!-- 执行维修 -->
-                        <div class="process-step">
+                        <div class="process-step" onclick="window.open('execute.html', '_blank')">
                             <div class="step-dot">3</div>
-                            <div class="step-content blur">
+                            <div class="step-content">
                                 <div class="step-header">
                                     <div class="step-title">执行维修</div>
                                 </div>
@@ -221,7 +216,7 @@
                         <!-- 完工确认 -->
                         <div class="process-step">
                             <div class="step-dot">4</div>
-                            <div class="step-content blur">
+                            <div class="step-content">
                                 <div class="step-header">
                                     <div class="step-title">完工确认</div>
                                 </div>
@@ -243,7 +238,7 @@
                         <!-- 工单审批 -->
                         <div class="process-step">
                             <div class="step-dot">5</div>
-                            <div class="step-content blur">
+                            <div class="step-content">
                                 <div class="step-header">
                                     <div class="step-title">工单审批</div>
                                 </div>
