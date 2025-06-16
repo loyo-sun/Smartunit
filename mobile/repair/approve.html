@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>工单审批</title>
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        .mobile-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            min-height: 100vh;
+            position: relative;
+        }
+        .page {
+            background: #f5f5f5;
+            min-height: 100vh;
+            position: relative;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            z-index: 100;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            height: 44px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+        .page-content {
+            padding: 15px;
+            padding-bottom: 70px;
+        }
+        .section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 8px;
+            color: #1890ff;
+        }
+        .info-item {
+            display: flex;
+            margin-bottom: 12px;
+        }
+        .info-label {
+            width: 80px;
+            color: #666;
+            flex-shrink: 0;
+        }
+        .info-value {
+            flex: 1;
+            color: #333;
+        }
+        .repair-item {
+            background: #f5f5f5;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+        .repair-item-code {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .repair-item-title {
+            color: #333;
+            font-weight: 500;
+        }
+        .repair-item-desc {
+            color: #666;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        .part-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 10px;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+        .part-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .part-code {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .part-name {
+            color: #333;
+            font-weight: 500;
+        }
+        .part-quantity {
+            text-align: right;
+            color: #333;
+        }
+        .part-price {
+            text-align: right;
+            color: #333;
+        }
+        .part-total {
+            text-align: right;
+            color: #ff4d4f;
+            font-weight: 500;
+        }
+        .total-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            text-align: right;
+        }
+        .total-label {
+            color: #666;
+            margin-right: 10px;
+        }
+        .total-value {
+            color: #ff4d4f;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .approve-group {
+            margin-bottom: 20px;
+        }
+        .approve-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .approve-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+        .approve-status {
+            font-size: 14px;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .status-pending {
+            background: #e6f7ff;
+            color: #1890ff;
+        }
+        .status-approved {
+            background: #f6ffed;
+            color: #52c41a;
+        }
+        .status-rejected {
+            background: #fff2f0;
+            color: #ff4d4f;
+        }
+        .approve-content {
+            background: #f5f5f5;
+            border-radius: 6px;
+            padding: 12px;
+        }
+        .approve-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        .approve-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: #1890ff;
+            color: #fff;
+        }
+        .btn-danger {
+            background: #ff4d4f;
+            color: #fff;
+        }
+        .btn:active {
+            opacity: 0.8;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-control:focus {
+            border-color: #1890ff;
+            outline: none;
+        }
+        /* 适配暗黑模式 */
+        @media (prefers-color-scheme: dark) {
+            .section {
+                background: #2c2c2c;
+            }
+            .section-title {
+                color: #fff;
+            }
+            .info-label {
+                color: #999;
+            }
+            .info-value {
+                color: #fff;
+            }
+            .approve-title {
+                color: #fff;
+            }
+            .approve-content {
+                background: #3c3c3c;
+            }
+            .approve-info {
+                color: #999;
+            }
+            .form-control {
+                background: #3c3c3c;
+                border-color: #4c4c4c;
+                color: #fff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="back-btn" onclick="history.back()">
+                        <i class="icon-back"></i>
+                    </div>
+                    <div class="title">工单审批</div>
+                </div>
+            </div>
+            <div class="page-content">
+                <!-- 工单信息 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="icon-info"></i>
+                        工单信息
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">工单号：</div>
+                        <div class="info-value">REP202403150001</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">设备名称：</div>
+                        <div class="info-value">三一重工 SY5418THB 56米泵车</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">故障描述：</div>
+                        <div class="info-value">泵送系统压力异常，主油缸动作缓慢，分配阀换向不灵敏</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">维修地点：</div>
+                        <div class="info-value">XX工地现场</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">报修时间：</div>
+                        <div class="info-value">2024-03-15 10:30</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">维修人员：</div>
+                        <div class="info-value">张工</div>
+                    </div>
+                </div>
+
+                <!-- 维修执行信息 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="icon-tools"></i>
+                        维修项目
+                    </div>
+                    <div id="repairItems">
+                        <!-- 维修项目列表 -->
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <i class="icon-parts"></i>
+                        更换配件
+                    </div>
+                    <div id="partItems">
+                        <!-- 配件列表 -->
+                    </div>
+                    <div class="total-section">
+                        <span class="total-label">配件总价：</span>
+                        <span class="total-value" id="partTotal">0.00</span>
+                    </div>
+                </div>
+
+                <!-- 审批区域 -->
+                <div class="section" id="approveSection">
+                    <div class="section-title">
+                        <i class="icon-check"></i>
+                        审批确认
+                    </div>
+                    <!-- 财务审批 -->
+                    <div class="approve-group" data-role="finance">
+                        <div class="approve-header">
+                            <div class="approve-title">审批人：李财务（财务）</div>
+                            <div class="approve-status status-pending">待审批</div>
+                        </div>
+                        <div class="approve-content">
+                            <div class="approve-info">
+                                <span>审批时间：</span>
+                                <span>2024-03-15 14:30</span>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="2" placeholder="请输入审批意见" disabled></textarea>
+                            </div>
+                            <div class="approve-actions" style="display: none;">
+                                <button class="btn btn-danger" onclick="rejectApprove('finance')">驳回</button>
+                                <button class="btn btn-primary" onclick="approve('finance')">同意</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 车队长审批 -->
+                    <div class="approve-group" data-role="fleet">
+                        <div class="approve-header">
+                            <div class="approve-title">审批人：王队长（车队长）</div>
+                            <div class="approve-status status-approved">已同意</div>
+                        </div>
+                        <div class="approve-content">
+                            <div class="approve-info">
+                                <span>审批时间：</span>
+                                <span>2024-03-15 14:30</span>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="2" placeholder="请输入审批意见" disabled>审批通过</textarea>
+                            </div>
+                            <div class="approve-actions" style="display: none;">
+                                <button class="btn btn-danger" onclick="rejectApprove('fleet')">驳回</button>
+                                <button class="btn btn-primary" onclick="approve('fleet')">同意</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 仓库审批 -->
+                    <div class="approve-group" data-role="warehouse">
+                        <div class="approve-header">
+                            <div class="approve-title">审批人：赵仓库（仓库）</div>
+                            <div class="approve-status status-pending">待审批</div>
+                        </div>
+                        <div class="approve-content">
+                            <div class="approve-info">
+                                <span>审批时间：</span>
+                                <span>2024-03-15 14:30</span>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="2" placeholder="请输入审批意见"></textarea>
+                            </div>
+                            <div class="approve-actions">
+                                <button class="btn btn-danger" onclick="rejectApprove('warehouse')">驳回</button>
+                                <button class="btn btn-primary" onclick="approve('warehouse')">同意</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 模拟维修项目数据
+        const repairItems = [
+            { code: 'R001', title: '检查主油泵', desc: '检查主油泵压力、流量、噪音等参数' },
+            { code: 'R002', title: '检查主油缸', desc: '检查主油缸密封、活塞、缸体等部件' },
+            { code: 'R003', title: '检查分配阀', desc: '检查分配阀换向、密封、磨损等情况' }
+        ];
+
+        // 模拟配件数据
+        const partItems = [
+            { code: 'P001', name: '主油泵', spec: 'A4VG-71', quantity: 1, price: 12800 },
+            { code: 'P002', name: '主油缸', spec: 'φ180×2000', quantity: 2, price: 5600 },
+            { code: 'P003', name: '分配阀', spec: 'S管阀', quantity: 1, price: 8500 }
+        ];
+
+        // 渲染维修项目
+        function renderRepairItems() {
+            const container = document.getElementById('repairItems');
+            container.innerHTML = repairItems.map(item => `
+                <div class="repair-item">
+                    <div class="repair-item-code">${item.code}</div>
+                    <div class="repair-item-title">${item.title}</div>
+                    <div class="repair-item-desc">${item.desc}</div>
+                </div>
+            `).join('');
+        }
+
+        // 渲染配件列表
+        function renderPartItems() {
+            const container = document.getElementById('partItems');
+            container.innerHTML = partItems.map(item => `
+                <div class="part-item">
+                    <div class="part-info">
+                        <div class="part-code">${item.code}</div>
+                        <div class="part-name">${item.name}</div>
+                    </div>
+                    <div class="part-quantity">${item.quantity}</div>
+                    <div class="part-price">${item.price}</div>
+                    <div class="part-total">${(item.quantity * item.price).toFixed(2)}</div>
+                </div>
+            `).join('');
+
+            // 计算配件总价
+            const total = partItems.reduce((sum, item) => sum + (item.quantity * item.price), 0);
+            document.getElementById('partTotal').textContent = total.toFixed(2);
+        }
+
+        // 审批同意
+        function approve(role) {
+            const group = getApproveGroup(role);
+            const status = group.querySelector('.approve-status');
+            const actions = group.querySelector('.approve-actions');
+            status.className = 'approve-status status-approved';
+            status.textContent = '已同意';
+            actions.style.display = 'none';
+        }
+
+        // 审批驳回
+        function rejectApprove(role) {
+            const group = getApproveGroup(role);
+            const status = group.querySelector('.approve-status');
+            const actions = group.querySelector('.approve-actions');
+            status.className = 'approve-status status-rejected';
+            status.textContent = '已驳回';
+            actions.style.display = 'none';
+        }
+
+        // 获取审批分组
+        function getApproveGroup(role) {
+            if (role === 'finance') return document.querySelectorAll('.approve-group')[0];
+            if (role === 'fleet') return document.querySelectorAll('.approve-group')[1];
+            if (role === 'warehouse') return document.querySelectorAll('.approve-group')[2];
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            renderRepairItems();
+            renderPartItems();
+            // 只显示当前角色审批项
+            const urlParams = new URLSearchParams(window.location.search);
+            const role = urlParams.get('role');
+            if (role) {
+                document.querySelectorAll('.approve-group').forEach(function(group) {
+                    if (group.getAttribute('data-role') !== role) {
+                        group.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html> 
