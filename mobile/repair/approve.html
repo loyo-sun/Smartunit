@@ -224,6 +224,12 @@
             border-color: #1890ff;
             outline: none;
         }
+        .form-control[disabled] {
+            background: #f0f0f0;
+            color: #999;
+            cursor: not-allowed;
+            opacity: 1;
+        }
         /* 适配暗黑模式 */
         @media (prefers-color-scheme: dark) {
             .section {
@@ -321,6 +327,22 @@
                     <div class="total-section">
                         <span class="total-label">配件总价：</span>
                         <span class="total-value" id="partTotal">0.00</span>
+                    </div>
+                </div>
+
+                <!-- 完工确认信息 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="icon-check"></i>
+                        完工确认信息
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">维修质量评分：</div>
+                        <div class="info-value">4分</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">维修建议：</div>
+                        <div class="info-value">建议定期检查主油泵压力，确保系统稳定运行。</div>
                     </div>
                 </div>
 
