@@ -71,35 +71,35 @@ const languageData = {
         "slogan": "Data-Driven Smart Operations",
         "about": {
             "title": "About the Product",
-            "description1": "Smartunit is a device intelligent management platform centered on 'data-driven optimization', helping engineering equipment enterprises transform from 'passive response' to 'active optimization'.",
-            "description2": "Smartunit is not just a device management system, but a comprehensive optimization engine for the entire device lifecycle. Through digital means, data models, and intelligent recognition, it achieves comprehensive optimization from device assets, maintenance processes, parts usage to operational costs."
+            "description1": "Smartunit is an intelligent equipment management platform focused on data-driven optimization, designed to help engineering enterprises shift from passive response to proactive optimization.",
+            "description2": "Smartunit is more than a device management system — it is a comprehensive optimization engine for the entire equipment lifecycle. Leveraging digital technologies, data modeling, and intelligent recognition, it drives end-to-end optimization across equipment assets, maintenance workflows, parts management, and operational costs."
         },
         "optimization": {
             "title": "What Are We Optimizing?",
             "cards": {
                 "asset": {
                     "title": "Asset Digital Optimization",
-                    "desc": "Build a unified asset list, integrate transfer, depreciation, attendance, and status data to achieve full lifecycle asset management, avoiding asset dormancy and duplicate purchases."
+                    "desc": "Build a unified digital asset registry, integrating transfer, depreciation, usage, and status data to enable full lifecycle visibility, reduce asset redundancy, and avoid duplicate purchases."
                 },
                 "workorder": {
                     "title": "Work Order Intelligence",
-                    "desc": "Mobile closed-loop work order system, combined with AI recognition mechanism, optimizes maintenance assignment and approval flow, improving response speed and decision quality."
+                    "desc": "Mobile work order management combined with AI recognition to streamline task assignment and approval processes, improving response time and decision-making quality."
                 },
                 "parts": {
                     "title": "Parts Rationalization",
-                    "desc": "Based on parts replacement prediction model, achieve precise parts inventory matching, reduce spare parts capital occupation, and improve usage efficiency."
+                    "desc": "Use parts replacement prediction models to enable precise inventory planning, reduce capital lock-in, and improve parts usage efficiency."
                 },
                 "dispatch": {
                     "title": "Dispatch Coordination",
-                    "desc": "Order-driven optimization of vehicle and personnel scheduling, improving resource utilization and enhancing dispatch flexibility."
+                    "desc": "Enable order-driven equipment and personnel scheduling to enhance resource utilization and dispatch flexibility."
                 },
                 "quality": {
                     "title": "Maintenance Quality",
-                    "desc": "Build capabilities for repeated maintenance recognition and abnormal parts replacement detection to continuously optimize maintenance quality control mechanisms."
+                    "desc": "Enable repeated failure detection and abnormal part replacement analysis to support continuous improvement of maintenance quality control."
                 },
                 "cost": {
                     "title": "Cost-Effectiveness",
-                    "desc": "Achieve maximum equipment operational efficiency through cost analysis, efficiency evaluation, and ROI tracking."
+                    "desc": "Maximize operational efficiency through cost analysis, performance evaluation, and ROI tracking."
                 }
             }
         },
@@ -108,22 +108,22 @@ const languageData = {
             "cards": {
                 "communication": {
                     "title": "Communication Brain",
-                    "desc": "Standardize maintenance language, extract structured fault characteristics, and optimize maintenance knowledge accumulation.",
+                    "desc": "Standardizes maintenance language, extracts structured fault features, and builds a knowledge base to enhance maintenance diagnostics.",
                     "features": [
                         "Unified maintenance terminology",
                         "Fault feature extraction",
-                        "Knowledge graph construction",
+                        "Knowledge graph development",
                         "Maintenance experience accumulation"
                     ]
                 },
                 "logic": {
                     "title": "Logic Brain",
-                    "desc": "Based on data time series, optimize parts replacement and maintenance decisions, identify risks and waste.",
+                    "desc": "Uses time-series data to optimize part replacements and maintenance strategies, identify risks, and provide intelligent cost optimization.",
                     "features": [
                         "Time series data analysis",
                         "Intelligent decision support",
                         "Risk warning mechanism",
-                        "Cost optimization suggestions"
+                        "Cost-saving suggestions"
                     ]
                 }
             }
