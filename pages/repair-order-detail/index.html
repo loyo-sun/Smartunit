@@ -1,50 +1,86 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>维修工单详情</title>
+    <title data-i18n="repairOrderDetail.title">维修工单详情</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 语言切换器样式 */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .language-switcher select {
+            padding: 8px 12px;
+            border: 1px solid #1890ff;
+            border-radius: 4px;
+            background: white;
+            color: #1890ff;
+            cursor: pointer;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .language-switcher select:hover {
+            background: #f0f7ff;
+        }
+        
+        .language-switcher select:focus {
+            border-color: #40a9ff;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+    </style>
 </head>
 <body>
+    <div class="language-switcher">
+        <select id="languageSelect" onchange="changeLanguage(this.value)">
+            <option value="zh-CN">中文</option>
+            <option value="en-US">English</option>
+        </select>
+    </div>
+    
     <div class="container">
         <div class="main-content">
             <!-- 左侧内容区 -->
             <div class="left-content">
                 <!-- 工单信息卡片 -->
                 <div class="card">
-                    <h2 class="card-title">工单信息</h2>
+                    <h2 class="card-title" data-i18n="repairOrderDetail.workOrder.title">工单信息</h2>
                     <div class="info-grid">
                         <div class="info-item">
-                            <label>设备编码</label>
+                            <label data-i18n="repairOrderDetail.workOrder.equipmentCode">设备编码</label>
                             <div class="info-value">EQ-2024-001</div>
                         </div>
                         <div class="info-item">
-                            <label>创建人</label>
+                            <label data-i18n="repairOrderDetail.workOrder.creator">创建人</label>
                             <div class="info-value">张工</div>
                         </div>
                         <div class="info-item">
-                            <label>维修日期</label>
+                            <label data-i18n="repairOrderDetail.workOrder.repairDate">维修日期</label>
                             <div class="info-value">2024-03-20</div>
                         </div>
                         <div class="info-item">
-                            <label>完工时间</label>
+                            <label data-i18n="repairOrderDetail.workOrder.completionTime">完工时间</label>
                             <div class="info-value">2024-03-20 15:30</div>
                         </div>
                         <div class="info-item">
-                            <label>故障描述</label>
-                            <div class="info-value">液压系统压力异常</div>
+                            <label data-i18n="repairOrderDetail.workOrder.faultDescription">故障描述</label>
+                            <div class="info-value" data-i18n="repairOrderDetail.fault.description">液压系统压力异常</div>
                         </div>
                         <div class="info-item">
-                            <label>故障根因</label>
-                            <div class="info-value">液压泵密封圈损坏</div>
+                            <label data-i18n="repairOrderDetail.workOrder.rootCause">故障根因</label>
+                            <div class="info-value" data-i18n="repairOrderDetail.fault.cause">液压泵密封圈损坏</div>
                         </div>
                         <div class="info-item">
-                            <label>工时成本</label>
+                            <label data-i18n="repairOrderDetail.workOrder.laborCost">工时成本</label>
                             <div class="info-value">¥1,200</div>
                         </div>
                         <div class="info-item">
-                            <label>配件成本</label>
+                            <label data-i18n="repairOrderDetail.workOrder.partsCost">配件成本</label>
                             <div class="info-value">¥3,500</div>
                         </div>
                     </div>
@@ -52,22 +88,22 @@
 
                 <!-- 维修工况信息卡片 -->
                 <div class="card">
-                    <h2 class="card-title">设备工况信息</h2>
+                    <h2 class="card-title" data-i18n="repairOrderDetail.workOrder.operationConditions">设备工况信息</h2>
                     <div class="info-grid">
                         <div class="info-item">
-                            <label>发动机小时</label>
+                            <label data-i18n="repairOrderDetail.workOrder.engineHours">发动机小时</label>
                             <div class="info-value">2,580 h</div>
                         </div>
                         <div class="info-item">
-                            <label>行驶里程</label>
+                            <label data-i18n="repairOrderDetail.workOrder.mileage">行驶里程</label>
                             <div class="info-value">15,680 km</div>
                         </div>
                         <div class="info-item">
-                            <label>总油耗</label>
+                            <label data-i18n="repairOrderDetail.workOrder.fuelConsumption">总油耗</label>
                             <div class="info-value">8,960 L</div>
                         </div>
                         <div class="info-item">
-                            <label>方量</label>
+                            <label data-i18n="repairOrderDetail.workOrder.volume">方量</label>
                             <div class="info-value">12,500 m³</div>
                         </div>
                     </div>
@@ -75,29 +111,29 @@
 
                 <!-- 配件明细表格 -->
                 <div class="card">
-                    <h2 class="card-title">配件明细</h2>
+                    <h2 class="card-title" data-i18n="repairOrderDetail.workOrder.partsDetail">配件明细</h2>
                     <table class="parts-table">
                         <thead>
                             <tr>
-                                <th>配件编码</th>
-                                <th>名称</th>
-                                <th>单位</th>
-                                <th>数量</th>
-                                <th>小计</th>
+                                <th data-i18n="repairOrderDetail.parts.code">配件编码</th>
+                                <th data-i18n="repairOrderDetail.parts.name">名称</th>
+                                <th data-i18n="repairOrderDetail.parts.unit">单位</th>
+                                <th data-i18n="repairOrderDetail.parts.quantity">数量</th>
+                                <th data-i18n="repairOrderDetail.parts.subtotal">小计</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>P001</td>
-                                <td>液压泵</td>
-                                <td>个</td>
+                                <td data-i18n="repairOrderDetail.fault.parts.main">液压泵</td>
+                                <td data-i18n="repairOrderDetail.parts.unitValue">个</td>
                                 <td>1</td>
                                 <td>¥2,500</td>
                             </tr>
                             <tr>
                                 <td>P002</td>
-                                <td>密封圈</td>
-                                <td>个</td>
+                                <td data-i18n="repairOrderDetail.fault.parts.detail">密封圈</td>
+                                <td data-i18n="repairOrderDetail.parts.unitValue">个</td>
                                 <td>2</td>
                                 <td>¥1,000</td>
                             </tr>
@@ -109,17 +145,17 @@
             <!-- 右侧AI审查助手区域 -->
             <div class="right-content">
                 <div class="card">
-                    <h2 class="card-title">AI识别助手</h2>
+                    <h2 class="card-title" data-i18n="repairOrderDetail.ai.inspectorAssistant">AI识别助手</h2>
                     
                     <!-- AI分析结果提示 -->
                     <div class="ai-alert">
                         <div class="ai-status">
                             <div class="ai-icon">🤖</div>
                             <div class="ai-text">
-                                <p>AI分析完成！发现3个问题，快来看看吧~</p>
+                                <p data-i18n="repairOrderDetail.ai.analysisComplete">AI分析完成！发现3个问题，快来看看吧~</p>
                                 <div class="risk-level">
-                                    <span class="risk-tag high">严重</span>
-                                    <span class="risk-score">风险评分: 75分</span>
+                                    <span class="risk-tag high" data-i18n="repairOrderDetail.ai.riskLevel.high">严重</span>
+                                    <span class="risk-score" data-i18n="repairOrderDetail.fault.score">风险评分: 75分</span>
                                 </div>
                             </div>
                         </div>
@@ -130,14 +166,14 @@
                         <div class="risk-item high">
                             <div class="risk-header">
                                 <input type="checkbox" id="risk1">
-                                <label for="risk1">异常换件提醒</label>
-                                <span class="risk-tag high">严重</span>
+                                <label for="risk1" data-i18n="repairOrderDetail.risks.partReplacement">异常换件提醒</label>
+                                <span class="risk-tag high" data-i18n="repairOrderDetail.ai.riskLevel.high">严重</span>
                             </div>
-                            <p class="risk-description">液压泵更换寿命仅 52 天，远低于行业均值 180 天</p>
+                            <p class="risk-description" data-i18n="repairOrderDetail.risks.partReplacementDesc">液压泵更换寿命仅 52 天，远低于行业均值 180 天</p>
                             <div class="risk-details">
                                 <div class="detail-item">
-                                    <span class="detail-label">建议操作：</span>
-                                    <span class="detail-value">检查设备使用情况，评估是否需要更换其他部件</span>
+                                    <span class="detail-label" data-i18n="repairOrderDetail.fault.suggestion.title">建议操作：</span>
+                                    <span class="detail-value" data-i18n="repairOrderDetail.fault.suggestion.content">检查设备使用情况，评估是否需要更换其他部件</span>
                                 </div>
                             </div>
                         </div>
@@ -145,14 +181,14 @@
                         <div class="risk-item medium">
                             <div class="risk-header">
                                 <input type="checkbox" id="risk2">
-                                <label for="risk2">重复维修识别</label>
-                                <span class="risk-tag medium">中等</span>
+                                <label for="risk2" data-i18n="repairOrderDetail.risks.repeatedRepair">重复维修识别</label>
+                                <span class="risk-tag medium" data-i18n="repairOrderDetail.ai.riskLevel.medium">中等</span>
                             </div>
-                            <p class="risk-description">同部件两次更换间隔仅 12 天，维修人相同</p>
+                            <p class="risk-description" data-i18n="repairOrderDetail.risks.repeatedRepairDesc">同部件两次更换间隔仅 12 天，维修人相同</p>
                             <div class="risk-details">
                                 <div class="detail-item">
-                                    <span class="detail-label">维修历史：</span>
-                                    <span class="detail-value">近30天内维修3次，建议进行设备全面检查</span>
+                                    <span class="detail-label" data-i18n="repairOrderDetail.fault.history.title">维修历史：</span>
+                                    <span class="detail-value" data-i18n="repairOrderDetail.fault.history.content">近30天内维修3次，建议进行设备全面检查</span>
                                 </div>
                             </div>
                         </div>
@@ -160,14 +196,14 @@
                         <div class="risk-item low">
                             <div class="risk-header">
                                 <input type="checkbox" id="risk3">
-                                <label for="risk3">维修合理性评分</label>
-                                <span class="risk-tag low">一般</span>
+                                <label for="risk3" data-i18n="repairOrderDetail.risks.repairScore">维修合理性评分</label>
+                                <span class="risk-tag low" data-i18n="repairOrderDetail.ai.riskLevel.low">一般</span>
                             </div>
-                            <p class="risk-description">故障现象与原因匹配度仅 45%，建议复审</p>
+                            <p class="risk-description" data-i18n="repairOrderDetail.risks.repairScoreDesc">故障现象与原因匹配度仅 45%，建议复审</p>
                             <div class="risk-details">
                                 <div class="detail-item">
-                                    <span class="detail-label">匹配分析：</span>
-                                    <span class="detail-value">故障描述与维修方案存在偏差，建议补充故障现象描述</span>
+                                    <span class="detail-label" data-i18n="repairOrderDetail.fault.analysis.title">匹配分析：</span>
+                                    <span class="detail-value" data-i18n="repairOrderDetail.fault.analysis.content">故障描述与维修方案存在偏差，建议补充故障现象描述</span>
                                 </div>
                             </div>
                         </div>
@@ -177,14 +213,15 @@
                     <div class="action-area">
                         <button class="export-btn">
                             <span class="btn-icon">📥</span>
-                            <span>一键导出报告</span>
+                            <span data-i18n="repairOrderDetail.actions.downloadReport">一键导出报告</span>
                         </button>
-                        <p class="note">由AI模型初审，请结合人工作业复核</p>
+                        <p class="note" data-i18n="repairOrderDetail.ai.reviewNote">由AI模型初审，请结合人工作业复核</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="../../js/i18n.js"></script>
     <script src="script.js"></script>
 </body>
 </html> 

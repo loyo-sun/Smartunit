@@ -11,6 +11,18 @@ function setLanguage(lang) {
     localStorage.setItem('preferredLanguage', lang);
     currentLanguage = lang;
     loadLanguage(lang);
+    
+    // 如果是forecast页面，手动触发一次更新
+    if (window.location.pathname.includes('/forecast/')) {
+        setTimeout(() => {
+            if (typeof updateI18nStatic === 'function') {
+                updateI18nStatic();
+            }
+            if (typeof updateDynamicContent === 'function') {
+                updateDynamicContent();
+            }
+        }, 300);
+    }
 }
 
 const languageData = {
@@ -112,6 +124,140 @@ const languageData = {
                 '便捷的资产编辑',
                 '移动端优化体验'
             ]
+        },
+        // repair-order-detail页面翻译
+        repairOrderDetail: {
+            title: '维修工单详情',
+            workOrder: {
+                title: '工单信息',
+                equipmentCode: '设备编码',
+                creator: '创建人',
+                repairDate: '维修日期',
+                completionTime: '完工时间',
+                faultDescription: '故障描述',
+                rootCause: '故障根因',
+                laborCost: '工时成本',
+                partsCost: '配件成本',
+                partsDetail: '配件明细',
+                operationConditions: '设备工况信息',
+                engineHours: '发动机小时',
+                mileage: '行驶里程',
+                fuelConsumption: '总油耗',
+                volume: '方量'
+            },
+            parts: {
+                code: '配件编码',
+                name: '名称',
+                unit: '单位',
+                quantity: '数量',
+                subtotal: '小计',
+                unitValue: '个'
+            },
+            ai: {
+                inspectorAssistant: 'AI识别助手',
+                analysisComplete: 'AI分析完成！发现3个问题，快来看看吧~',
+                riskLevel: {
+                    high: '严重',
+                    medium: '中等',
+                    low: '一般'
+                },
+                reviewNote: '由AI模型初审，请结合人工作业复核'
+            },
+            risks: {
+                partReplacement: '异常换件提醒',
+                partReplacementDesc: '液压泵更换寿命仅 52 天，远低于行业均值 180 天',
+                repeatedRepair: '重复维修识别',
+                repeatedRepairDesc: '同部件两次更换间隔仅 12 天，维修人相同',
+                repairScore: '维修合理性评分',
+                repairScoreDesc: '故障现象与原因匹配度仅 45%，建议复审'
+            },
+            actions: {
+                downloadReport: '一键导出报告'
+            },
+            fault: {
+                description: '液压系统压力异常',
+                cause: '液压泵密封圈损坏',
+                parts: {
+                    main: '液压泵',
+                    detail: '密封圈'
+                },
+                analysis: {
+                    title: '匹配分析',
+                    content: '故障描述与维修方案存在偏差，建议补充故障现象描述'
+                },
+                history: {
+                    title: '维修历史',
+                    content: '近30天内维修3次，建议进行设备全面检查'
+                },
+                suggestion: {
+                    title: '建议操作',
+                    content: '检查设备使用情况，评估是否需要更换其他部件'
+                },
+                score: '风险评分: 75分'
+            }
+        },
+        // forecast页面多语言
+        forecastPage: {
+            title: '配件预测',
+            filter: {
+                month: '选择月份',
+                search: '搜索配件编码/名称',
+                type: '全部配件类型',
+                typeOptions: {
+                    all: '全部配件类型',
+                    consumable: '易损件',
+                    critical: '关键件',
+                    regular: '常备件'
+                },
+                forecastType: '全部预测方式',
+                forecastTypeOptions: {
+                    all: '全部预测方式',
+                    mean: '均值预测',
+                    model: '模型预测'
+                },
+                reset: '重置',
+                export: '导出'
+            },
+            table: {
+                code: '配件编码',
+                name: '配件名称',
+                model: '型号',
+                unit: '单位',
+                price: '价格',
+                type: '配件类型',
+                forecastType: '预测方式',
+                forecastQty: '预测数量',
+                action: '操作',
+                detail: '详情'
+            },
+            pagination: {
+                prev: '上一页',
+                next: '下一页'
+            },
+            drawer: {
+                title: '配件预测详情',
+                close: '关闭',
+                info: {
+                    code: '配件编码',
+                    model: '型号',
+                    unit: '单位',
+                    type: '配件类型',
+                    forecastQty: '预测数量'
+                },
+                trend: '使用与预测趋势',
+                equipment: '设备分布',
+                equipmentTable: {
+                    code: '设备编码',
+                    name: '设备名称',
+                    project: '所属项目',
+                    qty: '预计用量'
+                }
+            },
+            tag: {
+                consumable: '易损件',
+                critical: '关键件',
+                regular: '常备件'
+            }
         }
     },
     'en-US': {
@@ -212,15 +358,149 @@ const languageData = {
                 'Convenient asset editing',
                 'Mobile-optimized experience'
             ]
+        },
+        // repair-order-detail page translations
+        repairOrderDetail: {
+            title: 'Repair Work Order Detail',
+            workOrder: {
+                title: 'Work Order Information',
+                equipmentCode: 'Equipment Code',
+                creator: 'Creator',
+                repairDate: 'Repair Date',
+                completionTime: 'Completion Time',
+                faultDescription: 'Fault Description',
+                rootCause: 'Root Cause',
+                laborCost: 'Labor Cost',
+                partsCost: 'Parts Cost',
+                partsDetail: 'Parts Detail',
+                operationConditions: 'Equipment Operation Data',
+                engineHours: 'Engine Hours',
+                mileage: 'Mileage',
+                fuelConsumption: 'Total Fuel Consumption',
+                volume: 'Volume'
+            },
+            parts: {
+                code: 'Part Code',
+                name: 'Name',
+                unit: 'Unit',
+                quantity: 'Quantity',
+                subtotal: 'Subtotal',
+                unitValue: 'pcs'
+            },
+            ai: {
+                inspectorAssistant: 'AI Inspector Assistant',
+                analysisComplete: 'AI analysis complete! Found 3 issues, check them out~',
+                riskLevel: {
+                    high: 'High',
+                    medium: 'Medium',
+                    low: 'Low'
+                },
+                reviewNote: 'Preliminary review by AI model, please verify with manual inspection'
+            },
+            risks: {
+                partReplacement: 'Abnormal Part Replacement Alert',
+                partReplacementDesc: 'Hydraulic pump replacement life only 52 days, far below industry average of 180 days',
+                repeatedRepair: 'Repeated Repair Detection',
+                repeatedRepairDesc: 'Same part replaced twice within 12 days, same repair person',
+                repairScore: 'Repair Reasonableness Score',
+                repairScoreDesc: 'Fault phenomenon and cause match rate only 45%, review recommended'
+            },
+            actions: {
+                downloadReport: 'Download Report'
+            },
+            fault: {
+                description: 'Hydraulic System Pressure Abnormal',
+                cause: 'Hydraulic Pump Seal Ring Damaged',
+                parts: {
+                    main: 'Hydraulic Pump',
+                    detail: 'Seal Ring'
+                },
+                analysis: {
+                    title: 'Matching Analysis',
+                    content: 'Fault description and repair solution have deviation, suggest to supplement fault phenomenon description'
+                },
+                history: {
+                    title: 'Repair History',
+                    content: '3 repairs in the last 30 days, suggest comprehensive equipment inspection'
+                },
+                suggestion: {
+                    title: 'Suggested Actions',
+                    content: 'Check equipment usage and evaluate if other parts need replacement'
+                },
+                score: 'Risk Score: 75 points'
+            }
+        },
+        // forecast页面多语言
+        forecastPage: {
+            title: 'Parts Forecast',
+            filter: {
+                month: 'Select Month',
+                search: 'Search Part Code/Name',
+                type: 'All Types',
+                typeOptions: {
+                    all: 'All Types',
+                    consumable: 'Consumable',
+                    critical: 'Critical',
+                    regular: 'Regular'
+                },
+                forecastType: 'All Forecast Methods',
+                forecastTypeOptions: {
+                    all: 'All Forecast Methods',
+                    mean: 'Mean Forecast',
+                    model: 'Model Forecast'
+                },
+                reset: 'Reset',
+                export: 'Export'
+            },
+            table: {
+                code: 'Part Code',
+                name: 'Part Name',
+                model: 'Model',
+                unit: 'Unit',
+                price: 'Price',
+                type: 'Type',
+                forecastType: 'Forecast Method',
+                forecastQty: 'Forecast Qty',
+                action: 'Action',
+                detail: 'Detail'
+            },
+            pagination: {
+                prev: 'Prev',
+                next: 'Next'
+            },
+            drawer: {
+                title: 'Part Forecast Detail',
+                close: 'Close',
+                info: {
+                    code: 'Part Code',
+                    model: 'Model',
+                    unit: 'Unit',
+                    type: 'Type',
+                    forecastQty: 'Forecast Qty'
+                },
+                trend: 'Usage & Forecast Trend',
+                equipment: 'Equipment Distribution',
+                equipmentTable: {
+                    code: 'Equipment Code',
+                    name: 'Equipment Name',
+                    project: 'Project',
+                    qty: 'Forecast Qty'
+                }
+            },
+            tag: {
+                consumable: 'Consumable',
+                critical: 'Critical',
+                regular: 'Regular'
+            }
         }
     }
 };
 
 function loadLanguage(lang) {
     try {
-        console.log('Loading language:', lang);
         translations = languageData[lang];
-        console.log('Translations loaded:', translations);
+        // 确保translations设置为全局变量
+        window.translations = translations;
         updateContent();
     } catch (error) {
         console.error('Error loading language:', error);
@@ -228,7 +508,9 @@ function loadLanguage(lang) {
 }
 
 function updateContent() {
-    console.log('Updating content with translations:', translations);
+    // 检查当前页面类型
+    const isForecastPage = window.location.pathname.includes('/forecast/');
+    const isRepairOrderDetailPage = window.location.pathname.includes('/repair-order-detail/');
     
     // 更新页面标题和副标题
     const title = document.querySelector('.header h1');
@@ -247,11 +529,18 @@ function updateContent() {
     if (aboutLink) aboutLink.textContent = translations.about;
     if (copyright) copyright.textContent = translations.copyright;
 
-    // 更新桌面端内容
-    updateDesktopContent();
-    
-    // 更新移动端内容
-    updateMobileContent();
+    // 根据页面类型更新内容
+    if (isForecastPage) {
+        updateForecastContent();
+    } else if (isRepairOrderDetailPage) {
+        updateRepairOrderDetailContent();
+    } else {
+        // 更新桌面端内容
+        updateDesktopContent();
+        
+        // 更新移动端内容
+        updateMobileContent();
+    }
 }
 
 // 更新桌面端内容
@@ -332,6 +621,108 @@ function updateMobileContent() {
     }
 }
 
+// 更新repair-order-detail页面内容
+function updateRepairOrderDetailContent() {
+    if (!translations.repairOrderDetail) return;
+    
+    // 更新页面标题
+    const title = document.querySelector('title[data-i18n="repairOrderDetail.title"]');
+    if (title) title.textContent = translations.repairOrderDetail.title;
+    
+    // 更新所有带有 data-i18n 属性的元素
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.dataset.i18n;
+        const keys = key.split('.');
+        let value = translations.repairOrderDetail;
+        
+        for (const k of keys) {
+            if (value && value[k]) {
+                value = value[k];
+            } else {
+                // 尝试从根级别查找
+                value = translations;
+                for (const rootKey of keys) {
+                    if (value && value[rootKey]) {
+                        value = value[rootKey];
+                    } else {
+                        return;
+                    }
+                }
+                break;
+            }
+        }
+        
+        if (element.tagName === 'INPUT') {
+            element.placeholder = value;
+        } else {
+            element.textContent = value;
+        }
+    });
+}
+
+// 更新forecast页面内容
+function updateForecastContent() {
+    if (!translations.forecastPage) {
+        return;
+    }
+    
+    // 更新页面标题
+    const title = document.querySelector('title[data-i18n="forecastPage.title"]');
+    if (title) title.textContent = translations.forecastPage.title;
+    
+    // 更新所有带有 data-i18n 属性的元素
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.dataset.i18n;
+        const keys = key.split('.');
+        let value = translations.forecastPage;
+        
+        for (const k of keys) {
+            if (value && value[k]) {
+                value = value[k];
+            } else {
+                // 尝试从根级别查找
+                value = translations;
+                for (const rootKey of keys) {
+                    if (value && value[rootKey]) {
+                        value = value[rootKey];
+                    } else {
+                        return;
+                    }
+                }
+                break;
+            }
+        }
+        
+        if (element.tagName === 'INPUT') {
+            element.placeholder = value;
+        } else {
+            element.textContent = value;
+        }
+    });
+    
+    // 更新placeholder属性
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        const keys = key.split('.');
+        let value = translations.forecastPage;
+        
+        for (const k of keys) {
+            if (value && value[k]) {
+                value = value[k];
+            } else {
+                return;
+            }
+        }
+        
+        element.placeholder = value;
+    });
+    
+    // 更新动态内容（如果存在updateDynamicContent函数）
+    if (typeof updateDynamicContent === 'function') {
+        updateDynamicContent();
+    }
+}
+
 // 更新特性列表
 function updateFeatures(element, features) {
     const featuresList = element.querySelector('.features');
@@ -346,7 +737,6 @@ function updateFeatures(element, features) {
 }
 
 function changeLanguage(lang) {
-    console.log('Changing language to:', lang);
     setLanguage(lang);
 }
 
@@ -363,4 +753,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 加载缓存的语言
     loadLanguage(storedLang);
+    
+    // 确保translations设置为全局变量
+    if (!window.translations) {
+        window.translations = translations;
+    }
 }); 

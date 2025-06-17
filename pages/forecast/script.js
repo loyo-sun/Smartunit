@@ -68,6 +68,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 初始化月份选择器
     initMonthSelector();
+
+    // 语言选择器初始值
+    const lang = localStorage.getItem('preferredLanguage') || 'zh-CN';
+    const select = document.getElementById('languageSelect');
+    if (select) {
+        select.value = lang;
+    }
+
+    // 等待i18n.js加载完成后再更新内容
+    setTimeout(() => {
+        // 从根目录的i18n.js获取translations
+        const rootTranslations = window.translations || {};
+        const forecastTranslations = rootTranslations.forecastPage || {};
+        
+        // 确保translations已经加载
+        if (rootTranslations && forecastTranslations) {
+            updateI18nStatic();
+            updateDynamicContent();
+        } else {
+            // 如果还没有加载完成，再等待一段时间
+            setTimeout(() => {
+                updateI18nStatic();
+                updateDynamicContent();
+            }, 2000);
+        }
+        
+        // 手动触发一次根目录的i18n更新
+        if (typeof updateContent === 'function') {
+            updateContent();
+        }
+    }, 1000);
 });
 
 // 更新表格数据
@@ -96,8 +127,8 @@ function updateTable() {
         
         // 检查是否匹配预测方式条件
         const matchesForecastType = forecastTypeValue === 'all' || 
-            (forecastTypeValue === 'mean' && forecastType === '均值预测') ||
-            (forecastTypeValue === 'model' && forecastType === '模型预测');
+            (forecastTypeValue === 'mean' && forecastType === t('filter.forecastTypeOptions.mean')) ||
+            (forecastTypeValue === 'model' && forecastType === t('filter.forecastTypeOptions.model'));
         
         // 显示或隐藏行
         row.style.display = matchesSearch && matchesType && matchesForecastType ? '' : 'none';
@@ -114,43 +145,43 @@ function loadDetailData(partData) {
             <h2 class="part-name">${partData.name}</h2>
             <div class="info-grid">
                 <div class="info-item">
-                    <span class="label">配件编码</span>
+                    <span class="label">${t('drawer.info.code')}</span>
                     <span class="value">${partData.code}</span>
                 </div>
                 <div class="info-item">
-                    <span class="label">型号</span>
+                    <span class="label">${t('drawer.info.model')}</span>
                     <span class="value">${partData.model}</span>
                 </div>
                 <div class="info-item">
-                    <span class="label">单位</span>
+                    <span class="label">${t('drawer.info.unit')}</span>
                     <span class="value">${partData.unit}</span>
                 </div>
                 <div class="info-item">
-                    <span class="label">配件类型</span>
+                    <span class="label">${t('drawer.info.type')}</span>
                     <span class="value"><span class="tag ${getTypeClass(partData.type)}">${partData.type}</span></span>
                 </div>
                 <div class="info-item">
-                    <span class="label">预测数量</span>
+                    <span class="label">${t('drawer.info.forecastQty')}</span>
                     <span class="value forecast">${partData.forecast}</span>
                 </div>
             </div>
         </div>
         <div class="trend-section">
-            <h3>使用与预测趋势</h3>
+            <h3>${t('drawer.trend')}</h3>
             <div class="chart-container">
                 <div id="trendChart" style="width: 100%; height: 300px;"></div>
             </div>
         </div>
-        ${partData.forecastType === '模型预测' ? `
+        ${partData.forecastType === t('filter.forecastTypeOptions.model') ? `
         <div class="equipment-section">
-            <h3>设备分布</h3>
+            <h3>${t('drawer.equipment')}</h3>
             <table class="equipment-table">
                 <thead>
                     <tr>
-                        <th>设备编码</th>
-                        <th>设备名称</th>
-                        <th>所属项目</th>
-                        <th>预计用量</th>
+                        <th>${t('drawer.equipmentTable.code')}</th>
+                        <th>${t('drawer.equipmentTable.name')}</th>
+                        <th>${t('drawer.equipmentTable.project')}</th>
+                        <th>${t('drawer.equipmentTable.qty')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -187,9 +218,9 @@ function loadDetailData(partData) {
 // 获取配件类型对应的CSS类
 function getTypeClass(type) {
     const typeMap = {
-        '易损件': 'consumable',
-        '关键件': 'critical',
-        '常备件': 'regular'
+        [t('tag.consumable')]: 'consumable',
+        [t('tag.critical')]: 'critical',
+        [t('tag.regular')]: 'regular'
     };
     return typeMap[type] || 'regular';
 }
@@ -347,4 +378,125 @@ function initMonthSelector() {
         
         monthSelector.appendChild(option);
     }
+}
+
+// 获取i18n翻译
+function t(key) {
+    // 从根目录的i18n.js获取translations
+    const rootTranslations = window.translations || {};
+    const forecastTranslations = rootTranslations.forecastPage || {};
+    
+    const keys = key.split('.');
+    let value = forecastTranslations;
+    
+    for (const k of keys) {
+        if (value && value[k] !== undefined) {
+            value = value[k];
+        } else {
+            return key;
+        }
+    }
+    return value;
+}
+
+// 语言切换
+function changeLanguage(lang) {
+    if (typeof setLanguage === 'function') {
+        setLanguage(lang);
+        // 手动触发一次更新
+        setTimeout(() => {
+            updateI18nStatic();
+            updateDynamicContent();
+        }, 200);
+    } else {
+        localStorage.setItem('preferredLanguage', lang);
+        window.location.reload();
+    }
+}
+
+// 静态文本刷新
+function updateI18nStatic() {
+    // 从根目录的i18n.js获取translations
+    const rootTranslations = window.translations || {};
+    const forecastTranslations = rootTranslations.forecastPage || {};
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (key) {
+            const keys = key.split('.');
+            let value = forecastTranslations;
+            
+            // 如果key以forecastPage开头，去掉前缀
+            if (keys[0] === 'forecastPage') {
+                keys.shift();
+            }
+            
+            for (const k of keys) {
+                if (value && value[k] !== undefined) {
+                    value = value[k];
+                } else {
+                    return;
+                }
+            }
+            
+            el.textContent = value;
+        }
+    });
+    
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (key) {
+            const keys = key.split('.');
+            let value = forecastTranslations;
+            
+            // 如果key以forecastPage开头，去掉前缀
+            if (keys[0] === 'forecastPage') {
+                keys.shift();
+            }
+            
+            for (const k of keys) {
+                if (value && value[k] !== undefined) {
+                    value = value[k];
+                } else {
+                    return;
+                }
+            }
+            
+            el.setAttribute('placeholder', value);
+        }
+    });
+}
+
+// 更新动态内容
+function updateDynamicContent() {
+    // 更新表格中的详情按钮文本
+    document.querySelectorAll('.btn-detail').forEach(btn => {
+        const newText = t('table.detail');
+        btn.textContent = newText;
+    });
+    
+    // 更新表格中的标签文本
+    document.querySelectorAll('.tag.consumable').forEach(tag => {
+        const newText = t('tag.consumable');
+        tag.textContent = newText;
+    });
+    document.querySelectorAll('.tag.critical').forEach(tag => {
+        const newText = t('tag.critical');
+        tag.textContent = newText;
+    });
+    document.querySelectorAll('.tag.regular').forEach(tag => {
+        const newText = t('tag.regular');
+        tag.textContent = newText;
+    });
+    
+    // 更新预测方式文本
+    document.querySelectorAll('td:nth-child(7)').forEach(td => {
+        if (td.textContent === '均值预测') {
+            const newText = t('filter.forecastTypeOptions.mean');
+            td.textContent = newText;
+        } else if (td.textContent === '模型预测') {
+            const newText = t('filter.forecastTypeOptions.model');
+            td.textContent = newText;
+        }
+    });
 } 
