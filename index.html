@@ -162,6 +162,85 @@
         .language-switcher select:hover {
             background: #f0f7ff;
         }
+
+        /* 搜索框样式 */
+        .search-container {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .search-box {
+            position: relative;
+            display: inline-block;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 16px;
+            z-index: 2;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 40px 12px 40px;
+            border: 2px solid #e8e8e8;
+            border-radius: 25px;
+            font-size: 14px;
+            background: white;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #1890ff;
+            box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: #999;
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: #999;
+            cursor: pointer;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .search-clear:hover {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        /* 搜索结果高亮 */
+        .menu-item.highlight {
+            border: 2px solid #1890ff;
+            box-shadow: 0 4px 12px rgba(24, 144, 255, 0.2);
+        }
+
+        .menu-item.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -180,6 +259,15 @@
         <div class="tab-container">
             <div class="tab active" onclick="switchTab('desktop')">电脑端</div>
             <div class="tab" onclick="switchTab('mobile')">移动端</div>
+        </div>
+
+        <!-- 搜索框 -->
+        <div class="search-container">
+            <div class="search-box">
+                <i class="search-icon">🔍</i>
+                <input type="text" id="searchInput" class="search-input" placeholder="搜索功能模块..." />
+                <button class="search-clear" id="searchClear" style="display: none;">✕</button>
+            </div>
         </div>
 
         <div id="desktop" class="content-section active">
@@ -234,6 +322,26 @@
                         <li>实时订单状态追踪</li>
                         <li>智能派单和分配</li>
                         <li>订单数据统计分析</li>
+                    </ul>
+                </a>
+                <a href="pages/order-statistics/index.html" class="menu-item" target="_blank">
+                    <h2>订单统计</h2>
+                    <p>深度分析订单数据，提供决策支持</p>
+                    <ul class="features">
+                        <li>订单状态分布统计</li>
+                        <li>订单量趋势分析</li>
+                        <li>客户订单详细统计</li>
+                        <li>多维度筛选和导出</li>
+                    </ul>
+                </a>
+                <a href="pages/statistics/index.html" class="menu-item" target="_blank">
+                    <h2>方量统计</h2>
+                    <p>车辆和司机方量数据统计分析</p>
+                    <ul class="features">
+                        <li>车辆方量月度统计</li>
+                        <li>司机工作量分析</li>
+                        <li>历史数据趋势对比</li>
+                        <li>灵活的报表导出功能</li>
                     </ul>
                 </a>
             </div>
@@ -292,6 +400,84 @@
 
     <script src="js/i18n.js"></script>
     <script>
+        // 搜索功能数据
+        const searchData = {
+            'zh-CN': {
+                '工单详情Pro': {
+                    title: '工单详情Pro',
+                    keywords: ['work order', 'detail', 'pro', 'repair', 'maintenance', '工单', '详情', '维修', '保养'],
+                    description: '智能分析工单数据，提供专业维修建议'
+                },
+                '配件预测': {
+                    title: '配件预测',
+                    keywords: ['parts', 'forecast', 'prediction', '配件', '预测', '库存'],
+                    description: '智能预测配件需求，优化库存管理'
+                },
+                '配件管理': {
+                    title: '配件管理',
+                    keywords: ['parts', 'management', '配件', '管理', '库存'],
+                    description: '全面管理配件信息，提升管理效率'
+                },
+                '资产列表': {
+                    title: '资产列表',
+                    keywords: ['assets', 'list', 'equipment', '资产', '列表', '设备'],
+                    description: '全面管理设备资产，提升资产管理效率'
+                },
+                '订单管理': {
+                    title: '订单管理',
+                    keywords: ['order', 'management', '订单', '管理', '维修'],
+                    description: '高效管理维修订单，提升服务响应速度'
+                },
+                '订单统计': {
+                    title: '订单统计',
+                    keywords: ['order', 'statistics', '订单', '统计', '分析'],
+                    description: '深度分析订单数据，提供决策支持'
+                },
+                '方量统计': {
+                    title: '方量统计',
+                    keywords: ['volume', 'statistics', '方量', '统计', '车辆', '司机'],
+                    description: '车辆和司机方量数据统计分析'
+                }
+            },
+            'en-US': {
+                'Work Order Detail Pro': {
+                    title: 'Work Order Detail Pro',
+                    keywords: ['work order', 'detail', 'pro', 'repair', 'maintenance', '工单', '详情', '维修', '保养'],
+                    description: 'Intelligent work order data analysis with professional maintenance suggestions'
+                },
+                'Parts Forecast': {
+                    title: 'Parts Forecast',
+                    keywords: ['parts', 'forecast', 'prediction', '配件', '预测', '库存'],
+                    description: 'Smart parts demand prediction for optimized inventory management'
+                },
+                'Parts Management': {
+                    title: 'Parts Management',
+                    keywords: ['parts', 'management', '配件', '管理', '库存'],
+                    description: 'Comprehensive parts information management for improved efficiency'
+                },
+                'Asset List': {
+                    title: 'Asset List',
+                    keywords: ['assets', 'list', 'equipment', '资产', '列表', '设备'],
+                    description: 'Comprehensive equipment asset management for improved efficiency'
+                },
+                'Order Management': {
+                    title: 'Order Management',
+                    keywords: ['order', 'management', '订单', '管理', '维修'],
+                    description: 'Efficient maintenance order management for improved service response'
+                },
+                'Order Statistics': {
+                    title: 'Order Statistics',
+                    keywords: ['order', 'statistics', '订单', '统计', '分析'],
+                    description: 'Deep analysis of order data for decision support'
+                },
+                'Volume Statistics': {
+                    title: 'Volume Statistics',
+                    keywords: ['volume', 'statistics', '方量', '统计', '车辆', '司机'],
+                    description: 'Vehicle and driver volume data statistical analysis'
+                }
+            }
+        };
+
         function switchTab(tabId) {
             // 移除所有标签的active类
             document.querySelectorAll('.tab').forEach(tab => {
@@ -304,12 +490,114 @@
             // 为选中的标签和对应的内容区域添加active类
             document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
             document.getElementById(tabId).classList.add('active');
+            
+            // 切换标签时清空搜索
+            clearSearch();
         }
 
         // 语言切换函数
         function changeLanguage(lang) {
             setLanguage(lang);
+            // 更新搜索框占位符
+            updateSearchPlaceholder();
+            // 清空搜索
+            clearSearch();
         }
+
+        // 更新搜索框占位符
+        function updateSearchPlaceholder() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput && translations.search) {
+                searchInput.placeholder = translations.search.placeholder;
+            }
+        }
+
+        // 搜索功能
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const clearBtn = document.getElementById('searchClear');
+            
+            // 显示/隐藏清除按钮
+            if (searchTerm.length > 0) {
+                clearBtn.style.display = 'flex';
+            } else {
+                clearBtn.style.display = 'none';
+            }
+
+            // 获取当前激活的内容区域
+            const activeSection = document.querySelector('.content-section.active');
+            if (!activeSection) return;
+
+            const menuItems = activeSection.querySelectorAll('.menu-item');
+            const currentLang = currentLanguage || 'zh-CN';
+            const data = searchData[currentLang];
+
+            menuItems.forEach(item => {
+                const title = item.querySelector('h2').textContent;
+                const itemData = data[title];
+                
+                if (!itemData) return;
+
+                // 检查是否匹配
+                const isMatch = searchTerm === '' || 
+                    itemData.keywords.some(keyword => 
+                        keyword.toLowerCase().includes(searchTerm) ||
+                        title.toLowerCase().includes(searchTerm) ||
+                        itemData.description.toLowerCase().includes(searchTerm)
+                    );
+
+                if (isMatch) {
+                    item.classList.remove('hidden');
+                    if (searchTerm.length > 0) {
+                        item.classList.add('highlight');
+                    } else {
+                        item.classList.remove('highlight');
+                    }
+                } else {
+                    item.classList.add('hidden');
+                    item.classList.remove('highlight');
+                }
+            });
+        }
+
+        // 清空搜索
+        function clearSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('searchClear');
+            
+            searchInput.value = '';
+            clearBtn.style.display = 'none';
+            
+            // 移除所有高亮和隐藏
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('highlight', 'hidden');
+            });
+        }
+
+        // 初始化搜索功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('searchClear');
+            
+            // 搜索输入事件
+            searchInput.addEventListener('input', performSearch);
+            
+            // 清除按钮事件
+            clearBtn.addEventListener('click', clearSearch);
+            
+            // 搜索框焦点事件
+            searchInput.addEventListener('focus', function() {
+                this.parentElement.style.boxShadow = '0 0 0 3px rgba(24, 144, 255, 0.1)';
+            });
+            
+            searchInput.addEventListener('blur', function() {
+                this.parentElement.style.boxShadow = 'none';
+            });
+            
+            // 初始化占位符
+            updateSearchPlaceholder();
+        });
     </script>
 </body>
 </html> 

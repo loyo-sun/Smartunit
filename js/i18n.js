@@ -33,6 +33,10 @@ const languageData = {
         mobile: '移动端',
         about: '关于Smartunit',
         copyright: '© 2025 Smartunit原型演示',
+        search: {
+            placeholder: '搜索功能模块...',
+            clear: '清空'
+        },
         // 桌面端菜单项
         repairOrderPro: {
             title: '工单详情Pro',
@@ -82,6 +86,26 @@ const languageData = {
                 '实时订单状态追踪',
                 '智能派单和分配',
                 '订单数据统计分析'
+            ]
+        },
+        orderStatistics: {
+            title: '订单统计',
+            description: '深度分析订单数据，提供决策支持',
+            features: [
+                '订单状态分布统计',
+                '订单量趋势分析',
+                '客户订单详细统计',
+                '多维度筛选和导出'
+            ]
+        },
+        volumeStatistics: {
+            title: '方量统计',
+            description: '车辆和司机方量数据统计分析',
+            features: [
+                '车辆方量月度统计',
+                '司机工作量分析',
+                '历史数据趋势对比',
+                '灵活的报表导出功能'
             ]
         },
         // 移动端菜单项
@@ -267,6 +291,10 @@ const languageData = {
         mobile: 'Mobile',
         about: 'About Smartunit',
         copyright: '© 2025 Smartunit Prototype Demo',
+        search: {
+            placeholder: 'Search feature module...',
+            clear: 'Clear'
+        },
         // Desktop menu items
         repairOrderPro: {
             title: 'Work Order Detail Pro',
@@ -316,6 +344,26 @@ const languageData = {
                 'Real-time order status tracking',
                 'Smart order dispatching and assignment',
                 'Order data statistical analysis'
+            ]
+        },
+        orderStatistics: {
+            title: 'Order Statistics',
+            description: 'Deep analysis of order data for decision support',
+            features: [
+                'Order status distribution statistics',
+                'Order volume trend analysis',
+                'Detailed customer order statistics',
+                'Multi-dimensional filtering and export'
+            ]
+        },
+        volumeStatistics: {
+            title: 'Volume Statistics',
+            description: 'Vehicle and driver volume data statistical analysis',
+            features: [
+                'Vehicle volume monthly statistics',
+                'Driver workload analysis',
+                'Historical data trend comparison',
+                'Flexible report export function'
             ]
         },
         // Mobile menu items
@@ -583,6 +631,22 @@ function updateDesktopContent() {
         orders.querySelector('h2').textContent = translations.orders.title;
         orders.querySelector('p').textContent = translations.orders.description;
         updateFeatures(orders, translations.orders.features);
+    }
+
+    // 订单统计
+    const orderStatistics = document.querySelector('#desktop .menu-item:nth-child(6)');
+    if (orderStatistics) {
+        orderStatistics.querySelector('h2').textContent = translations.orderStatistics.title;
+        orderStatistics.querySelector('p').textContent = translations.orderStatistics.description;
+        updateFeatures(orderStatistics, translations.orderStatistics.features);
+    }
+
+    // 方量统计
+    const volumeStatistics = document.querySelector('#desktop .menu-item:nth-child(7)');
+    if (volumeStatistics) {
+        volumeStatistics.querySelector('h2').textContent = translations.volumeStatistics.title;
+        volumeStatistics.querySelector('p').textContent = translations.volumeStatistics.description;
+        updateFeatures(volumeStatistics, translations.volumeStatistics.features);
     }
 }
 
