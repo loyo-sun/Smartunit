@@ -5,9 +5,29 @@
   <title>Smartunit</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #f0f2f5; }
-    .header { height: 60px; background: #409EFF; color: #fff; display: flex; align-items: center; padding: 0 32px; font-size: 22px; letter-spacing: 2px; box-shadow: 0 2px 8px #e6e6e6; }
-    .container { display: flex; height: calc(100vh - 60px); }
+    body { 
+      margin: 0; 
+      font-family: Arial, sans-serif; 
+      background: #f0f2f5; 
+      height: 100vh;
+      overflow: hidden;
+    }
+    .header { 
+      height: 60px; 
+      background: #409EFF; 
+      color: #fff; 
+      display: flex; 
+      align-items: center; 
+      padding: 0 32px; 
+      font-size: 22px; 
+      letter-spacing: 2px; 
+      box-shadow: 0 2px 8px #e6e6e6; 
+    }
+    .container { 
+      display: flex; 
+      height: calc(100vh - 60px); 
+      overflow: hidden;
+    }
     .sidebar { 
       width: 220px; 
       background: #fff; 
@@ -19,6 +39,7 @@
       transition: all 0.3s ease;
       height: calc(100vh - 60px);
       overflow-y: auto;
+      overflow-x: hidden;
     }
     .sidebar.floating {
       position: fixed;
@@ -27,22 +48,53 @@
       z-index: 1000;
       transform: translateX(-100%);
       transition: transform 0.3s ease;
+      height: calc(100vh - 60px);
     }
     .sidebar.floating.show {
       transform: translateX(0);
     }
     .sidebar ul { list-style: none; padding: 0; margin: 0; }
-    .sidebar li { padding: 18px 32px; cursor: pointer; color: #333; font-size: 16px; border-left: 4px solid transparent; transition: background 0.2s, color 0.2s, border-color 0.2s; }
-    .sidebar li.active, .sidebar li:hover { background: #e6f7ff; color: #409EFF; border-left: 4px solid #409EFF; }
+    .sidebar li { 
+      padding: 18px 32px; 
+      cursor: pointer; 
+      color: #333; 
+      font-size: 16px; 
+      border-left: 4px solid transparent; 
+      transition: background 0.2s, color 0.2s, border-color 0.2s; 
+    }
+    .sidebar li.active, .sidebar li:hover { 
+      background: #e6f7ff; 
+      color: #409EFF; 
+      border-left: 4px solid #409EFF; 
+    }
     .sidebar .submenu { display: none; }
     .sidebar .submenu.show { display: block; }
     .sidebar .submenu li { padding: 14px 32px 14px 48px; font-size: 14px; }
     .sidebar .menu-item { font-weight: bold; }
-    .sidebar .menu-item::after { content: '▼'; float: right; font-size: 12px; transition: transform 0.2s; }
-    .sidebar .menu-item.expanded::after { transform: rotate(180deg); }
-    .content { flex: 1; background: #f8f9fa; }
-    iframe { width: 100%; height: 100%; border: none; background: #fff; }
-    .sidebar .menu-item i { margin-right: 8px; width: 20px; }
+    .sidebar .menu-item::after { 
+      content: '▼'; 
+      float: right; 
+      font-size: 12px; 
+      transition: transform 0.2s; 
+    }
+    .sidebar .menu-item.expanded::after { 
+      transform: rotate(180deg); 
+    }
+    .content { 
+      flex: 1; 
+      background: #f8f9fa; 
+      overflow: hidden;
+    }
+    iframe { 
+      width: 100%; 
+      height: 100%; 
+      border: none; 
+      background: #fff; 
+    }
+    .sidebar .menu-item i { 
+      margin-right: 8px; 
+      width: 20px; 
+    }
     
     .sidebar-footer {
       position: absolute;
