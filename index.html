@@ -393,7 +393,11 @@
         </div>
 
         <div class="footer">
-            <p><a href="about/index.html" target="_blank" style="color: #1890ff; text-decoration: none;">关于Smartunit</a></p>
+            <p>
+                <a href="about/index.html" target="_blank" style="color: #1890ff; text-decoration: none;">关于Smartunit</a>
+                <span style="margin: 0 10px;">|</span>
+                <a href="dashboard.html" target="_blank" style="color: #1890ff; text-decoration: none;" id="dashboardLink">仪表盘</a>
+            </p>
             <p>© 2025 Smartunit原型演示</p>
         </div>
     </div>
@@ -500,6 +504,8 @@
             setLanguage(lang);
             // 更新搜索框占位符
             updateSearchPlaceholder();
+            // 更新页面文本
+            updatePageText();
             // 清空搜索
             clearSearch();
         }
@@ -509,6 +515,16 @@
             const searchInput = document.getElementById('searchInput');
             if (searchInput && translations.search) {
                 searchInput.placeholder = translations.search.placeholder;
+            }
+        }
+
+        // 更新页面文本的函数
+        function updatePageText() {
+            const dashboardLink = document.getElementById('dashboardLink');
+            if (currentLanguage === 'en-US') {
+                dashboardLink.textContent = 'Dashboard';
+            } else {
+                dashboardLink.textContent = '仪表盘';
             }
         }
 
@@ -597,6 +613,9 @@
             
             // 初始化占位符
             updateSearchPlaceholder();
+            
+            // 初始化页面文本
+            updatePageText();
         });
     </script>
 </body>

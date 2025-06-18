@@ -148,13 +148,232 @@ function renderTable(data) {
       <td>${item.costOwner}</td>
       <td>${item.customMulti}</td>
       <td>
-        <button class="btn-edit">编辑</button>
-        <button class="btn-delete">删除</button>
+        <button class="btn-edit" title="编辑"><i class="fas fa-edit"></i></button>
+        <button class="btn-delete" title="删除"><i class="fas fa-trash-alt"></i></button>
       </td>
     </tr>
   `).join('');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// 初始化筛选选项数据
+function initializeFilterOptions() {
+  // 资产编码/名称选项
+  const assetCodeSelect = document.getElementById('assetCode');
+  const assetOptions = ['成本归属A', '成本归属B', '成本归属C', '成本归属D'];
+  assetOptions.forEach(option => {
+    const opt = document.createElement('option');
+    opt.value = option;
+    opt.textContent = option;
+    assetCodeSelect.appendChild(opt);
+  });
+
+  // 成本归属选项
+  const costCenterSelect = document.getElementById('costCenter');
+  const costOptions = ['部门A', '部门B', '部门C', '部门D', '部门E', '部门F'];
+  costOptions.forEach(option => {
+    const opt = document.createElement('option');
+    opt.value = option;
+    opt.textContent = option;
+    costCenterSelect.appendChild(opt);
+  });
+
+  // 采购主体选项
+  const purchaseEntitySelect = document.getElementById('purchaseEntity');
+  const purchaseOptions = ['采购A', '采购B', '采购C', '采购D', '采购E', '采购F'];
+  purchaseOptions.forEach(option => {
+    const opt = document.createElement('option');
+    opt.value = option;
+    opt.textContent = option;
+    purchaseEntitySelect.appendChild(opt);
+  });
+
+  // 资产类型选项
+  const assetTypeSelect = document.getElementById('assetType');
+  const typeOptions = ['类型A', '类型B', '类型C', '类型D'];
+  typeOptions.forEach(option => {
+    const opt = document.createElement('option');
+    opt.value = option;
+    opt.textContent = option;
+    assetTypeSelect.appendChild(opt);
+  });
+}
+
+// 筛选数据
+function filterData() {
+  const assetCode = document.getElementById('assetCode').value;
+  const costCenter = document.getElementById('costCenter').value;
+  const purchaseEntity = document.getElementById('purchaseEntity').value;
+  const assetType = document.getElementById('assetType').value;
+  
+  let filteredData = demoData.filter(item => {
+    // 资产编码/名称筛选（这里简化为按成本归属筛选）
+    if (assetCode && !item.costOwner.includes(assetCode.replace('成本归属', ''))) {
+      return false;
+    }
+    
+    // 成本归属筛选
+    if (costCenter && item.costOwner !== costCenter) {
+      return false;
+    }
+    
+    // 采购主体筛选
+    if (purchaseEntity && item.purchaser !== purchaseEntity) {
+      return false;
+    }
+    
+    // 资产类型筛选（这里简化为按模型筛选）
+    if (assetType && !item.model.includes(assetType.replace('类型', ''))) {
+      return false;
+    }
+    
+    return true;
+  });
+  
+  renderTable(filteredData);
+  
+  // 显示筛选结果提示
+  if (assetCode || costCenter || purchaseEntity || assetType) {
+    showMessage(`筛选结果: 找到 ${filteredData.length} 条记录`, 'info');
+  }
+}
+
+// 重置筛选条件
+function resetFilters() {
+  document.getElementById('assetCode').value = '';
+  document.getElementById('costCenter').value = '';
+  document.getElementById('purchaseEntity').value = '';
+  document.getElementById('assetType').value = '';
+  
+  // 重新渲染表格显示所有数据
   renderTable(demoData);
+  
+  // 显示提示信息
+  showMessage('筛选条件已重置', 'success');
+}
+
+// 展开/收起筛选区域
+function toggleFilterExpansion() {
+  const filterSection = document.querySelector('.filter-section');
+  const expandBtn = document.querySelector('.btn-expand');
+  const expandIcon = expandBtn.querySelector('i');
+  const expandText = expandBtn.querySelector('span');
+  
+  if (filterSection.classList.contains('expanded')) {
+    filterSection.classList.remove('expanded');
+    expandIcon.className = 'fas fa-angle-down';
+    expandText.textContent = '展开';
+  } else {
+    filterSection.classList.add('expanded');
+    expandIcon.className = 'fas fa-angle-up';
+    expandText.textContent = '收起';
+  }
+}
+
+// 新增资产
+function addNewAsset() {
+  showMessage('新增资产功能开发中...', 'info');
+  // 这里可以添加新增资产的逻辑，比如打开模态框
+}
+
+// 显示消息提示
+function showMessage(message, type = 'info') {
+  // 创建消息元素
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message message-${type}`;
+  messageDiv.textContent = message;
+  messageDiv.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+    z-index: 1000;
+    animation: slideIn 0.3s ease;
+  `;
+  
+  // 根据类型设置背景色
+  switch(type) {
+    case 'success':
+      messageDiv.style.backgroundColor = '#52c41a';
+      break;
+    case 'error':
+      messageDiv.style.backgroundColor = '#f5222d';
+      break;
+    case 'warning':
+      messageDiv.style.backgroundColor = '#faad14';
+      break;
+    default:
+      messageDiv.style.backgroundColor = '#409EFF';
+  }
+  
+  document.body.appendChild(messageDiv);
+  
+  // 3秒后自动移除
+  setTimeout(() => {
+    messageDiv.style.animation = 'slideOut 0.3s ease';
+    setTimeout(() => {
+      document.body.removeChild(messageDiv);
+    }, 300);
+  }, 3000);
+}
+
+// 编辑资产
+function editAsset(code) {
+  showMessage(`编辑资产: ${code}`, 'info');
+}
+
+// 删除资产
+function deleteAsset(code) {
+  if (confirm(`确定要删除资产 ${code} 吗？`)) {
+    showMessage(`资产 ${code} 已删除`, 'success');
+    // 这里可以添加实际的删除逻辑
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 初始化表格
+  renderTable(demoData);
+  
+  // 初始化筛选选项
+  initializeFilterOptions();
+  
+  // 绑定按钮事件
+  document.querySelector('.btn-reset').addEventListener('click', resetFilters);
+  document.querySelector('.btn-expand').addEventListener('click', toggleFilterExpansion);
+  document.querySelector('.btn-add').addEventListener('click', addNewAsset);
+  
+  // 绑定筛选下拉框事件
+  document.getElementById('assetCode').addEventListener('change', filterData);
+  document.getElementById('costCenter').addEventListener('change', filterData);
+  document.getElementById('purchaseEntity').addEventListener('change', filterData);
+  document.getElementById('assetType').addEventListener('change', filterData);
+  
+  // 绑定表格操作按钮事件（使用事件委托）
+  document.querySelector('.asset-table').addEventListener('click', (e) => {
+    if (e.target.closest('.btn-edit')) {
+      const row = e.target.closest('tr');
+      const code = row.querySelector('.device-id').textContent;
+      editAsset(code);
+    } else if (e.target.closest('.btn-delete')) {
+      const row = e.target.closest('tr');
+      const code = row.querySelector('.device-id').textContent;
+      deleteAsset(code);
+    }
+  });
+  
+  // 添加消息动画样式
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
 }); 
