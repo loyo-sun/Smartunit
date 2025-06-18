@@ -344,6 +344,16 @@
                         <li>灵活的报表导出功能</li>
                     </ul>
                 </a>
+                <a href="pages/repair-management/index.html" class="menu-item" target="_blank">
+                    <h2>维修管理</h2>
+                    <p>维修工单全流程管理，智能派工与成本统计</p>
+                    <ul class="features">
+                        <li>工单创建、派工、进度跟踪</li>
+                        <li>维修成本自动统计</li>
+                        <li>设备与配件联动</li>
+                        <li>批量操作与权限控制</li>
+                    </ul>
+                </a>
             </div>
         </div>
 
@@ -513,14 +523,23 @@
         // 更新搜索框占位符
         function updateSearchPlaceholder() {
             const searchInput = document.getElementById('searchInput');
-            if (searchInput && translations.search) {
-                searchInput.placeholder = translations.search.placeholder;
+            if (searchInput) {
+                // 检测操作系统，显示对应的快捷键
+                const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+                const shortcut = isMac ? '⌘+K' : 'Ctrl+K';
+                
+                if (currentLanguage === 'en-US') {
+                    searchInput.placeholder = `Search modules... (${shortcut})`;
+                } else {
+                    searchInput.placeholder = `搜索功能模块... (${shortcut})`;
+                }
             }
         }
 
         // 更新页面文本的函数
         function updatePageText() {
             const dashboardLink = document.getElementById('dashboardLink');
+            
             if (currentLanguage === 'en-US') {
                 dashboardLink.textContent = 'Dashboard';
             } else {
@@ -609,6 +628,35 @@
             
             searchInput.addEventListener('blur', function() {
                 this.parentElement.style.boxShadow = 'none';
+            });
+            
+            // 快捷键搜索功能
+            document.addEventListener('keydown', function(e) {
+                // 检查是否按下了 Ctrl+K (Windows) 或 Command+K (Mac)
+                const isCtrlOrCmd = e.ctrlKey || e.metaKey;
+                const isK = e.key === 'k' || e.key === 'K';
+                
+                if (isCtrlOrCmd && isK) {
+                    e.preventDefault(); // 阻止默认行为
+                    
+                    // 如果搜索框已经聚焦，则清空搜索
+                    if (document.activeElement === searchInput) {
+                        clearSearch();
+                        searchInput.blur();
+                    } else {
+                        // 聚焦到搜索框
+                        searchInput.focus();
+                        searchInput.select(); // 选中现有文本
+                    }
+                }
+                
+                // ESC 键清空搜索并失去焦点
+                if (e.key === 'Escape') {
+                    if (document.activeElement === searchInput) {
+                        clearSearch();
+                        searchInput.blur();
+                    }
+                }
             });
             
             // 初始化占位符

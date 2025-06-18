@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>维修工单管理</title>
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="repair-management.css">
+    <style>
+        /* 参考 parts/index.html 的样式，略 */
+    </style>
+</head>
+<body>
+    <div class="parts-container">
+        <div class="page-header">
+            <h1 class="page-title">维修工单管理</h1>
+            <div class="page-actions">
+                <button class="btn btn-primary" id="btn-create">新建工单</button>
+                <button class="btn btn-secondary">导出</button>
+            </div>
+        </div>
+        <!-- 筛选区 -->
+        <div class="filter-section">
+            <input type="text" class="search-input" placeholder="设备编号/名称">
+            <select class="select-input">
+                <option value="">全部类型</option>
+                <option value="A">类型A</option>
+                <option value="B">类型B</option>
+            </select>
+            <select class="select-input">
+                <option value="">全部项目</option>
+                <option value="P1">项目1</option>
+                <option value="P2">项目2</option>
+            </select>
+            <select class="select-input">
+                <option value="">全部状态</option>
+                <option value="pending">待确认</option>
+                <option value="assigned">已派工</option>
+                <option value="processing">维修中</option>
+                <option value="completed">已完成</option>
+                <option value="rejected">已驳回</option>
+            </select>
+            <button class="btn btn-secondary">重置</button>
+        </div>
+        <!-- 统计信息区 -->
+        <div class="stats-section">
+            <span>合计维修成本：<b>200,000.00</b></span>
+            <span style="margin-left: 32px;">工单总数：<b>20</b></span>
+        </div>
+        <!-- 工单表格区 -->
+        <div class="table-section">
+            <table class="parts-table">
+                <thead>
+                    <tr>
+                        <th>工单编号</th>
+                        <th>设备编码</th>
+                        <th>设备名称</th>
+                        <th>设备类型</th>
+                        <th>故障根因</th>
+                        <th>所属项目</th>
+                        <th style="text-align: right">维修金额</th>
+                        <th>创建日期</th>
+                        <th>创建人</th>
+                        <th>状态</th>
+                        <th>维修人</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>WO2024001</td><td>TF00009111AE</td><td>ZXC-TR-001</td><td>自卸车</td><td>发动机故障</td><td>盛拓</td><td style="text-align: right">800,000.00</td><td>2024-2-4</td><td>张晓成</td><td><span class="tag tag-damage">待确认</span></td><td>王五</td><td><div class="action-buttons"><button class="action-btn" data-id="WO2024001" data-action="detail">详情</button><button class="action-btn" data-id="WO2024001" data-action="edit">编辑</button><button class="action-btn" data-id="WO2024001" data-action="delete">删除</button></div></td>
+                    </tr>
+                    <tr>
+                        <td>WO2024002</td><td>WJ00012345</td><td>WJJ-EX-002</td><td>挖掘机</td><td>液压系统故障</td><td>盛拓</td><td style="text-align: right">500,000.00</td><td>2024-2-5</td><td>李四</td><td><span class="tag tag-key">已派工</span></td><td>赵六</td><td><div class="action-buttons"><button class="action-btn" data-id="WO2024002" data-action="detail">详情</button><button class="action-btn" data-id="WO2024002" data-action="edit">编辑</button><button class="action-btn" data-id="WO2024002" data-action="delete">删除</button></div></td>
+                    </tr>
+                    <tr>
+                        <td>WO2024003</td><td>TU00056789</td><td>TTJ-AS-122</td><td>推土机</td><td>变速箱故障</td><td>盛拓</td><td style="text-align: right">300,000.00</td><td>2024-2-6</td><td>王五</td><td><span class="tag tag-normal">维修中</span></td><td>钱七</td><td><div class="action-buttons"><button class="action-btn" data-id="WO2024003" data-action="detail">详情</button><button class="action-btn" data-id="WO2024003" data-action="edit">编辑</button><button class="action-btn" data-id="WO2024003" data-action="delete">删除</button></div></td>
+                    </tr>
+                    <tr>
+                        <td>WO2024004</td><td>YL00023456</td><td>YLJ-XS-003</td><td>压路机</td><td>电气系统故障</td><td>盛拓</td><td style="text-align: right">120,000.00</td><td>2024-2-7</td><td>赵六</td><td><span class="tag tag-damage">待确认</span></td><td>孙八</td><td><div class="action-buttons"><button class="action-btn" data-id="WO2024004" data-action="detail">详情</button><button class="action-btn" data-id="WO2024004" data-action="edit">编辑</button><button class="action-btn" data-id="WO2024004" data-action="delete">删除</button></div></td>
+                    </tr>
+                    <tr>
+                        <td>WO2024005</td><td>ZJ00034567</td><td>ZJJ-CL-004</td><td>装载机</td><td>冷却系统故障</td><td>盛拓</td><td style="text-align: right">80,000.00</td><td>2024-2-8</td><td>孙八</td><td><span class="tag tag-key">已派工</span></td><td>李四</td><td><div class="action-buttons"><button class="action-btn" data-id="WO2024005" data-action="detail">详情</button><button class="action-btn" data-id="WO2024005" data-action="edit">编辑</button><button class="action-btn" data-id="WO2024005" data-action="delete">删除</button></div></td>
+                    </tr>
+                    <tr>
+                        <td>WO2024006</td><td>JB00045678</td><td>JBJ-SY-005</td><td>搅拌车</td><td>传动系统故障</td><td>盛拓</td><td style="text-align: right">60,000.00</td><td>2024-2-9</td><td>钱七</td><td><span class="tag tag-normal">维修中</span></td><td>张晓成</td><td><div class="action-buttons"><button class="action-btn" data-id="WO2024006" data-action="detail">详情</button><button class="action-btn" data-id="WO2024006" data-action="edit">编辑</button><button class="action-btn" data-id="WO2024006" data-action="delete">删除</button></div></td>
+                    </tr>
+                    <tr>
+                        <td>WO2024007</td><td>QZ00056789</td><td>QZJ-QY-006</td><td>起重机</td><td>液压油泄漏</td><td>盛拓</td><td style="text-align: right">150,000.00</td><td>2024-2-10</td><td>李四</td><td><span class="tag tag-damage">待确认</span></td><td>王五</td><td><div class="action-buttons"><button class="action-btn" data-id="WO2024007" data-action="detail">详情</button><button class="action-btn" data-id="WO2024007" data-action="edit">编辑</button><button class="action-btn" data-id="WO2024007" data-action="delete">删除</button></div></td>
+                    </tr>
+                    <tr>
+                        <td>WO2024008</td><td>BC00067890</td><td>BCJ-HB-007</td><td>泵车</td><td>泵送系统故障</td><td>盛拓</td><td style="text-align: right">220,000.00</td><td>2024-2-11</td><td>张晓成</td><td><span class="tag tag-key">已派工</span></td><td>孙八</td><td><div class="action-buttons"><button class="action-btn" data-id="WO2024008" data-action="detail">详情</button><button class="action-btn" data-id="WO2024008" data-action="edit">编辑</button><button class="action-btn" data-id="WO2024008" data-action="delete">删除</button></div></td>
+                    </tr>
+                    <tr>
+                        <td>WO2024009</td><td>CC00078901</td><td>CCJ-FD-008</td><td>叉车</td><td>制动系统故障</td><td>盛拓</td><td style="text-align: right">90,000.00</td><td>2024-2-12</td><td>王五</td><td><span class="tag tag-normal">维修中</span></td><td>钱七</td><td><div class="action-buttons"><button class="action-btn" data-id="WO2024009" data-action="detail">详情</button><button class="action-btn" data-id="WO2024009" data-action="edit">编辑</button><button class="action-btn" data-id="WO2024009" data-action="delete">删除</button></div></td>
+                    </tr>
+                    <tr>
+                        <td>WO2024010</td><td>PD00089012</td><td>PDJ-GR-009</td><td>平地机</td><td>转向系统故障</td><td>盛拓</td><td style="text-align: right">110,000.00</td><td>2024-2-13</td><td>赵六</td><td><span class="tag tag-damage">待确认</span></td><td>李四</td><td><div class="action-buttons"><button class="action-btn" data-id="WO2024010" data-action="detail">详情</button><button class="action-btn" data-id="WO2024010" data-action="edit">编辑</button><button class="action-btn" data-id="WO2024010" data-action="delete">删除</button></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- 分页 -->
+        <div class="pagination">
+            <button>上一页</button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>下一页</button>
+        </div>
+    </div>
+    <!-- 遮罩层 -->
+    <div class="drawer-mask"></div>
+    <!-- 抽屉表单 -->
+    <div class="drawer">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h3>新建工单</h3>
+                <button class="btn-close">✖️</button>
+            </div>
+            <div class="drawer-body">
+                <form id="repairForm">
+                    <div class="form-section">
+                        <h4>基础信息</h4>
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> 设备编码：</label>
+                            <input type="text" class="search-input" id="deviceCodeInput" list="deviceCodeList" placeholder="请输入设备编码">
+                            <datalist id="deviceCodeList">
+                                <option value="TF00009111AE">
+                                <option value="WJ00012345">
+                                <option value="TU00056789">
+                                <option value="YL00023456">
+                                <option value="ZJ00034567">
+                                <option value="JB00045678">
+                                <option value="QZ00056789">
+                                <option value="BC00067890">
+                                <option value="CC00078901">
+                                <option value="PD00089012">
+                            </datalist>
+                            <button type="button" class="btn btn-secondary" style="margin-left:8px;">维修单OCR</button>
+                        </div>
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> 设备名称：</label>
+                            <input type="text" class="search-input" id="deviceNameInput" placeholder="设备名称" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> 设备类型：</label>
+                            <input type="text" class="search-input" id="deviceTypeInput" placeholder="设备类型" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> 维修时间：</label>
+                            <input type="date" class="search-input">
+                        </div>
+                        <div class="form-group">
+                            <label>设备信息详情</label>
+                            <input type="text" class="search-input" placeholder="可展开/收起">
+                        </div>
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> 故障描述：</label>
+                            <textarea class="search-input" rows="4" placeholder="请输入内容"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>维修编码：</label>
+                            <input type="text" class="search-input" id="repairCodeInput" list="repairCodeList" placeholder="请输入维修编码">
+                            <datalist id="repairCodeList">
+                                <option value="QKBSFDJ-10">
+                                <option value="YYSXT-20">
+                                <option value="BSXGZ-30">
+                                <option value="DQXT-40">
+                                <option value="LQXT-50">
+                                <option value="CDXT-60">
+                                <option value="YYYLL-70">
+                                <option value="BCXT-80">
+                                <option value="ZDXT-90">
+                                <option value="ZXXT-100">
+                            </datalist>
+                        </div>
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> 维修项目：</label>
+                            <input type="text" class="search-input" id="repairProjectInput" placeholder="维修项目" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> 维修人：</label>
+                            <select class="select-input"><option>张三</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label>工时成本：</label>
+                            <input type="number" class="search-input" id="laborCostInput" value="1000000">
+                        </div>
+                        <div class="form-group">
+                            <label>换件成本：</label>
+                            <input type="number" class="search-input" id="partCostInput" value="1000000">
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <h4>备件明细</h4>
+                        <div class="parts-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>备件编码</th>
+                                        <th>名称</th>
+                                        <th>单价</th>
+                                        <th>数量</th>
+                                        <th>金额</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sparePartsTable">
+                                    <tr>
+                                        <td>TP3401544</td>
+                                        <td>机油滤清器</td>
+                                        <td>100000</td>
+                                        <td>1</td>
+                                        <td>100000</td>
+                                        <td><button type="button" class="btn btn-secondary btn-delete-row">删除</button></td>
+                                    </tr>
+                                    <!-- 可动态增删行 -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-primary" style="margin-top:8px;">新增</button>
+                    </div>
+                    <div class="form-section">
+                        <h4>上传图片</h4>
+                        <div style="display:flex;gap:16px;">
+                            <div style="width:100px;height:100px;border:1px solid #eee;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+                                <img src="../assets/img-placeholder.png" alt="" style="width:48px;height:48px;">
+                                <span style="font-size:12px;color:#888;">上传图片</span>
+                            </div>
+                            <div style="width:100px;height:100px;border:1px dashed #ccc;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:pointer;">
+                                <span style="font-size:32px;color:#bbb;">+</span>
+                                <span style="font-size:12px;color:#888;">上传图片</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <h4>维修工况</h4>
+                        <div class="parts-table">
+                            <table>
+                                <thead>
+                                    <tr><th>工况名称</th><th>值</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>工作小时</td><td>30000</td></tr>
+                                    <tr><td>里程</td><td>30000</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <button type="button" class="btn btn-secondary">取消</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="repair-management.js"></script>
+</body>
+</html> 

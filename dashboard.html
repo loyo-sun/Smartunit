@@ -8,7 +8,29 @@
     body { margin: 0; font-family: Arial, sans-serif; background: #f0f2f5; }
     .header { height: 60px; background: #409EFF; color: #fff; display: flex; align-items: center; padding: 0 32px; font-size: 22px; letter-spacing: 2px; box-shadow: 0 2px 8px #e6e6e6; }
     .container { display: flex; height: calc(100vh - 60px); }
-    .sidebar { width: 220px; background: #fff; border-right: 1px solid #ebeef5; padding-top: 24px; box-shadow: 2px 0 8px #f5f7fa; }
+    .sidebar { 
+      width: 220px; 
+      background: #fff; 
+      border-right: 1px solid #ebeef5; 
+      padding-top: 24px; 
+      padding-bottom: 80px;
+      box-shadow: 2px 0 8px #f5f7fa; 
+      position: relative;
+      transition: all 0.3s ease;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+    }
+    .sidebar.floating {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      z-index: 1000;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    .sidebar.floating.show {
+      transform: translateX(0);
+    }
     .sidebar ul { list-style: none; padding: 0; margin: 0; }
     .sidebar li { padding: 18px 32px; cursor: pointer; color: #333; font-size: 16px; border-left: 4px solid transparent; transition: background 0.2s, color 0.2s, border-color 0.2s; }
     .sidebar li.active, .sidebar li:hover { background: #e6f7ff; color: #409EFF; border-left: 4px solid #409EFF; }
@@ -21,6 +43,81 @@
     .content { flex: 1; background: #f8f9fa; }
     iframe { width: 100%; height: 100%; border: none; background: #fff; }
     .sidebar .menu-item i { margin-right: 8px; width: 20px; }
+    
+    .sidebar-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #f8f9fa;
+      border-top: 1px solid #ebeef5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .sidebar-footer:hover {
+      background: #e6f7ff;
+    }
+    .sidebar-footer i {
+      font-size: 18px;
+      color: #409EFF;
+    }
+    .sidebar.floating .sidebar-footer {
+      display: none;
+    }
+    
+    .floating-toggle {
+      position: fixed;
+      top: 80px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background: #409EFF;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3);
+      z-index: 999;
+      transition: all 0.3s ease;
+    }
+    .floating-toggle:hover {
+      background: #337ecc;
+      transform: scale(1.1);
+    }
+    .floating-toggle.show {
+      display: flex;
+    }
+    
+    .exit-floating {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      background: #f56c6c;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      font-size: 14px;
+      z-index: 1001;
+    }
+    .sidebar.floating .exit-floating {
+      display: flex;
+    }
+    .exit-floating:hover {
+      background: #e74c3c;
+    }
+    
     @media (max-width: 900px) {
       .sidebar { width: 120px; }
       .sidebar li { padding: 14px 12px; font-size: 14px; }
@@ -31,7 +128,10 @@
 <body>
   <div class="header">Smartunit</div>
   <div class="container">
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
+      <div class="exit-floating" id="exitFloating">
+        <i class="fas fa-times"></i>
+      </div>
       <ul id="menu">
         <li class="menu-item" data-category="assets"><i class="fas fa-cubes"></i>资产管理</li>
         <ul class="submenu" data-category="assets">
@@ -47,19 +147,56 @@
         
         <li class="menu-item" data-category="maintenance"><i class="fas fa-wrench"></i>维修保养</li>
         <ul class="submenu" data-category="maintenance">
+          <li data-url="pages/repair-management/index.html">维修工单</li>
           <li data-url="pages/parts/index.html">配件管理</li>
           <li data-url="pages/forecast/index.html">配件预测</li>
           <li data-url="pages/repair-order-detail/index.html">工单详情Pro</li>
         </ul>
       </ul>
+      <div class="sidebar-footer" id="sidebarFooter">
+        <i class="fas fa-float-left"></i>
+      </div>
     </div>
     <div class="content">
       <iframe id="mainFrame" src="pages/assets/index.html"></iframe>
     </div>
   </div>
+  
+  <div class="floating-toggle" id="floatingToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+  
   <script>
     const menu = document.getElementById('menu');
     const frame = document.getElementById('mainFrame');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarFooter = document.getElementById('sidebarFooter');
+    const floatingToggle = document.getElementById('floatingToggle');
+    const exitFloating = document.getElementById('exitFloating');
+    
+    // 浮动菜单切换功能
+    sidebarFooter.addEventListener('click', function() {
+      sidebar.classList.add('floating');
+      floatingToggle.classList.add('show');
+    });
+    
+    // 退出浮动模式
+    exitFloating.addEventListener('click', function() {
+      sidebar.classList.remove('floating', 'show');
+      floatingToggle.classList.remove('show');
+    });
+    
+    // 浮动菜单显示/隐藏
+    floatingToggle.addEventListener('click', function() {
+      sidebar.classList.add('show');
+    });
+    
+    // 鼠标移出菜单自动隐藏
+    sidebar.addEventListener('mouseleave', function() {
+      if (sidebar.classList.contains('floating')) {
+        sidebar.classList.remove('show');
+      }
+    });
     
     // 菜单切换功能
     menu.addEventListener('click', function(e) {
@@ -85,6 +222,11 @@
           document.querySelectorAll('#menu li').forEach(li => li.classList.remove('active'));
           e.target.classList.add('active');
           frame.src = e.target.getAttribute('data-url');
+          
+          // 如果是浮动状态，点击后隐藏菜单
+          if (sidebar.classList.contains('floating')) {
+            sidebar.classList.remove('show');
+          }
         }
       }
     });
