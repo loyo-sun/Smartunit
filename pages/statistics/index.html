@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方量统计 - 设备排班管理系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="statistics-container">
+        <!-- 页面头部 -->
+        <div class="page-header">
+            <h1 class="page-title">方量统计</h1>
+            <div class="page-actions">
+            </div>
+        </div>
+
+        <!-- 统计卡片 -->
+        <div class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value" id="todayVolume">1,200<span class="unit">m³</span></div>
+                    <div class="stat-label">今日方量</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value" id="monthVolume">25,600<span class="unit">m³</span></div>
+                    <div class="stat-label">本月累计</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value" id="activeVehicles">8<span class="unit">台</span></div>
+                    <div class="stat-label">活跃车辆</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value" id="activeDrivers">12<span class="unit">人</span></div>
+                    <div class="stat-label">活跃司机</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主TAB区域 -->
+        <div class="main-tabs">
+            <button class="main-tab-btn active" data-tab="vehicle">车辆统计</button>
+            <button class="main-tab-btn" data-tab="driver">司机统计</button>
+        </div>
+
+        <!-- 车辆统计TAB内容 -->
+        <div class="tab-content active" id="vehicleTab">
+            <!-- 车辆筛选区域 -->
+            <div class="filter-section" style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+                    <select id="vehicleTimeRange" class="select-input">
+                        <option value="last6months" selected>近半年</option>
+                        <option value="last3months">近3个月</option>
+                        <option value="last12months">近一年</option>
+                        <option value="custom">自定义</option>
+                    </select>
+                    <input type="month" id="vehicleStartMonth" class="select-input" placeholder="开始月份" value="2024-01">
+                    <input type="month" id="vehicleEndMonth" class="select-input" placeholder="结束月份" value="2024-06">
+                    <select id="vehicleFilter" class="select-input">
+                        <option value="">全部车辆</option>
+                        <option value="京A12345">京A12345</option>
+                        <option value="京B67890">京B67890</option>
+                        <option value="京C12345">京C12345</option>
+                        <option value="京D67890">京D67890</option>
+                    </select>
+                    <button class="btn btn-secondary" id="vehicleResetBtn">重置</button>
+                </div>
+                <button class="btn btn-secondary" id="vehicleExportBtn">导出报表</button>
+            </div>
+
+            <!-- 车辆统计表格 -->
+            <div class="table-section">
+                <table class="statistics-table">
+                    <thead>
+                        <tr>
+                            <th>车辆编号</th>
+                            <th>1月</th>
+                            <th>2月</th>
+                            <th>3月</th>
+                            <th>4月</th>
+                            <th>5月</th>
+                            <th>6月</th>
+                            <th>总方量</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vehicleTableBody">
+                        <!-- 数据将通过JavaScript动态生成 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 司机统计TAB内容 -->
+        <div class="tab-content" id="driverTab">
+            <!-- 司机筛选区域 -->
+            <div class="filter-section" style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+                    <select id="driverTimeRange" class="select-input">
+                        <option value="last6months" selected>近半年</option>
+                        <option value="last3months">近3个月</option>
+                        <option value="last12months">近一年</option>
+                        <option value="custom">自定义</option>
+                    </select>
+                    <input type="month" id="driverStartMonth" class="select-input" placeholder="开始月份" value="2024-01">
+                    <input type="month" id="driverEndMonth" class="select-input" placeholder="结束月份" value="2024-06">
+                    <select id="driverFilter" class="select-input">
+                        <option value="">全部司机</option>
+                        <option value="张师傅">张师傅</option>
+                        <option value="王师傅">王师傅</option>
+                        <option value="李师傅">李师傅</option>
+                        <option value="赵师傅">赵师傅</option>
+                    </select>
+                    <button class="btn btn-secondary" id="driverResetBtn">重置</button>
+                </div>
+                <button class="btn btn-secondary" id="driverExportBtn">导出报表</button>
+            </div>
+
+            <!-- 司机统计表格 -->
+            <div class="table-section">
+                <table class="statistics-table">
+                    <thead>
+                        <tr>
+                            <th>司机姓名</th>
+                            <th>1月</th>
+                            <th>2月</th>
+                            <th>3月</th>
+                            <th>4月</th>
+                            <th>5月</th>
+                            <th>6月</th>
+                            <th>总方量</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="driverTableBody">
+                        <!-- 数据将通过JavaScript动态生成 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 详情抽屉 -->
+    <div class="drawer-mask"></div>
+    <div class="drawer detail-drawer">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h3 id="detailTitle">详情统计</h3>
+                <button class="btn-close">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <div class="detail-info">
+                    <div class="info-section">
+                        <h4 class="info-title">基本信息</h4>
+                        <div class="info-grid" id="detailInfo">
+                            <!-- 详细信息将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="drawer-footer">
+                <button class="btn btn-default">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -93,7 +93,8 @@ const mockData = {
         unit: '个',
         price: '128.00',
         type: 'damage',
-        forecast: 'yes'
+        forecast: 'mean',
+        forecastNote: '根据历史数据，该轴承平均每6个月需要更换一次'
     },
     'P002': {
         code: 'P002',
@@ -102,7 +103,8 @@ const mockData = {
         unit: '台',
         price: '1,280.00',
         type: 'key',
-        forecast: 'yes'
+        forecast: 'model',
+        forecastNote: '使用机器学习模型预测，考虑温度、振动等因素'
     },
     'P003': {
         code: 'P003',
@@ -111,7 +113,8 @@ const mockData = {
         unit: '条',
         price: '45.00',
         type: 'normal',
-        forecast: 'no'
+        forecast: 'none',
+        forecastNote: '该配件暂不进行预测，按需采购'
     },
     'P004': {
         code: 'P004',
@@ -120,7 +123,8 @@ const mockData = {
         unit: '个',
         price: '320.00',
         type: 'key',
-        forecast: 'yes'
+        forecast: 'model',
+        forecastNote: '基于设备运行时间和负载情况预测'
     },
     'P005': {
         code: 'P005',
@@ -129,7 +133,8 @@ const mockData = {
         unit: '个',
         price: '15.00',
         type: 'damage',
-        forecast: 'no'
+        forecast: 'mean',
+        forecastNote: '密封圈易老化，建议每3个月检查一次'
     },
     'P006': {
         code: 'P006',
@@ -138,7 +143,8 @@ const mockData = {
         unit: '个',
         price: '85.00',
         type: 'normal',
-        forecast: 'yes'
+        forecast: 'model',
+        forecastNote: '根据轴承磨损情况预测轴承座更换时间'
     },
     'P007': {
         code: 'P007',
@@ -147,7 +153,8 @@ const mockData = {
         unit: '个',
         price: '280.00',
         type: 'key',
-        forecast: 'yes'
+        forecast: 'mean',
+        forecastNote: '联轴器平均使用寿命为2年'
     },
     'P008': {
         code: 'P008',
@@ -156,7 +163,8 @@ const mockData = {
         unit: '个',
         price: '25.00',
         type: 'damage',
-        forecast: 'no'
+        forecast: 'none',
+        forecastNote: '油封损坏时及时更换，不进行预测'
     },
     'P009': {
         code: 'P009',
@@ -165,7 +173,8 @@ const mockData = {
         unit: '个',
         price: '8.00',
         type: 'normal',
-        forecast: 'no'
+        forecast: 'mean',
+        forecastNote: '螺栓按季度检查，松动时更换'
     },
     'P010': {
         code: 'P010',
@@ -174,7 +183,8 @@ const mockData = {
         unit: '个',
         price: '168.00',
         type: 'damage',
-        forecast: 'yes'
+        forecast: 'model',
+        forecastNote: '基于振动监测数据预测轴承寿命'
     }
 };
 
@@ -195,6 +205,7 @@ function handleEdit(id) {
     form.querySelector('input[type="number"]').value = data.price.replace(',', '');
     form.querySelectorAll('select')[0].value = data.type;
     form.querySelectorAll('select')[1].value = data.forecast;
+    form.querySelectorAll('textarea')[1].value = data.forecastNote;
 
     // 打开抽屉
     openDrawer();
@@ -234,6 +245,8 @@ newPartsBtn.addEventListener('click', () => {
     form.reset();
     // 确保预测方式默认为"不预测"
     form.querySelectorAll('select')[1].value = 'none';
+    // 清空预测备注
+    form.querySelectorAll('textarea')[1].value = '';
 });
 
 // 导入导出功能
