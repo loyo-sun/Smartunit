@@ -216,7 +216,7 @@ body {
     background-color: var(--color-error);
 }
 .device-status.normal {
-    background-color: var(--color-info);
+    background-color: var(--color-success);
 }
 .card-project {
     font-size: 13px;
