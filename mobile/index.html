@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动端首页</title>
+    <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+    body { background: #f5f5f5; }
+    .main-iframe {
+      width: 100%;
+      max-width: 480px;
+      height: calc(100vh - 56px);
+      border: none;
+      display: block;
+      margin: 0 auto;
+      background: #f5f5f5;
+    }
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      height: 56px;
+      background: #fff;
+      display: flex;
+      border-top: 1px solid #eee;
+      z-index: 1000;
+    }
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 12px;
+      text-decoration: none;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    .nav-item.active {
+      color: #409EFF;
+    }
+    .nav-item i {
+      font-size: 20px;
+      margin-bottom: 2px;
+    }
+    </style>
+</head>
+<body>
+    <iframe id="mainFrame" class="main-iframe" src="dashboard/index.html"></iframe>
+    <div class="bottom-nav">
+      <div class="nav-item active" data-src="dashboard/index.html">
+        <i class="fa-solid fa-house"></i>
+        <span>工作台</span>
+      </div>
+      <div class="nav-item" data-src="assets/index.html">
+        <i class="fa-solid fa-boxes-stacked"></i>
+        <span>设备</span>
+      </div>
+      <div class="nav-item" data-src="repair/index.html">
+        <i class="fa-solid fa-screwdriver-wrench"></i>
+        <span>维修</span>
+      </div>
+      <div class="nav-item" data-src="maintenance/index.html">
+        <i class="fa-solid fa-gears"></i>
+        <span>保养</span>
+      </div>
+    </div>
+    <script>
+    // 底部导航切换iframe
+    document.querySelectorAll('.nav-item').forEach(function(item){
+      item.onclick = function(){
+        document.querySelectorAll('.nav-item').forEach(function(i){i.classList.remove('active')});
+        this.classList.add('active');
+        var src = this.getAttribute('data-src');
+        document.getElementById('mainFrame').src = src;
+      }
+    });
+    </script>
+</body>
+</html>

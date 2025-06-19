@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作台</title>
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="container dashboard-container">
+        <!-- 顶部导航栏 -->
+        <header class="dashboard-header">
+            <div class="nav-icon nav-message">
+                <i class="fa-regular fa-bell"></i>
+                <span class="red-dot"></span>
+            </div>
+            <div class="dashboard-title">工作台</div>
+            <div class="nav-icon nav-user"><i class="fa-regular fa-user"></i></div>
+        </header>
+
+        <!-- 核心数据区 -->
+        <div class="core-metrics">
+            <div class="metric-card">
+                <div class="metric-icon metric-text-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                <div class="metric-info">
+                    <div class="metric-label">本月维修成本</div>
+                    <div class="metric-value">1,232,189,432</div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon metric-text-icon"><i class="fa-solid fa-gears"></i></div>
+                <div class="metric-info">
+                    <div class="metric-label">本月保养成本</div>
+                    <div class="metric-value">1,232,189,432</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 停机设备/设备列表 Tab -->
+        <div class="tab-bar">
+            <div class="tab active" id="tab-stop">停机设备</div>
+            <div class="tab" id="tab-all">设备列表</div>
+        </div>
+        <div class="tab-content">
+            <!-- 停机设备状态筛选 -->
+            <div class="status-filter" id="stop-status-filter">
+                <span class="status-btn active" data-status="all">全部</span>
+                <span class="status-btn" data-status="waiting">待确认</span>
+                <span class="status-btn" data-status="parts-wait">待配件</span>
+                <span class="status-btn" data-status="parts-in">配件中</span>
+                <span class="status-btn" data-status="repair-wait">待维修</span>
+                <span class="status-btn" data-status="repairing">维修中</span>
+            </div>
+            <!-- 停机设备列表（默认显示） -->
+            <div class="device-list" id="stop-list">
+                <div class="device-item" data-status="waiting"><div class="main-info"><span class="device-name">自卸车A</span><span class="device-type">自卸车</span><span class="device-status tag waiting">待确认</span></div><div class="sub-info">项目A | 编码：EX1001</div><div class="extra-info">更新时间：06-12 10:32</div></div>
+                <div class="device-item" data-status="parts-wait"><div class="main-info"><span class="device-name">泵车B</span><span class="device-type">泵车</span><span class="device-status tag parts-wait">待配件</span></div><div class="sub-info">项目B | 编码：EX1002</div><div class="extra-info">更新时间：06-11 09:20</div></div>
+                <div class="device-item" data-status="parts-in"><div class="main-info"><span class="device-name">挖掘机C</span><span class="device-type">挖掘机</span><span class="device-status tag parts-in">配件中</span></div><div class="sub-info">项目C | 编码：EX1003</div><div class="extra-info">更新时间：06-10 14:10</div></div>
+                <div class="device-item" data-status="repair-wait"><div class="main-info"><span class="device-name">搅拌车D</span><span class="device-type">搅拌车</span><span class="device-status tag repair-wait">待维修</span></div><div class="sub-info">项目D | 编码：EX1004</div><div class="extra-info">更新时间：06-09 08:50</div></div>
+                <div class="device-item" data-status="repairing"><div class="main-info"><span class="device-name">自卸车E</span><span class="device-type">自卸车</span><span class="device-status tag repairing">维修中</span></div><div class="sub-info">项目E | 编码：EX1005</div><div class="extra-info">更新时间：06-08 16:30</div></div>
+                <div class="device-item" data-status="waiting"><div class="main-info"><span class="device-name">泵车F</span><span class="device-type">泵车</span><span class="device-status tag waiting">待确认</span></div><div class="sub-info">项目F | 编码：EX1006</div><div class="extra-info">更新时间：06-07 12:00</div></div>
+                <div class="device-item" data-status="parts-wait"><div class="main-info"><span class="device-name">挖掘机G</span><span class="device-type">挖掘机</span><span class="device-status tag parts-wait">待配件</span></div><div class="sub-info">项目G | 编码：EX1007</div><div class="extra-info">更新时间：06-06 11:15</div></div>
+                <div class="device-item" data-status="parts-in"><div class="main-info"><span class="device-name">搅拌车H</span><span class="device-type">搅拌车</span><span class="device-status tag parts-in">配件中</span></div><div class="sub-info">项目H | 编码：EX1008</div><div class="extra-info">更新时间：06-05 09:40</div></div>
+                <div class="device-item" data-status="repair-wait"><div class="main-info"><span class="device-name">自卸车I</span><span class="device-type">自卸车</span><span class="device-status tag repair-wait">待维修</span></div><div class="sub-info">项目I | 编码：EX1009</div><div class="extra-info">更新时间：06-04 15:25</div></div>
+                <div class="device-item" data-status="repairing"><div class="main-info"><span class="device-name">泵车J</span><span class="device-type">泵车</span><span class="device-status tag repairing">维修中</span></div><div class="sub-info">项目J | 编码：EX1010</div><div class="extra-info">更新时间：06-03 13:55</div></div>
+            </div>
+            <!-- 设备列表状态筛选 -->
+            <div class="status-filter" id="list-status-filter" style="display:none;">
+                <span class="status-btn active" data-status="all">全部</span>
+                <span class="status-btn" data-status="operating">经营</span>
+                <span class="status-btn" data-status="idle">闲置</span>
+            </div>
+            <!-- 设备列表（默认隐藏） -->
+            <div class="device-list card-list" id="all-list" style="display:none;">
+                <div class="device-card" data-status="operating">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">自卸车A</div>
+                            <div class="card-type">自卸车</div>
+                        </div>
+                        <span class="device-status tag operating">经营</span>
+                    </div>
+                    <div class="card-project">项目A</div>
+                </div>
+                <div class="device-card" data-status="idle">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">泵车B</div>
+                            <div class="card-type">泵车</div>
+                        </div>
+                        <span class="device-status tag idle">闲置</span>
+                    </div>
+                </div>
+                <div class="device-card" data-status="operating">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">挖掘机C</div>
+                            <div class="card-type">挖掘机</div>
+                        </div>
+                        <span class="device-status tag operating">经营</span>
+                    </div>
+                    <div class="card-project">项目C</div>
+                </div>
+                <div class="device-card" data-status="idle">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">搅拌车D</div>
+                            <div class="card-type">搅拌车</div>
+                        </div>
+                        <span class="device-status tag idle">闲置</span>
+                    </div>
+                </div>
+                <div class="device-card" data-status="operating">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">自卸车E</div>
+                            <div class="card-type">自卸车</div>
+                        </div>
+                        <span class="device-status tag operating">经营</span>
+                    </div>
+                    <div class="card-project">项目E</div>
+                </div>
+                <div class="device-card" data-status="idle">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">泵车F</div>
+                            <div class="card-type">泵车</div>
+                        </div>
+                        <span class="device-status tag idle">闲置</span>
+                    </div>
+                </div>
+                <div class="device-card" data-status="operating">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">挖掘机G</div>
+                            <div class="card-type">挖掘机</div>
+                        </div>
+                        <span class="device-status tag operating">经营</span>
+                    </div>
+                    <div class="card-project">项目G</div>
+                </div>
+                <div class="device-card" data-status="idle">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">搅拌车H</div>
+                            <div class="card-type">搅拌车</div>
+                        </div>
+                        <span class="device-status tag idle">闲置</span>
+                    </div>
+                </div>
+                <div class="device-card" data-status="operating">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">自卸车I</div>
+                            <div class="card-type">自卸车</div>
+                        </div>
+                        <span class="device-status tag operating">经营</span>
+                    </div>
+                    <div class="card-project">项目I</div>
+                </div>
+                <div class="device-card" data-status="idle">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">泵车J</div>
+                            <div class="card-type">泵车</div>
+                        </div>
+                        <span class="device-status tag idle">闲置</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="more-btn">查看更多</button>
+        <script>
+        // Tab切换逻辑
+        document.getElementById('tab-stop').onclick = function() {
+            this.classList.add('active');
+            document.getElementById('tab-all').classList.remove('active');
+            document.getElementById('stop-list').style.display = '';
+            document.getElementById('all-list').style.display = 'none';
+            document.getElementById('stop-status-filter').style.display = '';
+            document.getElementById('list-status-filter').style.display = 'none';
+        };
+        document.getElementById('tab-all').onclick = function() {
+            this.classList.add('active');
+            document.getElementById('tab-stop').classList.remove('active');
+            document.getElementById('stop-list').style.display = 'none';
+            document.getElementById('all-list').style.display = '';
+            document.getElementById('stop-status-filter').style.display = 'none';
+            document.getElementById('list-status-filter').style.display = '';
+        };
+        // 停机设备状态筛选
+        document.querySelectorAll('#stop-status-filter .status-btn').forEach(function(btn){
+            btn.onclick = function(){
+                document.querySelectorAll('#stop-status-filter .status-btn').forEach(function(b){b.classList.remove('active')});
+                this.classList.add('active');
+                var status = this.getAttribute('data-status');
+                document.querySelectorAll('#stop-list .device-item').forEach(function(item){
+                    if(status==='all'||item.getAttribute('data-status')===status){item.style.display='';}else{item.style.display='none';}
+                });
+            }
+        });
+        // 设备列表状态筛选
+        document.querySelectorAll('#list-status-filter .status-btn').forEach(function(btn){
+            btn.onclick = function(){
+                document.querySelectorAll('#list-status-filter .status-btn').forEach(function(b){b.classList.remove('active')});
+                this.classList.add('active');
+                var status = this.getAttribute('data-status');
+                document.querySelectorAll('#all-list .device-card').forEach(function(item){
+                    if(status==='all'||item.getAttribute('data-status')===status){item.style.display='';}else{item.style.display='none';}
+                });
+            }
+        });
+        </script>
+    </div>
+</body>
+</html> 
