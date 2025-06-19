@@ -41,6 +41,7 @@
       text-decoration: none;
       transition: color 0.2s;
       cursor: pointer;
+      position: relative;
     }
     .nav-item.active {
       color: #409EFF;
@@ -48,6 +49,9 @@
     .nav-item i {
       font-size: 20px;
       margin-bottom: 2px;
+    }
+    @media (max-width: 480px) {
+      .msg-drawer { width: 100vw; max-width: 100vw; }
     }
     </style>
 </head>
@@ -60,7 +64,7 @@
       </div>
       <div class="nav-item" data-src="assets/index.html">
         <i class="fa-solid fa-boxes-stacked"></i>
-        <span>设备</span>
+        <span>资产</span>
       </div>
       <div class="nav-item" data-src="repair/index.html">
         <i class="fa-solid fa-screwdriver-wrench"></i>
@@ -74,12 +78,14 @@
     <script>
     // 底部导航切换iframe
     document.querySelectorAll('.nav-item').forEach(function(item){
-      item.onclick = function(){
-        document.querySelectorAll('.nav-item').forEach(function(i){i.classList.remove('active')});
+      item.addEventListener('click', function(){
+        document.querySelectorAll('.nav-item').forEach(function(i){
+          i.classList.remove('active');
+        });
         this.classList.add('active');
         var src = this.getAttribute('data-src');
         document.getElementById('mainFrame').src = src;
-      }
+      });
     });
     </script>
 </body>

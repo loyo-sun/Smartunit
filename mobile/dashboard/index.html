@@ -20,6 +20,49 @@
             <div class="nav-icon nav-user"><i class="fa-regular fa-user"></i></div>
         </header>
 
+        <!-- 消息侧滑抽屉 -->
+        <div class="message-drawer" id="messageDrawer">
+            <div class="drawer-header">
+                <span>消息列表</span>
+                <span class="drawer-close" id="drawerClose">&times;</span>
+            </div>
+            <div class="drawer-content">
+                <div class="message-item">
+                    <div class="msg-content">【系统】您的设备A已完成维修</div>
+                    <div class="msg-time">2024-06-13 10:30</div>
+                </div>
+                <div class="message-item">
+                    <div class="msg-content">【通知】设备B待配件，请及时处理</div>
+                    <div class="msg-time">2024-06-13 09:15</div>
+                </div>
+            </div>
+        </div>
+        <div class="drawer-mask" id="drawerMask"></div>
+
+        <!-- 我的侧滑抽屉 -->
+        <div class="my-drawer" id="myDrawer">
+            <div class="drawer-header">
+                <span>我的</span>
+                <span class="drawer-close" id="myDrawerClose">&times;</span>
+            </div>
+            <div class="drawer-content my-content">
+                <div class="my-profile">
+                    <div class="my-avatar"><i class="fa-regular fa-user"></i></div>
+                    <div class="my-info">
+                        <div class="my-name">张三</div>
+                        <div class="my-role">维修员</div>
+                    </div>
+                </div>
+                <div class="my-menu">
+                    <div class="my-menu-item"><i class="fa-solid fa-gear"></i> 账号设置</div>
+                    <div class="my-menu-item"><i class="fa-regular fa-comment-dots"></i> 意见反馈</div>
+                    <div class="my-menu-item"><i class="fa-regular fa-circle-question"></i> 关于我们</div>
+                </div>
+                <button class="my-logout">退出登录</button>
+            </div>
+        </div>
+        <div class="drawer-mask" id="myDrawerMask"></div>
+
         <!-- 核心数据区 -->
         <div class="core-metrics">
             <div class="metric-card">
@@ -38,13 +81,13 @@
             </div>
         </div>
 
-        <!-- 停机设备/设备列表 Tab -->
+        <!-- 停机资产/资产列表 Tab -->
         <div class="tab-bar">
-            <div class="tab active" id="tab-stop">停机设备</div>
-            <div class="tab" id="tab-all">设备列表</div>
+            <div class="tab active" id="tab-stop">停机资产</div>
+            <div class="tab" id="tab-all">资产列表</div>
         </div>
         <div class="tab-content">
-            <!-- 停机设备状态筛选 -->
+            <!-- 停机资产状态筛选 -->
             <div class="status-filter" id="stop-status-filter">
                 <span class="status-btn active" data-status="all">全部</span>
                 <span class="status-btn" data-status="waiting">待确认</span>
@@ -53,26 +96,126 @@
                 <span class="status-btn" data-status="repair-wait">待维修</span>
                 <span class="status-btn" data-status="repairing">维修中</span>
             </div>
-            <!-- 停机设备列表（默认显示） -->
-            <div class="device-list" id="stop-list">
-                <div class="device-item" data-status="waiting"><div class="main-info"><span class="device-name">自卸车A</span><span class="device-type">自卸车</span><span class="device-status tag waiting">待确认</span></div><div class="sub-info">项目A | 编码：EX1001</div><div class="extra-info">更新时间：06-12 10:32</div></div>
-                <div class="device-item" data-status="parts-wait"><div class="main-info"><span class="device-name">泵车B</span><span class="device-type">泵车</span><span class="device-status tag parts-wait">待配件</span></div><div class="sub-info">项目B | 编码：EX1002</div><div class="extra-info">更新时间：06-11 09:20</div></div>
-                <div class="device-item" data-status="parts-in"><div class="main-info"><span class="device-name">挖掘机C</span><span class="device-type">挖掘机</span><span class="device-status tag parts-in">配件中</span></div><div class="sub-info">项目C | 编码：EX1003</div><div class="extra-info">更新时间：06-10 14:10</div></div>
-                <div class="device-item" data-status="repair-wait"><div class="main-info"><span class="device-name">搅拌车D</span><span class="device-type">搅拌车</span><span class="device-status tag repair-wait">待维修</span></div><div class="sub-info">项目D | 编码：EX1004</div><div class="extra-info">更新时间：06-09 08:50</div></div>
-                <div class="device-item" data-status="repairing"><div class="main-info"><span class="device-name">自卸车E</span><span class="device-type">自卸车</span><span class="device-status tag repairing">维修中</span></div><div class="sub-info">项目E | 编码：EX1005</div><div class="extra-info">更新时间：06-08 16:30</div></div>
-                <div class="device-item" data-status="waiting"><div class="main-info"><span class="device-name">泵车F</span><span class="device-type">泵车</span><span class="device-status tag waiting">待确认</span></div><div class="sub-info">项目F | 编码：EX1006</div><div class="extra-info">更新时间：06-07 12:00</div></div>
-                <div class="device-item" data-status="parts-wait"><div class="main-info"><span class="device-name">挖掘机G</span><span class="device-type">挖掘机</span><span class="device-status tag parts-wait">待配件</span></div><div class="sub-info">项目G | 编码：EX1007</div><div class="extra-info">更新时间：06-06 11:15</div></div>
-                <div class="device-item" data-status="parts-in"><div class="main-info"><span class="device-name">搅拌车H</span><span class="device-type">搅拌车</span><span class="device-status tag parts-in">配件中</span></div><div class="sub-info">项目H | 编码：EX1008</div><div class="extra-info">更新时间：06-05 09:40</div></div>
-                <div class="device-item" data-status="repair-wait"><div class="main-info"><span class="device-name">自卸车I</span><span class="device-type">自卸车</span><span class="device-status tag repair-wait">待维修</span></div><div class="sub-info">项目I | 编码：EX1009</div><div class="extra-info">更新时间：06-04 15:25</div></div>
-                <div class="device-item" data-status="repairing"><div class="main-info"><span class="device-name">泵车J</span><span class="device-type">泵车</span><span class="device-status tag repairing">维修中</span></div><div class="sub-info">项目J | 编码：EX1010</div><div class="extra-info">更新时间：06-03 13:55</div></div>
+            <!-- 停机资产列表（默认显示） -->
+            <div class="device-list card-list" id="stop-list">
+                <div class="device-card" data-status="waiting">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">自卸车A <span class="down-days-badge"><i class="fa-regular fa-clock"></i> 3天</span></div>
+                            <div class="card-type">自卸车</div>
+                        </div>
+                        <span class="device-status tag waiting">待确认</span>
+                    </div>
+                    <div class="card-project">项目A | 编码：EX1001</div>
+                    <div class="card-extra">更新时间：06-12 10:32</div>
+                </div>
+                <div class="device-card" data-status="parts-wait">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">泵车B <span class="down-days-badge"><i class="fa-regular fa-clock"></i> 2天</span></div>
+                            <div class="card-type">泵车</div>
+                        </div>
+                        <span class="device-status tag parts-wait">待配件</span>
+                    </div>
+                    <div class="card-project">项目B | 编码：EX1002</div>
+                    <div class="card-extra">更新时间：06-11 09:20</div>
+                </div>
+                <div class="device-card" data-status="parts-in">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">挖掘机C <span class="down-days-badge"><i class="fa-regular fa-clock"></i> 5天</span></div>
+                            <div class="card-type">挖掘机</div>
+                        </div>
+                        <span class="device-status tag parts-in">配件中</span>
+                    </div>
+                    <div class="card-project">项目C | 编码：EX1003</div>
+                    <div class="card-extra">更新时间：06-10 14:10</div>
+                </div>
+                <div class="device-card" data-status="repair-wait">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">搅拌车D <span class="down-days-badge"><i class="fa-regular fa-clock"></i> 1天</span></div>
+                            <div class="card-type">搅拌车</div>
+                        </div>
+                        <span class="device-status tag repair-wait">待维修</span>
+                    </div>
+                    <div class="card-project">项目D | 编码：EX1004</div>
+                    <div class="card-extra">更新时间：06-09 08:50</div>
+                </div>
+                <div class="device-card" data-status="repairing">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">自卸车E <span class="down-days-badge"><i class="fa-regular fa-clock"></i> 4天</span></div>
+                            <div class="card-type">自卸车</div>
+                        </div>
+                        <span class="device-status tag repairing">维修中</span>
+                    </div>
+                    <div class="card-project">项目E | 编码：EX1005</div>
+                    <div class="card-extra">更新时间：06-08 16:30</div>
+                </div>
+                <div class="device-card" data-status="waiting">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">泵车F <span class="down-days-badge"><i class="fa-regular fa-clock"></i> 2天</span></div>
+                            <div class="card-type">泵车</div>
+                        </div>
+                        <span class="device-status tag waiting">待确认</span>
+                    </div>
+                    <div class="card-project">项目F | 编码：EX1006</div>
+                    <div class="card-extra">更新时间：06-07 12:00</div>
+                </div>
+                <div class="device-card" data-status="parts-wait">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">挖掘机G <span class="down-days-badge"><i class="fa-regular fa-clock"></i> 6天</span></div>
+                            <div class="card-type">挖掘机</div>
+                        </div>
+                        <span class="device-status tag parts-wait">待配件</span>
+                    </div>
+                    <div class="card-project">项目G | 编码：EX1007</div>
+                    <div class="card-extra">更新时间：06-06 11:15</div>
+                </div>
+                <div class="device-card" data-status="parts-in">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">搅拌车H <span class="down-days-badge"><i class="fa-regular fa-clock"></i> 3天</span></div>
+                            <div class="card-type">搅拌车</div>
+                        </div>
+                        <span class="device-status tag parts-in">配件中</span>
+                    </div>
+                    <div class="card-project">项目H | 编码：EX1008</div>
+                    <div class="card-extra">更新时间：06-05 09:40</div>
+                </div>
+                <div class="device-card" data-status="repair-wait">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">自卸车I <span class="down-days-badge"><i class="fa-regular fa-clock"></i> 7天</span></div>
+                            <div class="card-type">自卸车</div>
+                        </div>
+                        <span class="device-status tag repair-wait">待维修</span>
+                    </div>
+                    <div class="card-project">项目I | 编码：EX1009</div>
+                    <div class="card-extra">更新时间：06-04 15:25</div>
+                </div>
+                <div class="device-card" data-status="repairing">
+                    <div class="card-main">
+                        <div class="card-info">
+                            <div class="card-title">泵车J <span class="down-days-badge"><i class="fa-regular fa-clock"></i> 2天</span></div>
+                            <div class="card-type">泵车</div>
+                        </div>
+                        <span class="device-status tag repairing">维修中</span>
+                    </div>
+                    <div class="card-project">项目J | 编码：EX1010</div>
+                    <div class="card-extra">更新时间：06-03 13:55</div>
+                </div>
             </div>
-            <!-- 设备列表状态筛选 -->
+            <!-- 资产列表状态筛选 -->
             <div class="status-filter" id="list-status-filter" style="display:none;">
                 <span class="status-btn active" data-status="all">全部</span>
                 <span class="status-btn" data-status="operating">经营</span>
                 <span class="status-btn" data-status="idle">闲置</span>
             </div>
-            <!-- 设备列表（默认隐藏） -->
+            <!-- 资产列表（默认隐藏） -->
             <div class="device-list card-list" id="all-list" style="display:none;">
                 <div class="device-card" data-status="operating">
                     <div class="card-main">
@@ -190,18 +333,18 @@
             document.getElementById('stop-status-filter').style.display = 'none';
             document.getElementById('list-status-filter').style.display = '';
         };
-        // 停机设备状态筛选
+        // 停机资产状态筛选
         document.querySelectorAll('#stop-status-filter .status-btn').forEach(function(btn){
             btn.onclick = function(){
                 document.querySelectorAll('#stop-status-filter .status-btn').forEach(function(b){b.classList.remove('active')});
                 this.classList.add('active');
                 var status = this.getAttribute('data-status');
-                document.querySelectorAll('#stop-list .device-item').forEach(function(item){
+                document.querySelectorAll('#stop-list .device-card').forEach(function(item){
                     if(status==='all'||item.getAttribute('data-status')===status){item.style.display='';}else{item.style.display='none';}
                 });
             }
         });
-        // 设备列表状态筛选
+        // 资产列表状态筛选
         document.querySelectorAll('#list-status-filter .status-btn').forEach(function(btn){
             btn.onclick = function(){
                 document.querySelectorAll('#list-status-filter .status-btn').forEach(function(b){b.classList.remove('active')});
@@ -212,6 +355,36 @@
                 });
             }
         });
+        </script>
+        <script>
+        // 消息抽屉逻辑
+        document.querySelector('.nav-message').onclick = function() {
+            document.getElementById('messageDrawer').classList.add('open');
+            document.getElementById('drawerMask').classList.add('open');
+        };
+        document.getElementById('drawerClose').onclick = function() {
+            document.getElementById('messageDrawer').classList.remove('open');
+            document.getElementById('drawerMask').classList.remove('open');
+        };
+        document.getElementById('drawerMask').onclick = function() {
+            document.getElementById('messageDrawer').classList.remove('open');
+            document.getElementById('drawerMask').classList.remove('open');
+        };
+        </script>
+        <script>
+        // 我的抽屉逻辑
+        document.querySelector('.nav-user').onclick = function() {
+            document.getElementById('myDrawer').classList.add('open');
+            document.getElementById('myDrawerMask').classList.add('open');
+        };
+        document.getElementById('myDrawerClose').onclick = function() {
+            document.getElementById('myDrawer').classList.remove('open');
+            document.getElementById('myDrawerMask').classList.remove('open');
+        };
+        document.getElementById('myDrawerMask').onclick = function() {
+            document.getElementById('myDrawer').classList.remove('open');
+            document.getElementById('myDrawerMask').classList.remove('open');
+        };
         </script>
     </div>
 </body>
