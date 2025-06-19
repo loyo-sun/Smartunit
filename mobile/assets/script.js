@@ -72,8 +72,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // 扫码按钮事件
     const scanBtn = document.querySelector('.scan-btn');
     scanBtn.onclick = function() {
-        alert('打开摄像头扫码（占位）');
-        // 这里可集成html5-qrcode等扫码库
+        // 展示扫码动画或提示
+        scanBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+        scanBtn.style.pointerEvents = 'none';
+        // 3秒后跳转到某个设备详情页（模拟扫码结果）
+        setTimeout(function() {
+            window.location.href = 'asset-detail.html?id=CMI-DT-001';
+        }, 3000);
     };
 
     // 搜索按钮和搜索栏逻辑
@@ -87,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function showSearchBar() {
         searchBar.style.display = 'flex';
         statusFilter.style.top = '92px';
-        deviceList.style.marginTop = '136px';
         searchInput.value = '';
         searchInput.focus();
         renderAssetList(mockAssets);
@@ -95,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function hideSearchBar() {
         searchBar.style.display = 'none';
         statusFilter.style.top = '44px';
-        deviceList.style.marginTop = '88px';
         renderAssetList(getFilterList());
     }
 
