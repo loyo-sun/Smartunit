@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的保养任务</title>
+    <title>保养列表</title>
     <link rel="stylesheet" href="styles.css">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-T2P54HCNFP"></script>
@@ -16,209 +16,218 @@
 </script>
 </head>
 <body>
-    <div class="container">
-        <!-- 顶部筛选栏 -->
-        <div class="filter-bar">
-            <div class="date-picker">
-                <input type="date" id="maintenanceDate" value="">
-            </div>
-            <div class="status-filter">
-                <button class="status-btn active" data-status="all">全部</button>
-                <button class="status-btn" data-status="pending">待执行</button>
-                <button class="status-btn" data-status="in-progress">执行中</button>
-                <button class="status-btn" data-status="completed">已完成</button>
-            </div>
-        </div>
-
-        <!-- 任务列表 -->
-        <div class="task-list">
-            <!-- 正常状态示例 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <span class="status-tag normal">正常</span>
-                    <h3 class="device-name">挖掘机 - EX200-7</h3>
+    <div class="mobile-container">
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="title">保养列表</div>
                 </div>
-                <div class="task-info">
-                    <div class="task-info-left">
-                        <p class="project-name">所属项目：上海地铁14号线</p>
-                        <div class="hours-info">
-                            <div class="hours-item">当前：2000小时</div>
-                            <div class="hours-item">下次：2500小时</div>
-                            <div class="hours-item">剩余：500小时</div>
+            </div>
+            <div class="page-content">
+                <!-- 顶部筛选栏 -->
+                <div class="filter-bar">
+                    <div class="date-picker">
+                        <input type="date" id="maintenanceDate" value="">
+                    </div>
+                    <div class="status-filter">
+                        <button class="status-btn active" data-status="all">全部</button>
+                        <button class="status-btn" data-status="pending">待执行</button>
+                        <button class="status-btn" data-status="in-progress">执行中</button>
+                        <button class="status-btn" data-status="completed">已完成</button>
+                    </div>
+                </div>
+
+                <!-- 任务列表 -->
+                <div class="task-list">
+                    <!-- 正常状态示例 -->
+                    <div class="task-card">
+                        <div class="task-header">
+                            <span class="status-tag normal">正常</span>
+                            <h3 class="device-name">挖掘机 - EX200-7</h3>
+                        </div>
+                        <div class="task-info">
+                            <div class="task-info-left">
+                                <p class="project-name">所属项目：上海地铁14号线</p>
+                                <div class="hours-info">
+                                    <div class="hours-item">当前：2000小时</div>
+                                    <div class="hours-item">下次：2500小时</div>
+                                    <div class="hours-item">剩余：500小时</div>
+                                </div>
+                            </div>
+                            <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
                         </div>
                     </div>
-                    <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
-                </div>
-            </div>
 
-            <!-- 待保养示例 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <span class="status-tag warning">待保养</span>
-                    <h3 class="device-name">装载机 - ZL50</h3>
-                </div>
-                <div class="task-info">
-                    <div class="task-info-left">
-                        <p class="project-name">所属项目：杭州湾跨海大桥</p>
-                        <div class="hours-info">
-                            <div class="hours-item">当前：4800小时</div>
-                            <div class="hours-item">下次：5000小时</div>
-                            <div class="hours-item">剩余：200小时</div>
+                    <!-- 待保养示例 -->
+                    <div class="task-card">
+                        <div class="task-header">
+                            <span class="status-tag warning">待保养</span>
+                            <h3 class="device-name">装载机 - ZL50</h3>
+                        </div>
+                        <div class="task-info">
+                            <div class="task-info-left">
+                                <p class="project-name">所属项目：杭州湾跨海大桥</p>
+                                <div class="hours-info">
+                                    <div class="hours-item">当前：4800小时</div>
+                                    <div class="hours-item">下次：5000小时</div>
+                                    <div class="hours-item">剩余：200小时</div>
+                                </div>
+                            </div>
+                            <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
                         </div>
                     </div>
-                    <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
-                </div>
-            </div>
 
-            <!-- 超期示例 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <span class="status-tag error">超期</span>
-                    <h3 class="device-name">推土机 - SD16</h3>
-                </div>
-                <div class="task-info">
-                    <div class="task-info-left">
-                        <p class="project-name">所属项目：深圳机场扩建</p>
-                        <div class="hours-info">
-                            <div class="hours-item">当前：5200小时</div>
-                            <div class="hours-item">下次：5000小时</div>
-                            <div class="hours-item">剩余：-200小时</div>
+                    <!-- 超期示例 -->
+                    <div class="task-card">
+                        <div class="task-header">
+                            <span class="status-tag error">超期</span>
+                            <h3 class="device-name">推土机 - SD16</h3>
+                        </div>
+                        <div class="task-info">
+                            <div class="task-info-left">
+                                <p class="project-name">所属项目：深圳机场扩建</p>
+                                <div class="hours-info">
+                                    <div class="hours-item">当前：5200小时</div>
+                                    <div class="hours-item">下次：5000小时</div>
+                                    <div class="hours-item">剩余：-200小时</div>
+                                </div>
+                            </div>
+                            <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
                         </div>
                     </div>
-                    <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
-                </div>
-            </div>
 
-            <!-- 正常状态示例 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <span class="status-tag normal">正常</span>
-                    <h3 class="device-name">压路机 - YZ18</h3>
-                </div>
-                <div class="task-info">
-                    <div class="task-info-left">
-                        <p class="project-name">所属项目：北京大兴机场</p>
-                        <div class="hours-info">
-                            <div class="hours-item">当前：1500小时</div>
-                            <div class="hours-item">下次：2000小时</div>
-                            <div class="hours-item">剩余：500小时</div>
+                    <!-- 正常状态示例 -->
+                    <div class="task-card">
+                        <div class="task-header">
+                            <span class="status-tag normal">正常</span>
+                            <h3 class="device-name">压路机 - YZ18</h3>
+                        </div>
+                        <div class="task-info">
+                            <div class="task-info-left">
+                                <p class="project-name">所属项目：北京大兴机场</p>
+                                <div class="hours-info">
+                                    <div class="hours-item">当前：1500小时</div>
+                                    <div class="hours-item">下次：2000小时</div>
+                                    <div class="hours-item">剩余：500小时</div>
+                                </div>
+                            </div>
+                            <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
                         </div>
                     </div>
-                    <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
-                </div>
-            </div>
 
-            <!-- 待保养示例 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <span class="status-tag warning">待保养</span>
-                    <h3 class="device-name">平地机 - PY165</h3>
-                </div>
-                <div class="task-info">
-                    <div class="task-info-left">
-                        <p class="project-name">所属项目：广州白云机场</p>
-                        <div class="hours-info">
-                            <div class="hours-item">当前：4500小时</div>
-                            <div class="hours-item">下次：4800小时</div>
-                            <div class="hours-item">剩余：300小时</div>
+                    <!-- 待保养示例 -->
+                    <div class="task-card">
+                        <div class="task-header">
+                            <span class="status-tag warning">待保养</span>
+                            <h3 class="device-name">平地机 - PY165</h3>
+                        </div>
+                        <div class="task-info">
+                            <div class="task-info-left">
+                                <p class="project-name">所属项目：广州白云机场</p>
+                                <div class="hours-info">
+                                    <div class="hours-item">当前：4500小时</div>
+                                    <div class="hours-item">下次：4800小时</div>
+                                    <div class="hours-item">剩余：300小时</div>
+                                </div>
+                            </div>
+                            <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
                         </div>
                     </div>
-                    <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
-                </div>
-            </div>
 
-            <!-- 超期示例 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <span class="status-tag error">超期</span>
-                    <h3 class="device-name">起重机 - QY25K</h3>
-                </div>
-                <div class="task-info">
-                    <div class="task-info-left">
-                        <p class="project-name">所属项目：武汉长江大桥</p>
-                        <div class="hours-info">
-                            <div class="hours-item">当前：5500小时</div>
-                            <div class="hours-item">下次：5000小时</div>
-                            <div class="hours-item">剩余：-500小时</div>
+                    <!-- 超期示例 -->
+                    <div class="task-card">
+                        <div class="task-header">
+                            <span class="status-tag error">超期</span>
+                            <h3 class="device-name">起重机 - QY25K</h3>
+                        </div>
+                        <div class="task-info">
+                            <div class="task-info-left">
+                                <p class="project-name">所属项目：武汉长江大桥</p>
+                                <div class="hours-info">
+                                    <div class="hours-item">当前：5500小时</div>
+                                    <div class="hours-item">下次：5000小时</div>
+                                    <div class="hours-item">剩余：-500小时</div>
+                                </div>
+                            </div>
+                            <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
                         </div>
                     </div>
-                    <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
-                </div>
-            </div>
 
-            <!-- 正常状态示例 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <span class="status-tag normal">正常</span>
-                    <h3 class="device-name">混凝土泵车 - SY5418THB</h3>
-                </div>
-                <div class="task-info">
-                    <div class="task-info-left">
-                        <p class="project-name">所属项目：成都天府机场</p>
-                        <div class="hours-info">
-                            <div class="hours-item">当前：1800小时</div>
-                            <div class="hours-item">下次：2500小时</div>
-                            <div class="hours-item">剩余：700小时</div>
+                    <!-- 正常状态示例 -->
+                    <div class="task-card">
+                        <div class="task-header">
+                            <span class="status-tag normal">正常</span>
+                            <h3 class="device-name">混凝土泵车 - SY5418THB</h3>
+                        </div>
+                        <div class="task-info">
+                            <div class="task-info-left">
+                                <p class="project-name">所属项目：成都天府机场</p>
+                                <div class="hours-info">
+                                    <div class="hours-item">当前：1800小时</div>
+                                    <div class="hours-item">下次：2500小时</div>
+                                    <div class="hours-item">剩余：700小时</div>
+                                </div>
+                            </div>
+                            <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
                         </div>
                     </div>
-                    <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
-                </div>
-            </div>
 
-            <!-- 待保养示例 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <span class="status-tag warning">待保养</span>
-                    <h3 class="device-name">旋挖钻机 - XR360</h3>
-                </div>
-                <div class="task-info">
-                    <div class="task-info-left">
-                        <p class="project-name">所属项目：南京地铁5号线</p>
-                        <div class="hours-info">
-                            <div class="hours-item">当前：4200小时</div>
-                            <div class="hours-item">下次：4500小时</div>
-                            <div class="hours-item">剩余：300小时</div>
+                    <!-- 待保养示例 -->
+                    <div class="task-card">
+                        <div class="task-header">
+                            <span class="status-tag warning">待保养</span>
+                            <h3 class="device-name">旋挖钻机 - XR360</h3>
+                        </div>
+                        <div class="task-info">
+                            <div class="task-info-left">
+                                <p class="project-name">所属项目：南京地铁5号线</p>
+                                <div class="hours-info">
+                                    <div class="hours-item">当前：4200小时</div>
+                                    <div class="hours-item">下次：4500小时</div>
+                                    <div class="hours-item">剩余：300小时</div>
+                                </div>
+                            </div>
+                            <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
                         </div>
                     </div>
-                    <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
-                </div>
-            </div>
 
-            <!-- 超期示例 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <span class="status-tag error">超期</span>
-                    <h3 class="device-name">履带起重机 - QUY150</h3>
-                </div>
-                <div class="task-info">
-                    <div class="task-info-left">
-                        <p class="project-name">所属项目：重庆轨道交通</p>
-                        <div class="hours-info">
-                            <div class="hours-item">当前：5800小时</div>
-                            <div class="hours-item">下次：5000小时</div>
-                            <div class="hours-item">剩余：-800小时</div>
+                    <!-- 超期示例 -->
+                    <div class="task-card">
+                        <div class="task-header">
+                            <span class="status-tag error">超期</span>
+                            <h3 class="device-name">履带起重机 - QUY150</h3>
+                        </div>
+                        <div class="task-info">
+                            <div class="task-info-left">
+                                <p class="project-name">所属项目：重庆轨道交通</p>
+                                <div class="hours-info">
+                                    <div class="hours-item">当前：5800小时</div>
+                                    <div class="hours-item">下次：5000小时</div>
+                                    <div class="hours-item">剩余：-800小时</div>
+                                </div>
+                            </div>
+                            <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
                         </div>
                     </div>
-                    <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
-                </div>
-            </div>
 
-            <!-- 正常状态示例 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <span class="status-tag normal">正常</span>
-                    <h3 class="device-name">塔式起重机 - QTZ80</h3>
-                </div>
-                <div class="task-info">
-                    <div class="task-info-left">
-                        <p class="project-name">所属项目：西安地铁8号线</p>
-                        <div class="hours-info">
-                            <div class="hours-item">当前：1200小时</div>
-                            <div class="hours-item">下次：2000小时</div>
-                            <div class="hours-item">剩余：800小时</div>
+                    <!-- 正常状态示例 -->
+                    <div class="task-card">
+                        <div class="task-header">
+                            <span class="status-tag normal">正常</span>
+                            <h3 class="device-name">塔式起重机 - QTZ80</h3>
+                        </div>
+                        <div class="task-info">
+                            <div class="task-info-left">
+                                <p class="project-name">所属项目：西安地铁8号线</p>
+                                <div class="hours-info">
+                                    <div class="hours-item">当前：1200小时</div>
+                                    <div class="hours-item">下次：2000小时</div>
+                                    <div class="hours-item">剩余：800小时</div>
+                                </div>
+                            </div>
+                            <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
                         </div>
                     </div>
-                    <button class="btn-primary" onclick="location.href='detail.html'">开始保养</button>
                 </div>
             </div>
         </div>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>维修工单</title>
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        :root {
+            --status-pending: #fa8c16;
+            --status-progress: #1890ff;
+            --status-completed: #52c41a;
+            --status-approved: #096dd9;
+        }
+
+        .page {
+            background-color: #f0f2f5;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            z-index: 100;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 44px;
+        }
+        .header .title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 44px;
+        }
+        .page-content {
+            padding: 0px 0 0;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            font-size: 14px;
+        }
+        .stats-item {
+            text-align: center;
+            color: var(--color-text-secondary);
+        }
+        .stats-item .count {
+            font-weight: bold;
+            color: var(--color-text-primary);
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 10px;
+            margin: 0 10px 10px;
+        }
+
+        .filter-tabs {
+            flex: 3;
+            display: flex;
+            background-color: #e4e7ed;
+            border-radius: 6px;
+            padding: 3px;
+        }
+        .filter-tab {
+            flex: 1;
+            padding: 6px 0;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter-tab.active {
+            background-color: #fff;
+            color: var(--color-primary);
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .filter-time {
+            flex: 1;
+            padding: 6px 12px;
+            font-size: 14px;
+            border-radius: 6px;
+            border: 1px solid #dcdfe6;
+            background-color: #fff;
+        }
+
+        .work-order-list .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 0 10px 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+        .work-order-list .card:active {
+             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .device-info {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+        .status-tag {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #fff;
+        }
+        .status-pending { background-color: var(--status-pending); }
+        .status-progress { background-color: var(--status-progress); }
+        .status-completed { background-color: var(--status-completed); }
+        .status-approved { background-color: var(--status-approved); }
+
+        .fault-desc {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #999;
+        }
+        .card-footer .arrow {
+            font-size: 16px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--color-text-secondary);
+        }
+        .empty-state .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .empty-state p {
+            font-size: 16px;
+        }
+
+        .mobile-container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="title">维修工单</div>
+                </div>
+            </div>
+            <div class="page-content">
+                <!-- 统计信息 -->
+                <div class="stats-bar">
+                    <div class="stats-item">今日工单<br><span class="count">5</span></div>
+                    <div class="stats-item">待处理<br><span class="count">3</span></div>
+                    <div class="stats-item">已完成<br><span class="count">2</span></div>
+                </div>
+
+                <!-- 筛选区域 -->
+                <div class="filter-section">
+                    <div class="filter-tabs">
+                        <div class="filter-tab active">全部</div>
+                        <div class="filter-tab">待确认</div>
+                        <div class="filter-tab">维修中</div>
+                        <div class="filter-tab">已完成</div>
+                    </div>
+                    <select class="filter-time">
+                        <option>本周</option>
+                        <option>今日</option>
+                        <option>本月</option>
+                    </select>
+                </div>
+
+                <!-- 工单列表 -->
+                <div class="work-order-list">
+                    <!-- 卡片1: 待确认 -->
+                    <div class="card" onclick="window.open('assign.html', '_self')">
+                        <div class="card-header">
+                            <div class="device-info">挖掘机 SY215C</div>
+                            <div class="status-tag status-pending">待确认</div>
+                        </div>
+                        <div class="fault-desc">发动机无法启动，启动时有异常噪音，机油压力报警。</div>
+                        <div class="card-footer">
+                            <span>2024-03-15 14:30</span>
+                            <span class="arrow">></span>
+                        </div>
+                    </div>
+
+                    <!-- 卡片2: 维修中 -->
+                    <div class="card" onclick="window.open('execute.html', '_self')">
+                        <div class="card-header">
+                            <div class="device-info">混凝土泵车</div>
+                            <div class="status-tag status-progress">维修中</div>
+                        </div>
+                        <div class="fault-desc">液压系统压力不足，臂架动作缓慢。</div>
+                        <div class="card-footer">
+                            <span>2024-03-15 10:10</span>
+                            <span class="arrow">></span>
+                        </div>
+                    </div>
+
+                    <!-- 卡片3: 已完成 -->
+                    <div class="card" onclick="window.open('complete.html', '_self')">
+                        <div class="card-header">
+                            <div class="device-info">履带式起重机</div>
+                            <div class="status-tag status-completed">已完成</div>
+                        </div>
+                        <div class="fault-desc">主卷扬异响，钢丝绳有磨损。</div>
+                        <div class="card-footer">
+                            <span>2024-03-14 18:05</span>
+                            <span class="arrow">></span>
+                        </div>
+                    </div>
+                    
+                    <!-- 卡片4: 已审批 -->
+                    <div class="card" onclick="window.open('approve.html', '_self')">
+                        <div class="card-header">
+                            <div class="device-info">装载机 ZL50</div>
+                            <div class="status-tag status-approved">已审批</div>
+                        </div>
+                        <div class="fault-desc">变速箱换挡冲击，油温过高。</div>
+                        <div class="card-footer">
+                            <span>2024-03-13 09:20</span>
+                            <span class="arrow">></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 空状态 (默认隐藏, 当列表无数据时显示) -->
+                <!-- 
+                <div class="empty-state">
+                    <div class="icon">📋</div>
+                    <p>暂无相关维修工单</p>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
